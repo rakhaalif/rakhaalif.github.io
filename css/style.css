@@ -915,3 +915,517 @@ body {
 .hero-content {
     will-change: transform;
 }
+
+/* ===== ABOUT PHOTO LAYOUT ===== */
+.about-grid {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 5rem;
+    align-items: start;
+}
+
+.about-photo-wrapper {
+    position: relative;
+    width: 300px;
+    height: 380px;
+    flex-shrink: 0;
+}
+
+.about-photo-bg {
+    position: absolute;
+    inset: 12px -12px -12px 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    z-index: 0;
+}
+
+.about-photo {
+    position: relative;
+    z-index: 1;
+    width: 300px;
+    height: 380px;
+    object-fit: cover;
+    object-position: center 5%;
+    border-radius: 16px;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    display: block;
+}
+
+/* ===== ABOUT FLOATING BUBBLES ===== */
+.about-bubble {
+    position: absolute;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    z-index: 3;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    animation: floatBubble 3s ease-in-out infinite;
+}
+
+.bubble-1 {
+    top: -16px;
+    left: 20px;
+    animation-delay: 0s;
+    border-color: rgba(57, 255, 136, 0.3);
+    color: var(--accent);
+}
+
+.bubble-2 {
+    top: 50%;
+    right: -20px;
+    transform: translateY(-50%);
+    animation-delay: 1s;
+}
+
+.bubble-3 {
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 2s;
+}
+
+@keyframes floatBubble {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+.bubble-2 {
+    animation: floatBubble2 3s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+@keyframes floatBubble2 {
+
+    0%,
+    100% {
+        transform: translateY(-50%);
+    }
+
+    50% {
+        transform: translateY(calc(-50% - 6px));
+    }
+}
+
+/* ===== SECTION BUBBLE TAG ===== */
+.section-bubble {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    vertical-align: middle;
+    margin-left: 12px;
+    position: relative;
+    top: -4px;
+    letter-spacing: 0.02em;
+}
+
+/* ===== RESPONSIVE ABOUT ===== */
+@media (max-width: 900px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+
+    .about-photo-wrapper {
+        margin: 0 auto;
+    }
+}
+
+/* ===== BUMPER ===== */
+.bumper {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    animation: bumperOut 0.6s ease 2.8s forwards;
+    pointer-events: none;
+}
+
+@keyframes bumperOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.bumper-content {
+    text-align: center;
+}
+
+.bumper-icons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.5s ease 0.3s both;
+}
+
+.bumper-icon {
+    width: 52px;
+    height: 52px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.bumper-title {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    animation: fadeUp 0.5s ease 0.5s both;
+}
+
+.bumper-url {
+    font-size: 0.85rem;
+    color: #555;
+    background: #111;
+    border: 1px solid #222;
+    padding: 6px 16px;
+    border-radius: 999px;
+    animation: fadeUp 0.5s ease 0.7s both;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== TAB BAR ===== */
+.section-sub {
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-size: 0.95rem;
+}
+
+.tab-bar {
+    display: flex;
+    gap: 0.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px;
+    width: fit-content;
+    margin: 0 auto 3rem;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 999px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.tab-btn:hover {
+    color: var(--text);
+}
+
+.tab-btn.active {
+    background: var(--bg-card2, #1a1a1a);
+    color: var(--accent);
+    border: 1px solid var(--border);
+    font-weight: 600;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeUp 0.3s ease;
+}
+
+/* ===== CERT GRID ===== */
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.cert-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem;
+}
+
+.cert-icon {
+    font-size: 1.8rem;
+}
+
+/* ===== BADGE ROW ===== */
+.badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+}
+
+/* ===== ID CARD ===== */
+.idcard-wrapper {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 9000;
+    cursor: grab;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
+}
+
+.idcard-wrapper:active {
+    cursor: grabbing;
+}
+
+.idcard-lanyard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lanyard-strap {
+    width: 6px;
+    height: 80px;
+    background: linear-gradient(180deg, #1a1a1a, #333);
+    border-radius: 3px;
+}
+
+.lanyard-clip {
+    font-size: 0.7rem;
+    color: #555;
+    margin-bottom: -4px;
+    z-index: 1;
+}
+
+.idcard-body {
+    width: 160px;
+    background: #f0f0f0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 3px solid #fff;
+    text-align: center;
+    padding-bottom: 12px;
+}
+
+.idcard-stripe {
+    height: 8px;
+    background: linear-gradient(90deg, var(--accent), #00b4d8);
+}
+
+.idcard-photo {
+    width: 90px;
+    height: 110px;
+    object-fit: cover;
+    object-position: center 5%;
+    border-radius: 8px;
+    margin: 12px auto 8px;
+    display: block;
+    background: #fff;
+    border: 2px solid #ddd;
+}
+
+.idcard-name {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #111;
+    margin: 0 8px 2px;
+}
+
+.idcard-role {
+    font-size: 0.65rem;
+    color: #555;
+    margin: 0 8px 8px;
+}
+
+.idcard-divider {
+    height: 1px;
+    background: #ddd;
+    margin: 0 12px 8px;
+}
+
+.idcard-footer {
+    font-size: 0.6rem;
+    color: #888;
+    margin: 0;
+}
+
+.idcard-hint {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+    text-align: center;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* ===== ID CARD PHYSICS (ABOUT) ===== */
+.about-card-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.idcard-scene {
+    position: relative;
+    width: 220px;
+    height: 420px;
+    margin: 0 auto;
+}
+
+#rope-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.idcard-hang {
+    position: absolute;
+    left: 50%;
+    top: 60px;
+    transform: translateX(-50%) rotate(0deg);
+    transform-origin: top center;
+    z-index: 2;
+    cursor: grab;
+    will-change: transform;
+}
+
+.idcard-hang:active {
+    cursor: grabbing;
+}
+
+.idcard-body {
+    width: 160px;
+    background: #f0f0f0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 3px solid #fff;
+    text-align: center;
+    padding-bottom: 14px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.idcard-stripe {
+    height: 8px;
+    background: linear-gradient(90deg, var(--accent), #00b4d8);
+}
+
+.idcard-photo {
+    width: 100px;
+    height: 120px;
+    object-fit: cover;
+    object-position: center 5%;
+    border-radius: 8px;
+    margin: 14px auto 8px;
+    display: block;
+    background: #fff;
+    border: 2px solid #ddd;
+}
+
+.idcard-name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #111;
+    margin: 0 8px 2px;
+}
+
+.idcard-role {
+    font-size: 0.68rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin: 0 8px 4px;
+}
+
+.idcard-sub {
+    font-size: 0.62rem;
+    color: #666;
+    margin: 0 8px 6px;
+}
+
+.idcard-divider {
+    height: 1px;
+    background: #ddd;
+    margin: 4px 12px 8px;
+}
+
+.idcard-footer {
+    font-size: 0.6rem;
+    color: #999;
+    margin: 0;
+}
+
+.idcard-hint {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+    text-align: center;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .idcard-scene {
+        height: 380px;
+    }
+}

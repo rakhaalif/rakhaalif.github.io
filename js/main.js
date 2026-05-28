@@ -193,3 +193,161 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
     });
 });
+
+// ===== BUMPER =====
+window.addEventListener('load', () => {
+    const bumper = document.getElementById('bumper');
+    setTimeout(() => { bumper.style.display = 'none'; }, 3400);
+});
+
+// ===== TABS =====
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        const target = document.getElementById('tab-' + btn.dataset.tab);
+        target.classList.add('active');
+        // Re-trigger stagger
+        target.querySelectorAll('.stagger-children').forEach(el => {
+            el.classList.remove('visible');
+            setTimeout(() => el.classList.add('visible'), 50);
+        });
+    });
+});
+
+// ===== ID CARD PHYSICS =====
+(function () {
+    const scene = document.getElementById('idcard-scene');
+    const card = document.getElementById('idcard-hang');
+    const canvas = document.getElementById('rope-canvas');
+    if (!scene || !card || !canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const PIVOT_X = 110; // anchor point X (center top)
+    const PIVOT_Y = 8;   // anchor point Y
+
+    // Physics state
+    let angle = 0;      // current angle in radians
+    let angleVel = 0;      // angular velocity
+    const DAMPING = 0.97;   // energy loss per frame
+    const GRAVITY = 0.003;  // pendulum gravity constant
+    const ROPE_LEN = 60;    // rope length px
+
+    // Drag state
+    let isDragging = false;
+    let lastAngle = 0;
+    let lastTime = 0;
+
+    function getAngleFromPointer(px, py) {
+        const rect = scene.getBoundingClientRect();
+        const dx = (px - rect.left) - PIVOT_X;
+        const dy = (py - rect.top) - PIVOT_Y;
+        return Math.atan2(dx, dy);
+    }
+
+    function resizeCanvas() {
+        canvas.width = scene.offsetWidth;
+        canvas.height = scene.offsetHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    function drawRope() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const cardTop = {
+            x: PIVOT_X + Math.sin(angle) * ROPE_LEN,
+            y: PIVOT_Y + Math.cos(angle) * ROPE_LEN
+        };
+        // Draw lanyard strap
+        ctx.beginPath();
+        ctx.moveTo(PIVOT_X, PIVOT_Y);
+        // Bezier curve for natural rope sag
+        ctx.bezierCurveTo(
+            PIVOT_X + Math.sin(angle) * ROPE_LEN * 0.4,
+            PIVOT_Y + ROPE_LEN * 0.3,
+            cardTop.x,
+            cardTop.y - 10,
+            cardTop.x,
+            cardTop.y
+        );
+        ctx.strokeStyle = 'rgba(100,100,100,0.7)';
+        ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+
+        // Clip connector
+        ctx.beginPath();
+        ctx.arc(PIVOT_X, PIVOT_Y, 5, 0, Math.PI * 2);
+        ctx.fillStyle = '#555';
+        ctx.fill();
+
+        // Top anchor dot
+        ctx.beginPath();
+        ctx.arc(PIVOT_X, PIVOT_Y - 2, 3, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(57,255,136,0.6)';
+        ctx.fill();
+    }
+
+    function updateCard() {
+        const cardX = PIVOT_X + Math.sin(angle) * ROPE_LEN - 80;
+        const cardY = PIVOT_Y + Math.cos(angle) * ROPE_LEN;
+        card.style.transform =
+            `translateX(calc(-50% + ${Math.sin(angle) * ROPE_LEN}px)) rotate(${angle * 0.8}rad)`;
+        card.style.top = (PIVOT_Y + Math.cos(angle) * ROPE_LEN) + 'px';
+    }
+
+    function animate() {
+        if (!isDragging) {
+            // Pendulum physics
+            angleVel += -GRAVITY * Math.sin(angle);
+            angleVel *= DAMPING;
+            angle += angleVel;
+        }
+        drawRope();
+        updateCard();
+        requestAnimationFrame(animate);
+    }
+    animate();
+
+    // === Mouse drag ===
+    card.addEventListener('mousedown', e => {
+        isDragging = true;
+        lastAngle = getAngleFromPointer(e.clientX, e.clientY);
+        lastTime = performance.now();
+        e.preventDefault();
+    });
+    document.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        const newAngle = getAngleFromPointer(e.clientX, e.clientY);
+        const now = performance.now();
+        angleVel = (newAngle - lastAngle) / (now - lastTime + 1) * 16;
+        angle = newAngle;
+        lastAngle = newAngle;
+        lastTime = now;
+    });
+    document.addEventListener('mouseup', () => { isDragging = false; });
+
+    // === Touch drag ===
+    card.addEventListener('touchstart', e => {
+        isDragging = true;
+        const t = e.touches[0];
+        lastAngle = getAngleFromPointer(t.clientX, t.clientY);
+        lastTime = performance.now();
+        e.preventDefault();
+    }, { passive: false });
+    document.addEventListener('touchmove', e => {
+        if (!isDragging) return;
+        const t = e.touches[0];
+        const newAngle = getAngleFromPointer(t.clientX, t.clientY);
+        const now = performance.now();
+        angleVel = (newAngle - lastAngle) / (now - lastTime + 1) * 16;
+        angle = newAngle;
+        lastAngle = newAngle;
+        lastTime = now;
+    }, { passive: false });
+    document.addEventListener('touchend', () => { isDragging = false; });
+
+    // Auto gentle swing on load
+    angle = 0.3;
+})();
