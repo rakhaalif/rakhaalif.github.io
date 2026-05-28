@@ -64,7 +64,7 @@ function animateCounter(el, target, suffix = '', duration = 1500) {
 
 const counters = [
     { selector: '.stat:nth-child(1) .stat-num', value: 3.80, suffix: '' },
-    { selector: '.stat:nth-child(2) .stat-num', value: 5, suffix: '+' },
+    { selector: '.stat:nth-child(2) .stat-num', value: 5, suffix: '' },
     { selector: '.stat:nth-child(3) .stat-num', value: 90, suffix: '+' },
     { selector: '.stat:nth-child(4) .stat-num', value: 860, suffix: '+' },
 ];
