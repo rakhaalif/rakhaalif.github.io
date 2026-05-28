@@ -790,20 +790,24 @@ body {
 /* ===== HERO AVATAR ===== */
 .hero-avatar-wrapper {
     position: relative;
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
     margin: 0 auto 2rem;
+    flex-shrink: 0;
 }
 
 .hero-avatar {
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     object-fit: cover;
+    object-position: center 10%;
     position: relative;
     z-index: 2;
     border: 2px solid rgba(57, 255, 136, 0.3);
-    filter: grayscale(20%);
+    display: block;
+    background: #ffffff;
+    /* ← tambahkan ini */
     transition: filter 0.3s, transform 0.3s;
 }
 
