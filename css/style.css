@@ -786,3 +786,128 @@ body {
         font-size: 2.8rem;
     }
 }
+
+/* ===== HERO AVATAR ===== */
+.hero-avatar-wrapper {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 2rem;
+}
+
+.hero-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+    border: 2px solid rgba(57, 255, 136, 0.3);
+    filter: grayscale(20%);
+    transition: filter 0.3s, transform 0.3s;
+}
+
+.hero-avatar:hover {
+    filter: grayscale(0%);
+    transform: scale(1.04);
+}
+
+.hero-avatar-ring {
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 1.5px solid transparent;
+    background: linear-gradient(135deg, var(--accent), transparent, var(--accent2)) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    animation: rotatRing 4s linear infinite;
+    z-index: 1;
+}
+
+@keyframes rotatRing {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===== SCROLL PROGRESS BAR ===== */
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    height: 2px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width 0.1s linear;
+    box-shadow: 0 0 8px rgba(57, 255, 136, 0.6);
+}
+
+/* ===== CURSOR GLOW ===== */
+.cursor-glow {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(57, 255, 136, 0.04) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    transform: translate(-50%, -50%);
+    transition: transform 0.08s ease;
+}
+
+/* ===== COUNTER ANIMATION ===== */
+.stat-num {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+/* ===== STAGGER CHILDREN ===== */
+.stagger-children>* {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.stagger-children.visible>*:nth-child(1) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
+}
+
+.stagger-children.visible>*:nth-child(2) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.08s;
+}
+
+.stagger-children.visible>*:nth-child(3) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.16s;
+}
+
+.stagger-children.visible>*:nth-child(4) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.24s;
+}
+
+.stagger-children.visible>*:nth-child(5) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.32s;
+}
+
+.stagger-children.visible>*:nth-child(6) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.40s;
+}
+
+/* ===== PARALLAX HERO ===== */
+.hero-content {
+    will-change: transform;
+}
