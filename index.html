@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rakha Alif Athallah — Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-logo">RAA<span class="accent">.</span></div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#techstack">Stack</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <canvas id="particles"></canvas>
+        <div class="hero-content">
+            <p class="hero-tag mono">&#60; Hello World /&#62;</p>
+            <h1 class="hero-name">Rakha Alif<br><span class="accent">Athallah</span></h1>
+            <p class="hero-sub">Data &amp; AI Enthusiast &nbsp;·&nbsp; LLM &amp; RAG Engineer &nbsp;·&nbsp; SQA
+                Automation</p>
+            <div class="hero-cta">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="#contact" class="btn btn-outline">Let's Connect</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-label mono">01 — about_me</div>
+            <h2 class="section-title">Who I Am</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>I'm a final-year Informatics Engineering student at <span class="accent">Universitas
+                            Brawijaya</span> (GPA 3.80/4.00), passionate about building intelligent systems at the
+                        intersection of AI, data, and software quality.</p>
+                    <p>My thesis focuses on <span class="accent">automated functional and visual test case
+                            generation</span> for web applications using Large Language Models with Retrieval-Augmented
+                        Generation — combining cutting-edge AI with practical software engineering.</p>
+                    <p>Currently interning as an <span class="accent">SQA Automation Engineer</span> at Telkom
+                        Indonesia, building agentic AI solutions for autonomous test generation and execution.</p>
+                    <div class="about-stats">
+                        <div class="stat"><span class="stat-num accent">3.80</span><span class="stat-label">GPA</span>
+                        </div>
+                        <div class="stat"><span class="stat-num accent">5+</span><span
+                                class="stat-label">Projects</span></div>
+                        <div class="stat"><span class="stat-num accent">90+</span><span class="stat-label">Members
+                                Led</span></div>
+                        <div class="stat"><span class="stat-num accent">860+</span><span class="stat-label">Students
+                                Managed</span></div>
+                    </div>
+                </div>
+                <div class="about-card">
+                    <div class="card-inner">
+                        <div class="card-tag mono">current_status.json</div>
+                        <div class="card-body">
+                            <div class="json-line"><span class="json-key">"name"</span>: <span class="json-str">"Rakha
+                                    Alif Athallah"</span>,</div>
+                            <div class="json-line"><span class="json-key">"role"</span>: <span class="json-str">"AI &
+                                    Data Engineer"</span>,</div>
+                            <div class="json-line"><span class="json-key">"university"</span>: <span
+                                    class="json-str">"Brawijaya University"</span>,</div>
+                            <div class="json-line"><span class="json-key">"focus"</span>: <span class="json-str">"LLM ·
+                                    RAG · SQA"</span>,</div>
+                            <div class="json-line"><span class="json-key">"location"</span>: <span
+                                    class="json-str">"Malang, East Java 🇮🇩"</span>,</div>
+                            <div class="json-line"><span class="json-key">"available"</span>: <span
+                                    class="json-bool">true</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section section-alt" id="experience">
+        <div class="container">
+            <div class="section-label mono">02 — experience</div>
+            <h2 class="section-title">Where I've Worked</h2>
+            <div class="timeline">
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-meta">
+                            <span class="timeline-company accent">Telkom Indonesia</span>
+                            <span class="timeline-period mono">Jul 2025 – Sep 2025</span>
+                        </div>
+                        <div class="timeline-role">SQA Automation Intern</div>
+                        <ul class="timeline-list">
+                            <li>Designed and implemented an agentic AI solution to autonomously generate functional and
+                                visual test cases</li>
+                            <li>Enhanced QA workflows by integrating automated test coverage into existing pipelines
+                            </li>
+                            <li>Executed and verified AI-generated test cases through structured functional, UI visual,
+                                and API testing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-meta">
+                            <span class="timeline-company accent">DBS Coding Camp × Dicoding</span>
+                            <span class="timeline-period mono">Feb 2025 – Jul 2025</span>
+                        </div>
+                        <div class="timeline-role">Machine Learning Engineer</div>
+                        <ul class="timeline-list">
+                            <li>Developed end-to-end predictive models implementing various ML algorithms for data
+                                analysis</li>
+                            <li>Applied Deep Learning fundamentals with TensorFlow to build image classification
+                                solutions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-meta">
+                            <span class="timeline-company accent">Universitas Brawijaya</span>
+                            <span class="timeline-period mono">Feb 2024 – Jul 2024</span>
+                        </div>
+                        <div class="timeline-role">Laboratory Teaching Assistant — Algorithm & Data Structures</div>
+                        <ul class="timeline-list">
+                            <li>Developed tutorial materials and provided hands-on assistance during lab sessions</li>
+                            <li>Assessed 30+ students through assignments and HackerRank tests</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-meta">
+                            <span class="timeline-company accent">HMTI Universitas Brawijaya</span>
+                            <span class="timeline-period mono">Nov 2024 – Present</span>
+                        </div>
+                        <div class="timeline-role">Vice Chairman</div>
+                        <ul class="timeline-list">
+                            <li>Co-led 90 members across 20+ work programs between two academic divisions</li>
+                            <li>Formulated strategies, set organizational goals, and made key decisions</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TECH STACK -->
+    <section class="section" id="techstack">
+        <div class="container">
+            <div class="section-label mono">03 — tech_stack</div>
+            <h2 class="section-title">Tools & Technologies</h2>
+            <div class="stack-grid">
+
+                <div class="stack-category reveal">
+                    <div class="stack-cat-label">🐍 Languages</div>
+                    <div class="stack-badges">
+                        <span class="badge">Python</span>
+                        <span class="badge">Java</span>
+                        <span class="badge">SQL</span>
+                        <span class="badge">R</span>
+                    </div>
+                </div>
+
+                <div class="stack-category reveal">
+                    <div class="stack-cat-label">🤖 ML & Deep Learning</div>
+                    <div class="stack-badges">
+                        <span class="badge">Scikit-learn</span>
+                        <span class="badge">TensorFlow</span>
+                        <span class="badge">Keras</span>
+                        <span class="badge">Pandas</span>
+                        <span class="badge">NumPy</span>
+                        <span class="badge">Hugging Face</span>
+                    </div>
+                </div>
+
+                <div class="stack-category reveal">
+                    <div class="stack-cat-label">✨ LLM & RAG</div>
+                    <div class="stack-badges">
+                        <span class="badge badge-accent">Gemini API</span>
+                        <span class="badge badge-accent">OpenAI API</span>
+                        <span class="badge badge-accent">LangChain</span>
+                        <span class="badge badge-accent">FAISS</span>
+                        <span class="badge badge-accent">BM25</span>
+                    </div>
+                </div>
+
+                <div class="stack-category reveal">
+                    <div class="stack-cat-label">📊 Visualization</div>
+                    <div class="stack-badges">
+                        <span class="badge">Matplotlib</span>
+                        <span class="badge">Seaborn</span>
+                        <span class="badge">Streamlit</span>
+                        <span class="badge">Power BI</span>
+                    </div>
+                </div>
+
+                <div class="stack-category reveal">
+                    <div class="stack-cat-label">☁️ Cloud & Dev</div>
+                    <div class="stack-badges">
+                        <span class="badge">AWS</span>
+                        <span class="badge">Docker</span>
+                        <span class="badge">Git & GitHub</span>
+                        <span class="badge">VS Code</span>
+                        <span class="badge">Jupyter</span>
+                    </div>
+                </div>
+
+                <div class="stack-category reveal">
+                    <div class="stack-cat-label">🧪 Testing</div>
+                    <div class="stack-badges">
+                        <span class="badge">Pytest</span>
+                        <span class="badge">Selenium</span>
+                        <span class="badge">BDD / Gherkin</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section section-alt" id="projects">
+        <div class="container">
+            <div class="section-label mono">04 — projects</div>
+            <h2 class="section-title">What I've Built</h2>
+            <div class="projects-grid">
+
+                <div class="project-card reveal">
+                    <div class="project-number mono">01</div>
+                    <div class="project-tags">
+                        <span class="tag">LLM</span><span class="tag">RAG</span><span class="tag">SQA</span>
+                    </div>
+                    <h3 class="project-title">AI-Powered Automated QA Chatbot</h3>
+                    <p class="project-desc">Multi-Agent architecture (Functional + Visual Agent) with Gemini 2.0
+                        multimodal. RAG Engine using BM25 for knowledge base indexing. Generates BDD (Given-When-Then)
+                        test cases with auto-export to Squash TM.</p>
+                    <div class="project-metrics">
+                        <div class="metric"><span class="metric-val accent">4</span><span class="metric-label">Eval
+                                Metrics</span></div>
+                        <div class="metric"><span class="metric-val accent">BDD</span><span class="metric-label">Output
+                                Format</span></div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://www.figma.com/design/tFlV4Sti2pGrOGFejt27MW/" target="_blank"
+                            class="proj-link">Figma ↗</a>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-number mono">02</div>
+                    <div class="project-tags">
+                        <span class="tag">Deep Learning</span><span class="tag">Computer Vision</span>
+                    </div>
+                    <h3 class="project-title">Skin Cancer Early Detection</h3>
+                    <p class="project-desc">Classifies 7 types of skin lesions using the HAM10000 dataset. Handles
+                        severe class imbalance with robust training strategies.</p>
+                    <div class="project-metrics">
+                        <div class="metric"><span class="metric-val accent">92.5%</span><span
+                                class="metric-label">Accuracy</span></div>
+                        <div class="metric"><span class="metric-val accent">88%</span><span
+                                class="metric-label">Melanoma Recall</span></div>
+                        <div class="metric"><span class="metric-val accent">95%</span><span class="metric-label">Nevus
+                                Precision</span></div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/rakhaalif" target="_blank" class="proj-link">GitHub ↗</a>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-number mono">03</div>
+                    <div class="project-tags">
+                        <span class="tag">Recommender System</span><span class="tag">ML</span>
+                    </div>
+                    <h3 class="project-title">Anime Recommendation System</h3>
+                    <p class="project-desc">Processes 12,294 anime titles and 6.3M user reviews. Hybrid content-based
+                        and collaborative filtering approach.</p>
+                    <div class="project-metrics">
+                        <div class="metric"><span class="metric-val accent">77%</span><span class="metric-label">Match
+                                Rate</span></div>
+                        <div class="metric"><span class="metric-val accent">1.24</span><span
+                                class="metric-label">RMSE</span></div>
+                        <div class="metric"><span class="metric-val accent">6.3M</span><span
+                                class="metric-label">Reviews</span></div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/rakhaalif/Sistem-Rekomendasi-Anime" target="_blank"
+                            class="proj-link">GitHub ↗</a>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-number mono">04</div>
+                    <div class="project-tags">
+                        <span class="tag">NLP</span><span class="tag">Sentiment Analysis</span>
+                    </div>
+                    <h3 class="project-title">Tokopedia Sentiment Analysis</h3>
+                    <p class="project-desc">Scraped and analyzed 90,000 Tokopedia app reviews. AI model trained to
+                        understand Indonesian everyday language nuances.</p>
+                    <div class="project-metrics">
+                        <div class="metric"><span class="metric-val accent">91%</span><span
+                                class="metric-label">Accuracy</span></div>
+                        <div class="metric"><span class="metric-val accent">78%</span><span
+                                class="metric-label">Positive Reviews</span></div>
+                        <div class="metric"><span class="metric-val accent">90K</span><span
+                                class="metric-label">Reviews</span></div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/rakhaalif/analisis-sentimen-tokopedia" target="_blank"
+                            class="proj-link">GitHub ↗</a>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-number mono">05</div>
+                    <div class="project-tags">
+                        <span class="tag">Data Analytics</span><span class="tag">Dashboard</span>
+                    </div>
+                    <h3 class="project-title">Brazil E-Commerce Dashboard</h3>
+                    <p class="project-desc">Analyzed 99,441 orders identifying peak order hours, revenue leaders, and
+                        category insights. Interactive dashboard with 6 real-time filters.</p>
+                    <div class="project-metrics">
+                        <div class="metric"><span class="metric-val accent">R$13.6M</span><span
+                                class="metric-label">Revenue Analyzed</span></div>
+                        <div class="metric"><span class="metric-val accent">99K+</span><span
+                                class="metric-label">Orders</span></div>
+                        <div class="metric"><span class="metric-val accent">6</span><span class="metric-label">Live
+                                Filters</span></div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/rakhaalif/Dashboard-E-Commerce-Brazil" target="_blank"
+                            class="proj-link">GitHub ↗</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+        <div class="container contact-container">
+            <div class="section-label mono">05 — contact</div>
+            <h2 class="section-title">Let's Connect</h2>
+            <p class="contact-sub">Open for collaborations, opportunities, or just a chat about AI & data.</p>
+            <a href="mailto:rakhaalifathallah123@gmail.com" class="btn btn-primary btn-lg">Say Hello ✉️</a>
+            <div class="social-links">
+                <a href="https://github.com/rakhaalif" target="_blank" class="social-link">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12" />
+                    </svg>
+                    GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/rakhaalif/" target="_blank" class="social-link">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                    </svg>
+                    LinkedIn
+                </a>
+                <a href="https://www.instagram.com/rakhaa.athallah/" target="_blank" class="social-link">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                    </svg>
+                    Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p class="mono">Built with ❤️ by <span class="accent">Rakha Alif Athallah</span> · 2025</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
