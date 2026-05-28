@@ -8,15 +8,15 @@
 }
 
 :root {
-    --bg: #050f05;
-    --bg-alt: #081208;
-    --bg-card: #0d1f0d;
-    --accent: #00ff88;
-    --accent2: #00d4aa;
-    --text: #e2f5e2;
-    --text-muted: #6b9e6b;
-    --border: rgba(0, 255, 136, 0.12);
-    --glow: rgba(0, 255, 136, 0.15);
+    --bg: #080808;
+    --bg-alt: #0e0e0e;
+    --bg-card: #111111;
+    --accent: #39ff88;
+    --accent2: #00b894;
+    --text: #d4d4d4;
+    --text-muted: #6b6b6b;
+    --border: rgba(255, 255, 255, 0.07);
+    --glow: rgba(57, 255, 136, 0.08);
     --font-main: 'Space Grotesk', sans-serif;
     --font-mono: 'Fira Code', monospace;
 }
@@ -169,6 +169,7 @@ body {
     font-weight: 700;
     line-height: 1.05;
     letter-spacing: -0.03em;
+    color: #ffffff;
     opacity: 0;
     animation: fadeUp 0.6s 0.4s forwards;
 }
@@ -284,6 +285,7 @@ body {
     font-weight: 700;
     letter-spacing: -0.02em;
     margin-bottom: 3rem;
+    color: #ffffff;
 }
 
 /* ===== ABOUT ===== */
