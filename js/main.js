@@ -216,6 +216,25 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     });
 });
 
+// ===== TAB ANCHOR NAVIGATOR =====
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+    const href = link.getAttribute('href');
+    let targetTab = href.replace('#', '');
+    if (targetTab === 'techstack') targetTab = 'stack'; // Map techstack href to stack tab
+
+    const tabBtn = document.querySelector(`.tab-btn[data-tab="${targetTab}"]`);
+    if (tabBtn) {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            tabBtn.click();
+            const portfolio = document.getElementById('portfolio');
+            if (portfolio) {
+                portfolio.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
+});
+
 // ===== ID CARD PHYSICS =====
 (function () {
     const scene = document.getElementById('idcard-scene');
