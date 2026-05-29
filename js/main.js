@@ -66,7 +66,7 @@ const counters = [
     { selector: '.stat:nth-child(1) .stat-num', value: 3.80, suffix: '' },
     { selector: '.stat:nth-child(2) .stat-num', value: 5, suffix: '' },
     { selector: '.stat:nth-child(3) .stat-num', value: 90, suffix: '+' },
-    { selector: '.stat:nth-child(4) .stat-num', value: 4, suffix: '' },
+    { selector: '.stat:nth-child(4) .stat-num', value: 8, suffix: '' },
 ];
 let countersDone = false;
 const statsSection = document.querySelector('.about-stats');

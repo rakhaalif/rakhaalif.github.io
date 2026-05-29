@@ -1192,13 +1192,14 @@ a.project-card {
 
 .cert-card {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
     padding: 1.2rem;
 }
 
 .cert-icon {
     font-size: 1.8rem;
+    line-height: 1;
 }
 
 a.cert-card {
