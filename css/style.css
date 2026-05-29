@@ -642,6 +642,19 @@ a.project-card {
     text-align: center;
 }
 
+.contact-container .section-title {
+    margin-bottom: 1.5rem;
+}
+
+.contact-bubble-wrap {
+    margin-bottom: 2rem;
+}
+
+.contact-bubble-wrap .section-bubble {
+    margin-left: 0;
+    top: 0;
+}
+
 .contact-sub {
     color: var(--text-muted);
     max-width: 480px;
