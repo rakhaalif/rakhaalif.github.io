@@ -895,40 +895,45 @@ a.project-card {
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.stagger-children.visible>*:nth-child(1) {
+.stagger-children.visible>* {
     opacity: 1;
     transform: none;
+}
+
+.stagger-children.visible>*:nth-child(1) {
     transition-delay: 0s;
 }
 
 .stagger-children.visible>*:nth-child(2) {
-    opacity: 1;
-    transform: none;
     transition-delay: 0.08s;
 }
 
 .stagger-children.visible>*:nth-child(3) {
-    opacity: 1;
-    transform: none;
     transition-delay: 0.16s;
 }
 
 .stagger-children.visible>*:nth-child(4) {
-    opacity: 1;
-    transform: none;
     transition-delay: 0.24s;
 }
 
 .stagger-children.visible>*:nth-child(5) {
-    opacity: 1;
-    transform: none;
     transition-delay: 0.32s;
 }
 
 .stagger-children.visible>*:nth-child(6) {
-    opacity: 1;
-    transform: none;
     transition-delay: 0.40s;
+}
+
+.stagger-children.visible>*:nth-child(7) {
+    transition-delay: 0.48s;
+}
+
+.stagger-children.visible>*:nth-child(8) {
+    transition-delay: 0.56s;
+}
+
+.stagger-children.visible>*:nth-child(n+9) {
+    transition-delay: 0.64s;
 }
 
 /* ===== PARALLAX HERO ===== */
