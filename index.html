@@ -1,477 +1,378 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="en" data-type="service" data-radius="soft" data-buttons="arrow" data-motion>
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rakha Alif Athallah — Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-</head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rakha Alif Athallah: data and AI engineer, Universitas Brawijaya</title>
+<meta name="description" content="Projects by Rakha Alif Athallah: LLM test generation at Telkom Indonesia, skin cancer detection, anime recommendations, Tokopedia sentiment analysis and a Brazil sales dashboard.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rakha Alif Athallah: data and AI engineer">
+<meta property="og:description" content="LLM test generation at Telkom Indonesia, five machine learning projects and nine certificates.">
+<meta property="og:image" content="share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#eef0f3">
+<!-- <link rel="canonical" href="https://rakha-alif.github.io/"> -->
+<meta name="site-kind" content="other">
+<meta name="page-type" content="service">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..700&family=Hanken+Grotesk:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/ui/cards.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<link rel="stylesheet" href="assets/backgrounds/backgrounds.css">
+<link rel="stylesheet" href="assets/layout/layout.css">
+<link rel="stylesheet" href="assets/icons/icon.css">
+<style>
+:root {
+  --p-bg: #eef0f3; --p-surface: #e2e5ea; --p-ink: #0b0c0e; --p-muted: #5d6470;
+  --p-accent: #1f2de6; --p-accent-ink: #ffffff; --p-action: #1f2de6; --p-action-ink: #ffffff;
+  --p-inv-bg: #0b0c0e; --p-inv-surface: #17181a; --p-inv-ink: #eef0f3; --p-inv-muted: #8e8f92;
+  --p-inv-accent: #eef0f3; --p-inv-accent-ink: #0b0c0e; --p-inv-action: #eef0f3; --p-inv-action-ink: #0b0c0e;
+  --font-display: "Newsreader", Georgia, serif;
+  --font-text: "Hanken Grotesk", system-ui, sans-serif;
+  --display-weight: 400;
+  --display-tracking: -0.018em;
+  --display-tracking-xl: -0.025em;
+  --ly-scale: 1.06;
+}
+</style>
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script src="assets/backgrounds/backgrounds.js"></script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="assets/moments/moments.js">
+<link rel="modulepreload" href="assets/moments/lib.js">
+<link rel="modulepreload" href="assets/moments/word-highlight/moment.js">
+<!-- page CSS: inside visuals only (the bumper, the ID card in the hero's frame, one --p-h per card row) -->
+<style>
+  /* bumper intro: kept at the owner's request; it never takes the pointer and is gone after 3.4 s */
+  .bumper { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center;
+    background: var(--p-inv-bg); color: var(--p-inv-ink); text-align: center; pointer-events: none;
+    animation: bumper-out .6s ease 2.8s forwards; }
+  .bumper__icons { display: flex; gap: var(--s-5); justify-content: center; margin-bottom: var(--s-5); animation: bumper-up .5s ease .3s both; }
+  .bumper__icon { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 50%;
+    background: var(--p-inv-surface); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--p-inv-ink) 16%, transparent); font-size: 20px; }
+  .bumper__title { margin: 0 0 var(--s-4); font: var(--display-weight) clamp(32px, 5vw, 56px)/1.05 var(--font-display);
+    letter-spacing: var(--display-tracking-xl); animation: bumper-up .5s ease .5s both; }
+  .bumper__url { display: inline-block; padding: 6px 16px; border-radius: 999px; font-size: 14px; color: var(--p-inv-muted);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--p-inv-ink) 16%, transparent); animation: bumper-up .5s ease .7s both; }
+  @keyframes bumper-out { to { opacity: 0; visibility: hidden; } }
+  @keyframes bumper-up { from { opacity: 0; transform: translateY(16px); } }
+  @media (prefers-reduced-motion: reduce) { .bumper { display: none; } }
 
+  /* the ID card on its lanyard: drag it sideways and it swings back (js/main.js) */
+  .idcard-scene { position: absolute; inset: 0; overflow: hidden; touch-action: pan-y; }
+  .idcard-hang { position: absolute; left: 50%; top: 0; width: 248px; display: flex; flex-direction: column; align-items: center;
+    transform: translateX(-50%); transform-origin: top center; cursor: grab; will-change: transform; user-select: none; }
+  .idcard-hang:active { cursor: grabbing; }
+  .idcard-strap { position: relative; width: 30px; height: clamp(80px, 22svh, 190px); background: var(--p-ink);
+    display: flex; flex-direction: column; align-items: center; justify-content: space-around; }
+  .idcard-strap span { color: var(--p-inv-ink); font: 500 11px/1 var(--font-text); writing-mode: vertical-lr; transform: rotate(180deg); }
+  .idcard-clip { position: relative; width: 30px; height: 30px; display: flex; justify-content: center; }
+  .idcard-clip::before { content: ""; position: absolute; top: -6px; width: 18px; height: 18px; border-radius: 50%; border: 3px solid #2a2c30; }
+  .idcard-clip::after { content: ""; position: absolute; top: 8px; width: 8px; height: 22px; border-radius: 3px; background: #2a2c30; }
+  .idcard-body { position: relative; width: 248px; aspect-ratio: 5 / 7; margin-top: 10px; padding: 12px; border-radius: 22px; background: #fff;
+    box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 24px 48px -12px rgba(11,12,14,.35); }
+  .idcard-body::before { content: ""; position: absolute; top: 8px; left: 50%; width: 18px; height: 5px; border-radius: 3px; transform: translateX(-50%); background: var(--p-ink); }
+  .idcard-inner { width: 100%; height: 100%; overflow: hidden; border-radius: 14px; background: var(--p-surface); }
+  .idcard-inner img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; pointer-events: none; }
+  @media (max-width: 1023px) { .idcard-hang, .idcard-body { width: 200px; } .idcard-strap { height: clamp(48px, 8svh, 96px); } }
+  @media (max-width: 639px) { .idcard-hang, .idcard-body { width: 150px; } .idcard-strap { height: 32px; } .idcard-strap span { display: none; } }
+
+  /* project cards: one panel height per row */
+  :is(#projects, #data-projects) .panel { flex: none; min-height: 0; height: var(--p-h); }
+  #projects .panel { --p-h: 340px; }
+  #data-projects .panel { --p-h: 380px; }
+  @media (max-width: 1279px) { #projects .panel { --p-h: 220px; } #data-projects { --h: 2; } #data-projects .panel { --p-h: 340px; } }
+  @media (min-width: 640px) and (max-width: 1023px) {
+    #projects .grid > .card { grid-column: span 6; }
+    #data-projects .grid > .card { grid-column: span 4; }
+    #projects .panel { --p-h: 280px; }
+    #data-projects { --h: 1; }
+    #data-projects .panel { --p-h: 180px; }
+  }
+  @media (min-width: 640px) and (max-width: 1023px) and (min-height: 1100px) {
+    #projects .panel { --p-h: 420px; }
+    #data-projects .panel { --p-h: 340px; }
+  }
+  /* experience: under 1280 the rows and the photograph stack, over two screens */
+  @media (max-width: 1279px) {
+    #experience { --h: 2; --hm: 2; }
+    #experience .grid > * { grid-column: 1 / -1; }
+    #experience .frame { min-height: 360px; margin-top: var(--s-7); }
+  }
+  /* certificates: screen one the heading and the photograph, screen two the list */
+  #certificates .frame { height: 100%; min-height: 240px; }
+  @media (min-width: 640px) and (min-height: 860px) { #certificates .rows > li { padding-block: var(--s-5); } #certificates .rows > li:first-child { padding-top: 0; } }
+  @media (max-width: 639px) {
+    #experience .frame { min-height: 220px; }
+    :is(#experience, #certificates) .rows > li { grid-template-columns: minmax(0, 1fr); }
+    :is(#experience, #certificates) .rows__value { grid-column: 1; grid-row: auto; justify-self: start; width: auto; text-align: left; white-space: nowrap; font-size: var(--t-small); }
+    #certificates .frame { flex: none; height: 200px; min-height: 0; }
+    #certificates .rows > li { padding-block: var(--s-1); }
+  }
+  #projects .panel > img { width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 639px) { #projects, #data-projects { --hm: 2; } #projects .panel { --p-h: 260px; } #data-projects .panel { --p-h: 180px; } }
+
+  /* stack: the tools as real icons on 72px tiles, eight across, in one frame */
+  .tools__grid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: var(--s-8) var(--s-5); margin: 0; padding: 0; list-style: none; }
+  .tools__grid li { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-3); }
+  .tools__grid .ic-tile { --tile: 96px; }
+  .tools__grid .ic-tile > .ic { --ic-s: 52px; width: 52px; height: 52px; }
+  @media (max-width: 1023px) { .tools__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (max-width: 639px) { .tools__grid .ic-tile { --tile: 64px; } .tools__grid .ic-tile > .ic { --ic-s: 34px; width: 34px; height: 34px; } }
+</style>
+</head>
 <body>
-    <!-- BUMPER INTRO -->
-    <div class="bumper" id="bumper">
-        <div class="bumper-content">
-            <div class="bumper-icons">
-                <span class="bumper-icon">&#60;/&#62;</span>
-                <span class="bumper-icon">👤</span>
-                <span class="bumper-icon">🌐</span>
+<!-- type: service (a person is hired)
+     deal: hero split (film re-dealt: no film), nav nav-split, close close-photo, footer footer-dark, rhythm surface-pairs,
+     buttons arrow, mark dots, palette cool-grey-cobalt, type newsreader, grounds none (kind other)
+     moments: word-highlight in #about
+     kept at the owner's request: the bumper intro and the draggable ID card -->
+
+<div class="bumper" aria-hidden="true">
+  <div>
+    <div class="bumper__icons"><span class="bumper__icon">&lt;/&gt;</span><span class="bumper__icon">👤</span><span class="bumper__icon">🌐</span></div>
+    <p class="bumper__title">Welcome to my<br>portfolio website</p>
+    <span class="bumper__url">rakha-alif.github.io</span>
+  </div>
+</div>
+
+<header class="nav nav--split">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Skip to content</a>
+    <a class="nav__logo" href="#top"><span class="mark" data-mark="dots" aria-hidden="true"></span>Rakha Alif Athallah</a>
+    <nav class="nav__links" aria-label="Main">
+      <div class="nav__item">
+        <a class="nav__link" href="#projects">Projects <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav__menu">
+          <div class="wrap grid">
+            <div class="menu-col span-4">
+              <p class="t-label">AI and machine learning</p>
+              <a href="#projects">Automated test case generator<span>Agentic AI at Telkom Indonesia</span></a>
+              <a href="#projects">Skin cancer early detection<span>Image classification with TensorFlow</span></a>
+              <a href="#data-projects">Anime recommendation system<span>Collaborative and content filtering</span></a>
             </div>
-            <h1 class="bumper-title">Welcome to my<br>Portfolio Website</h1>
-            <p class="bumper-url mono">rakha-alif.github.io</p>
+            <div class="menu-col span-4">
+              <p class="t-label">Data analysis</p>
+              <a href="#data-projects">Tokopedia sentiment analysis<span>NLP on product reviews</span></a>
+              <a href="#data-projects">Brazil e-commerce dashboard<span>Sales and customer trends</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav__item"><a class="nav__link" href="#experience">Experience</a></div>
+      <div class="nav__item"><a class="nav__link" href="#stack">Stack</a></div>
+      <div class="nav__item"><a class="nav__link" href="#certificates">Certificates</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="btn btn--primary" href="assets/CV_ATS_Rakha%20Alif%20Athallah.pdf" download>Download CV</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero hero--split" data-enter aria-labelledby="hero-h">
+    <div class="wrap"><div class="hero-text grid hero__grid">
+      <div class="hero__text span-5">
+        <h1 id="hero-h">Rakha Alif Athallah, data and AI engineer</h1>
+        <p class="hero__lead">Final-year Informatics Engineering student at Universitas Brawijaya, GPA 3.80. I build LLM agents that write and run software tests, and machine learning models for images and text.</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="assets/CV_ATS_Rakha%20Alif%20Athallah.pdf" download>Download CV<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+          <a class="btn btn--secondary" href="https://www.linkedin.com/in/rakhaalif/" target="_blank" rel="noopener">Message on LinkedIn</a>
+        </div>
+      </div>
+      <div class="hero__media span-6 start-7" data-visual>
+        <div class="idcard-scene" id="idcard-scene" role="img" aria-label="Rakha Alif Athallah's ID card on a lanyard; drag it sideways and it swings back">
+          <div class="idcard-hang" id="idcard-hang">
+            <div class="idcard-strap" aria-hidden="true"><span>rkh.dev</span><span>rkh.dev</span></div>
+            <div class="idcard-clip" aria-hidden="true"></div>
+            <div class="idcard-body">
+              <div class="idcard-inner">
+                <img src="assets/img/rakha-portrait-560.webp" srcset="assets/img/rakha-portrait-560.webp 560w, assets/img/rakha-portrait.webp 1000w" sizes="(max-width: 639px) 126px, (max-width: 1023px) 176px, 224px" alt="Portrait of Rakha Alif Athallah on an ID card" width="560" height="511" fetchpriority="high" data-source="client" data-subject="portrait">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="section statement" id="about" data-moment="word-highlight" aria-label="About">
+    <div class="wrap">
+      <p class="t-label">About</p>
+      <p class="mo-wh__text">My thesis uses large language models with retrieval-augmented generation to write functional and visual test cases for web applications. At Telkom Indonesia I built an agent that writes those tests and <strong>runs them</strong> before each release.</p>
+    </div>
+  </section>
+
+  <section class="section" id="projects" aria-labelledby="projects-h">
+    <div class="wrap">
+        <div class="section-head">
+          <h2 id="projects-h">AI projects at Telkom and DBS. <span class="muted">Each card opens the design or the live app.</span></h2>
+        </div>
+        <div class="grid">
+          <a class="card card--row card--open span-6" href="https://www.figma.com/design/tFlV4Sti2pGrOGFejt27MW/Usecase-Casecraft-Agent-Netmonk" target="_blank" rel="noopener">
+            <h3>Test generation agent at Telkom Indonesia</h3>
+            <p>Automated Test Case Generator: an agent that writes functional and visual test cases and runs them, built in my internship.</p>
+            <div class="ic-chip-row"><span class="ic-chip"><img class="ic" src="assets/icons/python.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Python</span><span class="ic-chip"><img class="ic" src="assets/icons/gemini.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Gemini API</span><span class="ic-chip">RAG</span></div>
+            <div class="panel"><img class="frame__img" src="assets/img/photo-f61739566.jpg" srcset="assets/img/photo-f61739566-500.jpg 500w, assets/img/photo-f61739566-960.jpg 960w, assets/img/photo-f61739566.jpg 1280w" sizes="(max-width: 1023px) 100vw, 50vw" width="1280" height="853" alt="Source code open in an editor on a laptop screen" loading="lazy" decoding="async" data-source="stand-in" data-subject="code on a laptop"></div>
+          </a>
+          <a class="card card--row card--open span-6" href="https://capstone-dbs-skinalyze.vercel.app" target="_blank" rel="noopener">
+            <h3>Skin cancer detection from image data</h3>
+            <p>Skin Cancer Early Detection: a deep learning classifier from the DBS Coding Camp capstone, live as a web app.</p>
+            <div class="ic-chip-row"><span class="ic-chip"><img class="ic" src="assets/icons/tensorflow.svg" alt="" width="18" height="18" loading="lazy" decoding="async">TensorFlow</span><span class="ic-chip"><img class="ic" src="assets/icons/python.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Python</span></div>
+            <div class="panel"><img class="frame__img" src="assets/img/photo-f84892807.jpg" srcset="assets/img/photo-f84892807-500.jpg 500w, assets/img/photo-f84892807-960.jpg 960w, assets/img/photo-f84892807.jpg 1280w" sizes="(max-width: 1023px) 100vw, 50vw" width="1280" height="962" alt="A skin lesion seen close up through a dermatoscope" loading="lazy" decoding="async" data-source="stand-in" data-subject="skin lesion"></div>
+          </a>
         </div>
     </div>
+  </section>
 
-    <!-- NAVBAR -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-logo">rkh<span class="accent">.dev</span></div>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#techstack">Stack</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
+  <section class="section" id="data-projects" aria-labelledby="data-projects-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="data-projects-h">Data projects on GitHub. <span class="muted">Each card opens the code.</span></h2>
+      </div>
+      <div class="grid row-2">
+        <a class="card card--row card--open span-4" href="https://github.com/rakhaalif/Sistem-Rekomendasi-Anime" target="_blank" rel="noopener">
+          <h3>Anime recommendations from rating data</h3>
+          <p>Anime Recommendation System: content-based and collaborative filtering on what viewers rated.</p>
+          <div class="ic-chip-row"><span class="ic-chip"><img class="ic ic-land" src="assets/icons/scikitlearn.svg" alt="" width="18" height="10" loading="lazy" decoding="async">scikit-learn</span><span class="ic-chip"><img class="ic" src="assets/icons/pandas-icon.svg" alt="" width="11" height="18" loading="lazy" decoding="async">pandas</span></div>
+          <div class="panel"><img class="frame__img" src="assets/img/photo-f46928304-960.jpg" srcset="assets/img/photo-f46928304-500.jpg 500w, assets/img/photo-f46928304-960.jpg 960w" sizes="(max-width: 1023px) 100vw, 33vw" width="960" height="722" alt="A shelf of manga volumes" loading="lazy" decoding="async" data-source="stand-in" data-subject="manga shelf"></div>
+        </a>
+        <a class="card card--row card--open span-4" href="https://github.com/rakhaalif/analisis-sentimen-tokopedia" target="_blank" rel="noopener">
+          <h3>Sentiment analysis of Tokopedia reviews</h3>
+          <p>NLP classifiers that label customer reviews from the Tokopedia marketplace positive or negative.</p>
+          <div class="ic-chip-row"><span class="ic-chip"><img class="ic" src="assets/icons/python.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Python</span><span class="ic-chip"><img class="ic ic-land" src="assets/icons/scikitlearn.svg" alt="" width="18" height="10" loading="lazy" decoding="async">scikit-learn</span></div>
+          <div class="panel"><img class="frame__img" src="assets/img/photo-f191913514.jpg" srcset="assets/img/photo-f191913514-500.jpg 500w, assets/img/photo-f191913514-960.jpg 960w, assets/img/photo-f191913514.jpg 1280w" sizes="(max-width: 1023px) 100vw, 33vw" width="1280" height="853" alt="A shopper reading a phone while leaning on a shopping trolley" loading="lazy" decoding="async" data-source="stand-in" data-subject="shopper with phone"></div>
+        </a>
+        <a class="card card--row card--open span-4" href="https://github.com/rakhaalif/Dashboard-E-Commerce-Brazil" target="_blank" rel="noopener">
+          <h3>Brazil e-commerce sales dashboard</h3>
+          <p>An interactive view of Brazilian online sales, customer behaviour and delivery trends.</p>
+          <div class="ic-chip-row"><span class="ic-chip"><img class="ic" src="assets/icons/python.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Python</span><span class="ic-chip"><img class="ic" src="assets/icons/pandas-icon.svg" alt="" width="11" height="18" loading="lazy" decoding="async">pandas</span></div>
+          <div class="panel"><img class="frame__img" src="assets/img/photo-f138536950-900.jpg" srcset="assets/img/photo-f138536950-500.jpg 500w, assets/img/photo-f138536950-900.jpg 900w" sizes="(max-width: 1023px) 100vw, 33vw" width="900" height="1200" alt="A cardboard shipping box on a carpet" loading="lazy" decoding="async" style="object-position: 50% 60%" data-source="stand-in" data-subject="shipping box"></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experience" aria-labelledby="experience-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="experience-h">Experience since 2024</h2>
+      </div>
+      <div class="grid grid--top fill">
+        <ul class="rows span-6">
+          <li><span class="rows__name">SQA Automation Intern</span><p>PT Telkom Indonesia. Built an agentic AI that generates and runs functional and visual tests.</p><span class="rows__value">Jul to Sep 2025</span></li>
+          <li><span class="rows__name">Machine Learning Engineer</span><p>DBS Coding Camp. Predictive models in Python and image classifiers in TensorFlow.</p><span class="rows__value">Feb to Jul 2025</span></li>
+          <li><span class="rows__name">Vice Chairman</span><p>HMDTIF Brawijaya. Ran a student association of 90 members and 20+ work programmes.</p><span class="rows__value">Nov 2024 to Nov 2025</span></li>
+          <li><span class="rows__name">Head of Quality Control</span><p>PKKMB. Led 7 staff checking services for 860+ new students.</p><span class="rows__value">Feb 2024 to Jan 2025</span></li>
+          <li><span class="rows__name">Laboratory Assistant</span><p>Universitas Brawijaya. Taught algorithms and data structures labs to 30+ students.</p><span class="rows__value">Feb to Jul 2024</span></li>
         </ul>
-        <div class="hamburger" id="hamburger">
-            <span></span><span></span><span></span>
+        <div class="frame frame--photo frame--fill span-6 start-7">
+          <img class="frame__img" src="assets/img/photo-f102898347.jpg" srcset="assets/img/photo-f102898347-500.jpg 500w, assets/img/photo-f102898347-960.jpg 960w, assets/img/photo-f102898347.jpg 1280w" sizes="(max-width: 639px) 188vw, (max-width: 1279px) 100vw, 50vw" width="1280" height="853" alt="A university lecture theatre seen from the back row" loading="lazy" decoding="async" data-source="stand-in" data-subject="lecture theatre">
         </div>
-    </nav>
+      </div>
+    </div>
+  </section>
 
-    <!-- HERO -->
-    <section class="hero" id="hero">
-        <canvas id="particles"></canvas>
-        <div class="hero-content">
-            <p class="hero-tag mono">&#60;import rkh/&#62;</p>
-            <h1 class="hero-name">Rakha Alif<br><span class="accent">Athallah</span></h1>
-            <p class="hero-sub">Data &amp; AI Enthusiast
-            <div class="hero-cta">
-                <a href="#projects" class="btn btn-primary">View Projects</a>
-                <a href="#contact" class="btn btn-outline">Let's Connect</a>
-                <a href="assets/CV_ATS_Rakha Alif Athallah.pdf" download class="btn btn-outline">📄 Download CV</a>
-            </div>
+  <section class="section ground-surface" id="stack" aria-labelledby="stack-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="stack-h">Tech stack for data work. <span class="muted">The tools behind the projects above.</span></h2>
+      </div>
+      <div class="tools" data-visual role="img" aria-label="Python, Java, R, SQL, scikit-learn, TensorFlow, Keras, Gemini API, pandas, NumPy, Matplotlib, Seaborn, AWS, Git, VS Code and RStudio">
+        <ul class="tools__grid">
+          <li><span class="ic-tile"><img class="ic" src="assets/icons/python.svg" alt="" width="40" height="40" loading="lazy" decoding="async"></span><span class="t-label">Python</span></li>
+          <li><span class="ic-tile"><img class="ic" src="assets/icons/java.svg" alt="" width="40" height="40" loading="lazy" decoding="async"></span><span class="t-label">Java</span></li>
+          <li><span class="ic-tile"><img class="ic" src="assets/icons/r-lang.svg" alt="" width="40" height="40" loading="lazy" decoding="async"></span><span class="t-label">R</span></li>
+          <li><span class="ic-tile"><img class="ic" src="assets/icons/sql.svg" alt="" width="40" height="40" loading="lazy" decoding="async"></span><span class="t-label">SQL</span></li>
+          <li><span class="ic-tile"><img class="ic" src="assets/icons/scikitlearn.svg" alt="" width="40" height="40" loading="lazy" decoding="async"></span><span class="t-label">scikit-learn</span></li>
+          <li><span class="ic-tile"><img class="ic" src="assets/icons/tensorflow.svg" alt="" width="40" height="40" loading="lazy" decoding="async"></span><span class="t-label">TensorFlow</span></li>
+          <li><span class="ic-tile"><img class="ic" src="assets/icons/keras.svg" alt="" width="40" height="40" loading="lazy" decoding="async"></span><span class="t-label">Keras</span></li>
+          <li><span class="ic-tile"><img class="ic" src="assets/icons/gemini.svg" alt="" width="40" height="40" loading="lazy" decoding="async"></span><span class="t-label">Gemini API</span></li>
+          <li><span class="ic-tile"><img class="ic" src="assets/icons/pandas-icon.svg" alt="" width="40" height="40" loading="lazy" decoding="async"></span><span class="t-label">pandas</span></li>
+          <li><span class="ic-tile"><img class="ic" src="assets/icons/numpy.svg" alt="" width="40" height="40" loading="lazy" decoding="async"></span><span class="t-label">NumPy</span></li>
+          <li><span class="ic-tile"><img class="ic" src="assets/icons/matplotlib-icon.svg" alt="" width="40" height="40" loading="lazy" decoding="async"></span><span class="t-label">Matplotlib</span></li>
+          <li><span class="ic-tile"><img class="ic" src="assets/icons/seaborn-icon.svg" alt="" width="40" height="40" loading="lazy" decoding="async"></span><span class="t-label">Seaborn</span></li>
+          <li><span class="ic-tile"><img class="ic" src="assets/icons/aws.svg" alt="" width="40" height="40" loading="lazy" decoding="async"></span><span class="t-label">AWS</span></li>
+          <li><span class="ic-tile"><img class="ic" src="assets/icons/git-icon.svg" alt="" width="40" height="40" loading="lazy" decoding="async"></span><span class="t-label">Git</span></li>
+          <li><span class="ic-tile"><img class="ic" src="assets/icons/vscode.svg" alt="" width="40" height="40" loading="lazy" decoding="async"></span><span class="t-label">VS Code</span></li>
+          <li><span class="ic-tile"><img class="ic" src="assets/icons/rstudioide.svg" alt="" width="40" height="40" loading="lazy" decoding="async"></span><span class="t-label">RStudio</span></li>
+        </ul>
+      </div>
+      <p class="measure" style="margin-top: var(--s-7)">Languages, machine learning, data and platforms, in that order. Also SQL Server Management Studio and Google Sheets, and the methods behind them: data visualisation, deep learning, NLP, computer vision and MLOps.</p>
+    </div>
+  </section>
+
+  <section class="section ground-surface g2" id="certificates" aria-labelledby="certificates-h">
+    <div class="wrap">
+      <div class="group">
+        <div class="section-head">
+          <h2 id="certificates-h">Nine data and AI certificates. <span class="muted">Each row opens the credential.</span></h2>
         </div>
-        <div class="hero-scroll">
-            <span>scroll</span>
-            <div class="scroll-line"></div>
+        <div class="frame frame--photo fill">
+          <img class="frame__img" src="assets/img/photo-f112672355.jpg" srcset="assets/img/photo-f112672355-500.jpg 500w, assets/img/photo-f112672355-960.jpg 960w, assets/img/photo-f112672355.jpg 1280w" sizes="(max-width: 639px) 188vw, 100vw" width="1280" height="853" alt="Graduates in caps and gowns, seen from behind" loading="lazy" decoding="async" data-source="stand-in" data-subject="graduation caps">
         </div>
-    </section>
+      </div>
+      <div class="grid">
+        <ul class="rows span-12">
+          <li><a class="rows__name link" href="https://skillshop.credential.net/e317fadc-370c-45a4-ad2c-20d54bab5621#acc.yI9uY5oQ" target="_blank" rel="noopener">Google Analytics Certification</a><span class="rows__value">Google Skillshop, Aug 2026</span></li>
+          <li><a class="rows__name link" href="https://drive.google.com/file/d/1Tb2F5FATKCqwWLmW80EsZkUSSWQ00BNq/view" target="_blank" rel="noopener">Python Data Analysis</a><span class="rows__value">DBS Coding Camp, Jun 2025</span></li>
+          <li><a class="rows__name link" href="https://dicoding.com/certificates/72ZDKQR1VPYW" target="_blank" rel="noopener">Fundamental Deep Learning</a><span class="rows__value">Dicoding Indonesia, Jun 2025</span></li>
+          <li><a class="rows__name link" href="https://dicoding.com/certificates/KEXL2EVO0ZG2" target="_blank" rel="noopener">Machine Learning Terapan</a><span class="rows__value">Dicoding Indonesia, Jun 2025</span></li>
+          <li><a class="rows__name link" href="https://dicoding.com/certificates/JMZVVQ8KRZN9" target="_blank" rel="noopener">Fundamental Pemrosesan Data</a><span class="rows__value">Dicoding Indonesia, Jun 2025</span></li>
+          <li><a class="rows__name link" href="https://www.credly.com/badges/36ef9d8b-8574-4093-9990-40a6b82459cc" target="_blank" rel="noopener">Data Engineering</a><span class="rows__value">AWS, May 2025</span></li>
+          <li><a class="rows__name link" href="https://dicoding.com/certificates/N9ZO23Q8RPG5" target="_blank" rel="noopener">Analisis Data dengan Python</a><span class="rows__value">Dicoding Indonesia, May 2025</span></li>
+          <li><a class="rows__name link" href="https://www.credly.com/badges/36ef9d8b-8574-4093-9990-40a6b82459cc" target="_blank" rel="noopener">Complete Data Science Bootcamp</a><span class="rows__value">Udemy, Dec 2024</span></li>
+          <li><a class="rows__name link" href="https://www.credly.com/badges/36ef9d8b-8574-4093-9990-40a6b82459cc" target="_blank" rel="noopener">Machine Learning Practice</a><span class="rows__value">Udemy, 2024</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
 
-    <!-- ABOUT -->
-    <section class="section" id="about">
-        <div class="container">
-            <h2 class="section-title">Who I Am <span class="section-bubble">👋 Hello!</span></h2>
-            <div class="about-grid">
-
-                <!-- ID Card Physics (kiri) -->
-                <div class="about-card-col reveal">
-                    <div class="idcard-scene" id="idcard-scene">
-                        <canvas id="rope-canvas" style="display: none;"></canvas>
-                        <div class="idcard-hang" id="idcard-hang">
-                            <!-- Lanyard Strap -->
-                            <div class="idcard-strap">
-                                <div class="idcard-strap-text">3D CARD</div>
-                                <div class="idcard-strap-text">3D CARD</div>
-                            </div>
-                            <!-- Metallic Clasp Clip -->
-                            <div class="idcard-clip">
-                                <div class="clip-ring"></div>
-                                <div class="clip-hook"></div>
-                            </div>
-                            <!-- High-end Glossy 3D Card Holder -->
-                            <div class="idcard-body">
-                                <div class="idcard-inner">
-                                    <img src="assets/img/photo.PNG" alt="Rakha" class="idcard-photo" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="idcard-hint mono">← drag me →</p>
-                </div>
-
-                <!-- Teks kanan -->
-                <div class="about-text reveal">
-                    <p>I'm a final-year Informatics Engineering student at <span class="accent">Universitas
-                            Brawijaya</span> (GPA 3.80/4.00), passionate about building intelligent systems at the
-                        intersection of AI, data, and software quality.</p>
-                    <p>My thesis focuses on <span class="accent">Automated Functional and Visual Test Cases
-                            Generation</span> for web applications using Large Language Models with Retrieval-Augmented
-                        Generation that combining cutting-edge AI with practical software engineering.</p>
-                    <p>Previously interned as an <span class="accent">SQA Automation Engineer</span> at Telkom
-                        Indonesia, where I built agentic AI solutions for autonomous test generation and execution.</p>
-                    <div class="about-stats stagger-children">
-                        <div class="stat"><span class="stat-num accent">3.80</span><span class="stat-label">GPA</span>
-                        </div>
-                        <div class="stat"><span class="stat-num accent">5+</span><span
-                                class="stat-label">Projects</span></div>
-                        <div class="stat"><span class="stat-num accent">90+</span><span class="stat-label">Members
-                                Led</span></div>
-                        <div class="stat"><span class="stat-num accent">8</span><span
-                                class="stat-label">Certifications</span></div>
-                    </div>
-                </div>
-
-            </div>
+<footer class="footer closing footer--dark ground-inverse" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--photo">
+      <div class="section-head--split">
+        <div><h2 id="close-h">Open to data and AI roles</h2><p class="t-lead">The CV lists every project, role and certificate on this page.</p></div>
+        <a class="btn btn--primary" href="assets/CV_ATS_Rakha%20Alif%20Athallah.pdf" download>Download CV<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+      </div>
+      <div class="close__media"><img src="assets/img/photo-f61740057.jpg" srcset="assets/img/photo-f61740057-500.jpg 500w, assets/img/photo-f61740057-960.jpg 960w, assets/img/photo-f61740057.jpg 1280w" sizes="(max-width: 639px) 188vw, 100vw" width="1280" height="853" alt="Someone writing code on a laptop at a desk" loading="lazy" decoding="async" data-source="stand-in" data-subject="coding at a laptop"></div>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-8 stack-4">
+          <a class="nav__logo" href="#top"><span class="mark" data-mark="dots" aria-hidden="true"></span>Rakha Alif Athallah</a>
+          <p class="footer__lede">Data and AI engineer, Informatics Engineering at Universitas Brawijaya.</p>
         </div>
-    </section>
-
-    <!-- PORTFOLIO TABS -->
-    <section class="section" id="portfolio">
-        <div class="container">
-            <h2 class="section-title">Portfolio Showcase</h2>
-            <p class="section-sub">Explore my journey through experience, skills, projects, and certifications.</p>
-
-            <!-- Tab Buttons -->
-            <div class="tab-bar">
-                <button class="tab-btn active" data-tab="experience">💼 Experience</button>
-                <button class="tab-btn" data-tab="stack">⚡ Tech Stack</button>
-                <button class="tab-btn" data-tab="projects">🚀 Projects</button>
-                <button class="tab-btn" data-tab="certifications">🏆 Certifications</button>
-            </div>
-
-            <!-- Tab: Experience -->
-            <div class="tab-content active" id="tab-experience">
-                <div class="timeline stagger-children">
-                    <!-- SQA Automation Intern -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date mono">Jul 2025 — Sep 2025</div>
-                        <div class="timeline-card card">
-                            <h3>SQA Automation Intern</h3>
-                            <p class="accent mono">PT Telkom Indonesia</p>
-                            <p>Engineered and implemented an agentic AI solution for autonomous generation and execution
-                                of functional and visual test cases, improving overall software validation efficiency.
-                                Enhanced QA workflows by integrating automated test coverage into existing pipelines to
-                                support flawless pre-release delivery.</p>
-                        </div>
-                    </div>
-                    <!-- Machine Learning Engineer -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date mono">Feb 2025 — Jul 2025</div>
-                        <div class="timeline-card card">
-                            <h3>Machine Learning Engineer</h3>
-                            <p class="accent mono">DBS Coding Camp — Dicoding</p>
-                            <p>Developed end-to-end predictive models by performing data analysis with Python and
-                                implementing various machine learning algorithms. Applied Deep Learning fundamentals
-                                with TensorFlow to build practical AI solutions for image classification tasks.</p>
-                        </div>
-                    </div>
-                    <!-- Laboratory Assistant -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date mono">Feb 2024 — Jul 2024</div>
-                        <div class="timeline-card card">
-                            <h3>Laboratory Assistant</h3>
-                            <p class="accent mono">Universitas Brawijaya</p>
-                            <p>Teaching Assistant for Algorithm and Data Structures. Developed tutorial materials and
-                                provided hands-on assistance during lab sessions. Monitored and assessed 30+ students
-                                through assignments and HackerRank tests.</p>
-                        </div>
-                    </div>
-                    <!-- Vice Chairman HMDTIF -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date mono">Nov 2024 — Nov 2025</div>
-                        <div class="timeline-card card">
-                            <h3>Vice Chairman</h3>
-                            <p class="accent mono">HMDTIF — Universitas Brawijaya</p>
-                            <p>Collaborating with the chairman to oversee and manage 90 members with 20+ work programs
-                                from two academic programs. Formulating strategies, setting organizational goals, and
-                                making key decisions to advance the association's objectives.</p>
-                        </div>
-                    </div>
-                    <!-- Head of QC Division -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date mono">Feb 2024 — Jan 2025</div>
-                        <div class="timeline-card card">
-                            <h3>Head of Quality Control Division</h3>
-                            <p class="accent mono">PKKMB &amp; Startup Academy</p>
-                            <p>Managed a team of 7 staff members ensuring quality and standards of student services and
-                                programs across 860+ new students. Oversaw detailed data tracking using Google Sheets
-                                for accurate analysis and efficient management.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tab: Tech Stack -->
-            <div class="tab-content" id="tab-stack">
-                <div class="stack-grid stagger-children">
-                    <div class="stack-card card">
-                        <div class="stack-icon">🐍</div>
-                        <h4>Languages</h4>
-                        <div class="badge-row"><span class="badge">Python</span><span class="badge">Java</span><span
-                                class="badge">R</span><span class="badge">SQL</span></div>
-                    </div>
-                    <div class="stack-card card">
-                        <div class="stack-icon">🤖</div>
-                        <h4>ML &amp; Deep Learning</h4>
-                        <div class="badge-row"><span class="badge">Scikit-learn</span><span
-                                class="badge">TensorFlow</span><span class="badge">Keras</span></div>
-                    </div>
-                    <div class="stack-card card">
-                        <div class="stack-icon">📊</div>
-                        <h4>Data &amp; Analytics</h4>
-                        <div class="badge-row"><span class="badge">Pandas</span><span class="badge">NumPy</span><span
-                                class="badge">Matplotlib</span><span class="badge">Seaborn</span><span
-                                class="badge">Statistics</span></div>
-                    </div>
-                    <div class="stack-card card">
-                        <div class="stack-icon">🧠</div>
-                        <h4>Core Competencies</h4>
-                        <div class="badge-row"><span class="badge">Data Visualization</span><span class="badge">Machine
-                                Learning</span><span class="badge">Deep Learning</span><span
-                                class="badge">NLP</span><span class="badge">Computer Vision</span><span
-                                class="badge">MLOps</span></div>
-                    </div>
-                    <div class="stack-card card">
-                        <div class="stack-icon">☁️</div>
-                        <h4>Tools &amp; Platforms</h4>
-                        <div class="badge-row"><span class="badge">AWS</span><span class="badge">Git</span><span
-                                class="badge">VS Code</span><span class="badge">RStudio</span><span
-                                class="badge">SSMS</span><span class="badge">Spreadsheets</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tab: Projects -->
-            <div class="tab-content" id="tab-projects">
-                <div class="projects-grid stagger-children">
-                    <a href="https://www.figma.com/design/tFlV4Sti2pGrOGFejt27MW/Usecase-Casecraft-Agent-Netmonk"
-                        target="_blank" class="project-card card">
-                        <div class="project-header"><span class="project-icon">🤖</span></div>
-                        <h3>AI-Powered Automated QA Chatbot</h3>
-                        <p>Agentic AI solution for autonomous test case generation and execution with chatbot
-                            integration, built during internship at PT Telkom Indonesia.</p>
-                        <div class="badge-row"><span class="badge">Python</span><span class="badge">Gemini
-                                API</span><span class="badge">Agentic AI</span><span class="badge">RAG</span></div>
-                    </a>
-                    <a href="https://capstone-dbs-skinalyze.vercel.app" target="_blank" class="project-card card">
-                        <div class="project-header"><span class="project-icon">🔬</span></div>
-                        <h3>Skin Cancer Early Detection</h3>
-                        <p>AI-powered early detection system for skin cancer using image classification and deep
-                            learning, designed to assist medical professionals in diagnosis.</p>
-                        <div class="badge-row"><span class="badge">Deep Learning</span><span class="badge">Image
-                                Classification</span><span class="badge">TensorFlow</span><span
-                                class="badge">Python</span></div>
-                    </a>
-                    <a href="https://github.com/rakhaalif/Sistem-Rekomendasi-Anime" target="_blank"
-                        class="project-card card">
-                        <div class="project-header"><span class="project-icon">🎌</span></div>
-                        <h3>Anime Recommendation System</h3>
-                        <p>Content-based and collaborative filtering recommendation system for anime, built with machine
-                            learning algorithms to provide personalized suggestions.</p>
-                        <div class="badge-row"><span class="badge">Python</span><span
-                                class="badge">Scikit-learn</span><span class="badge">Pandas</span><span
-                                class="badge">ML</span></div>
-                    </a>
-                    <a href="https://github.com/rakhaalif/analisis-sentimen-tokopedia" target="_blank"
-                        class="project-card card">
-                        <div class="project-header"><span class="project-icon">💬</span></div>
-                        <h3>Tokopedia Sentiment Analysis</h3>
-                        <p>Natural Language Processing project analyzing customer review sentiments on Tokopedia
-                            e-commerce platform using machine learning classification models.</p>
-                        <div class="badge-row"><span class="badge">Python</span><span class="badge">NLP</span><span
-                                class="badge">Scikit-learn</span><span class="badge">Pandas</span></div>
-                    </a>
-                    <a href="https://github.com/rakhaalif/Dashboard-E-Commerce-Brazil" target="_blank"
-                        class="project-card card">
-                        <div class="project-header"><span class="project-icon">📊</span></div>
-                        <h3>Brazil E-Commerce Dashboard</h3>
-                        <p>Interactive data visualization dashboard analyzing Brazilian e-commerce trends, customer
-                            behavior, and sales performance metrics.</p>
-                        <div class="badge-row"><span class="badge">Python</span><span class="badge">Data
-                                Visualization</span><span class="badge">Pandas</span><span
-                                class="badge">Dashboard</span></div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Tab: Certifications -->
-            <div class="tab-content" id="tab-certifications">
-                <div class="cert-grid stagger-children">
-                    <!-- Python Data Analysis -->
-                    <a href="https://drive.google.com/file/d/1Tb2F5FATKCqwWLmW80EsZkUSSWQ00BNq/view" target="_blank"
-                        class="cert-card card" id="cert-dbs-python-data-analysis">
-                        <div class="cert-icon">🏆</div>
-                        <div class="cert-info">
-                            <h4>Python Data Analysis</h4>
-                            <p class="text-muted mono">DBS Coding Camp — Jun 2025</p>
-                            <div class="badge-row">
-                                <span class="badge">Data Analysis</span>
-                                <span class="badge">Python</span>
-                            </div>
-                        </div>
-                        <span class="cert-link-icon">↗</span>
-                    </a>
-
-                    <!-- Belajar Fundamental Deep Learning -->
-                    <a href="https://dicoding.com/certificates/72ZDKQR1VPYW" target="_blank" class="cert-card card"
-                        id="cert-dicoding-deep-learning">
-                        <div class="cert-icon">🏆</div>
-                        <div class="cert-info">
-                            <h4>Fundamental Deep Learning</h4>
-                            <p class="text-muted mono">Dicoding Indonesia — Jun 2025</p>
-                            <p class="cert-id text-muted mono" style="font-size: 0.75rem; margin-top: 0.25rem;">ID:
-                                72ZDKQR1VPYW</p>
-                            <div class="badge-row">
-                                <span class="badge">Deep Learning</span>
-                                <span class="badge">Machine Learning</span>
-                            </div>
-                        </div>
-                        <span class="cert-link-icon">↗</span>
-                    </a>
-
-                    <!-- Machine Learning Terapan -->
-                    <a href="https://dicoding.com/certificates/KEXL2EVO0ZG2" target="_blank" class="cert-card card"
-                        id="cert-dicoding-ml-terapan">
-                        <div class="cert-icon">🏆</div>
-                        <div class="cert-info">
-                            <h4>Machine Learning Terapan</h4>
-                            <p class="text-muted mono">Dicoding Indonesia — Jun 2025</p>
-                            <p class="cert-id text-muted mono" style="font-size: 0.75rem; margin-top: 0.25rem;">ID:
-                                KEXL2EVO0ZG2</p>
-                            <div class="badge-row">
-                                <span class="badge">Machine Learning</span>
-                                <span class="badge">Python</span>
-                            </div>
-                        </div>
-                        <span class="cert-link-icon">↗</span>
-                    </a>
-
-                    <!-- Belajar Fundamental Pemrosesan Data -->
-                    <a href="https://dicoding.com/certificates/JMZVVQ8KRZN9" target="_blank" class="cert-card card"
-                        id="cert-dicoding-pemrosesan-data">
-                        <div class="cert-icon">🏆</div>
-                        <div class="cert-info">
-                            <h4>Fundamental Pemrosesan Data</h4>
-                            <p class="text-muted mono">Dicoding Indonesia — Jun 2025</p>
-                            <p class="cert-id text-muted mono" style="font-size: 0.75rem; margin-top: 0.25rem;">ID:
-                                JMZVVQ8KRZN9</p>
-                            <div class="badge-row">
-                                <span class="badge">Data Processing</span>
-                                <span class="badge">ETL</span>
-                                <span class="badge">Python</span>
-                            </div>
-                        </div>
-                        <span class="cert-link-icon">↗</span>
-                    </a>
-
-                    <!-- Data Engineering (AWS) -->
-                    <a href="https://www.credly.com/badges/36ef9d8b-8574-4093-9990-40a6b82459cc" target="_blank"
-                        class="cert-card card" id="cert-aws-data-engineering">
-                        <div class="cert-icon">🏆</div>
-                        <div class="cert-info">
-                            <h4>Data Engineering</h4>
-                            <p class="text-muted mono">AWS — May 2025</p>
-                            <div class="badge-row">
-                                <span class="badge">Data Engineering</span>
-                                <span class="badge">Cloud Computing</span>
-                            </div>
-                        </div>
-                        <span class="cert-link-icon">↗</span>
-                    </a>
-
-                    <!-- Belajar Analisis Data dengan Python -->
-                    <a href="https://dicoding.com/certificates/N9ZO23Q8RPG5" target="_blank" class="cert-card card"
-                        id="cert-dicoding-analisis-data">
-                        <div class="cert-icon">🏆</div>
-                        <div class="cert-info">
-                            <h4>Analisis Data dengan Python</h4>
-                            <p class="text-muted mono">Dicoding Indonesia — May 2025</p>
-                            <p class="cert-id text-muted mono" style="font-size: 0.75rem; margin-top: 0.25rem;">ID:
-                                N9ZO23Q8RPG5</p>
-                            <div class="badge-row">
-                                <span class="badge">Data Analytics</span>
-                                <span class="badge">Python</span>
-                            </div>
-                        </div>
-                        <span class="cert-link-icon">↗</span>
-                    </a>
-
-                    <!-- Complete Data Science Bootcamp -->
-                    <a href="https://www.credly.com/badges/36ef9d8b-8574-4093-9990-40a6b82459cc" target="_blank"
-                        class="cert-card card" id="cert-udemy-ds-bootcamp">
-                        <div class="cert-icon">🏆</div>
-                        <div class="cert-info">
-                            <h4>Complete Data Science Bootcamp</h4>
-                            <p class="text-muted mono">Udemy — Dec 2024</p>
-                            <div class="badge-row">
-                                <span class="badge">Data Science</span>
-                                <span class="badge">Python</span>
-                                <span class="badge">Statistics</span>
-                            </div>
-                        </div>
-                        <span class="cert-link-icon">↗</span>
-                    </a>
-
-                    <!-- Machine Learning Practice -->
-                    <a href="https://www.credly.com/badges/36ef9d8b-8574-4093-9990-40a6b82459cc" target="_blank"
-                        class="cert-card card" id="cert-udemy-ml-practice">
-                        <div class="cert-icon">🏆</div>
-                        <div class="cert-info">
-                            <h4>Machine Learning Practice</h4>
-                            <p class="text-muted mono">Udemy — 2024</p>
-                            <div class="badge-row">
-                                <span class="badge">Machine Learning</span>
-                                <span class="badge">Python</span>
-                            </div>
-                        </div>
-                        <span class="cert-link-icon">↗</span>
-                    </a>
-                </div>
-            </div>
-
+        <div class="span-2 footer__col"><h3>Work</h3><ul><li><a href="#projects">Projects</a></li><li><a href="#experience">Experience</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Skills</h3><ul><li><a href="#stack">Stack</a></li><li><a href="#certificates">Certificates</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 Rakha Alif Athallah</span>
+        <div class="socials">
+          <a href="https://github.com/rakhaalif" target="_blank" rel="noopener" aria-label="GitHub"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+          <a href="https://www.linkedin.com/in/rakhaalif/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="https://www.instagram.com/rakhaa.athallah/" target="_blank" rel="noopener" aria-label="Instagram"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
         </div>
-    </section>
+        <a class="credits" href="credits.html">Photographs via Wikimedia Commons</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
-    <!-- CONTACT -->
-    <section class="section" id="contact">
-        <div class="container contact-container">
-            <div class="section-label mono">contact</div>
-            <h2 class="section-title">Let's Connect</h2>
-            <div class="contact-bubble-wrap">
-                <span class="section-bubble">✉️ Open to Work</span>
-            </div>
-            <p class="contact-sub">Open for collaborations, opportunities, or just a chat about AI & data.</p>
-            <a href="https://www.linkedin.com/in/rakhaalif/" target="_blank" class="btn btn-primary btn-lg">Say Hello
-                💬</a>
-            <div class="social-links">
-                <a href="https://github.com/rakhaalif" target="_blank" class="social-link">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12" />
-                    </svg>
-                    GitHub
-                </a>
-                <a href="https://www.linkedin.com/in/rakhaalif/" target="_blank" class="social-link">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                    </svg>
-                    LinkedIn
-                </a>
-                <a href="https://www.instagram.com/rakhaa.athallah/" target="_blank" class="social-link">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-                    </svg>
-                    Instagram
-                </a>
-            </div>
-        </div>
-    </section>
+<nav class="actionbar" aria-label="Quick actions">
+  <a class="btn btn--primary" href="assets/CV_ATS_Rakha%20Alif%20Athallah.pdf" download>Download CV</a>
+</nav>
 
-    <footer class="footer">
-        <p class="mono"> by <span class="accent">Rakha Alif Athallah</span>
-    </footer>
-
-    <script src="js/main.js"></script>
+<script type="module" src="assets/system.js"></script>
+<script type="module" src="assets/motion/motion.js"></script>
+<script type="module" src="assets/layout/layout.js"></script>
+<script src="js/main.js"></script>
 </body>
-
 </html>
