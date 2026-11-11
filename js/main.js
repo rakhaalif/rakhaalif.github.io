@@ -28,8 +28,12 @@
     let dragStartAngle = 0;
     let running = false;
 
+    const body = document.getElementById('idcard-body');
+
     function render() {
         card.style.transform = `translateX(-50%) rotate(${angle}rad)`;
+        // the foil sheen on the card slides with the swing
+        if (body) body.style.setProperty('--swing', angle.toFixed(4));
     }
 
     function step() {
@@ -84,4 +88,18 @@
 
     render();
     if (!reduced) start();
+})();
+
+// ===== SKELETON SHIMMER =====
+// Each photograph's frame shows a soft shimmer until the picture has loaded; the picture itself is never hidden.
+(function () {
+    const imgs = document.querySelectorAll('.panel > img, .frame > img, .idc-photo > img, .close__media > img');
+    imgs.forEach(img => {
+        if (img.complete && img.naturalWidth) return;
+        const box = img.parentElement;
+        box.classList.add('is-loading');
+        const done = () => box.classList.remove('is-loading');
+        img.addEventListener('load', done, { once: true });
+        img.addEventListener('error', done, { once: true });
+    });
 })();

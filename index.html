@@ -1,23 +1,23 @@
 <!doctype html>
-<html lang="en" data-type="service" data-radius="soft" data-buttons="arrow" data-motion>
+<html lang="en" data-type="software" data-radius="soft" data-buttons="solid" data-ground="sage" data-motion>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Rakha Alif Athallah: data and AI engineer, Universitas Brawijaya</title>
-<meta name="description" content="Projects by Rakha Alif Athallah: LLM test generation at Telkom Indonesia, skin cancer detection, anime recommendations, Tokopedia sentiment analysis and a Brazil sales dashboard.">
+<title>Rakha Alif Athallah: QA and AI engineer, Universitas Brawijaya</title>
+<meta name="description" content="Projects by Rakha Alif Athallah, quality assurance and AI engineer: an LLM test generation agent at Telkom Indonesia, the Skinalyze skin cancer app, and anime, Tokopedia and Brazil e-commerce projects on GitHub.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Rakha Alif Athallah: data and AI engineer">
-<meta property="og:description" content="LLM test generation at Telkom Indonesia, five machine learning projects and nine certificates.">
-<meta property="og:image" content="share.jpg">
+<meta property="og:title" content="Rakha Alif Athallah: QA and AI engineer">
+<meta property="og:description" content="An LLM agent that writes and runs software tests, built at Telkom Indonesia, plus four machine learning projects and nine certificates.">
+<meta property="og:image" content="https://rakhaalif.github.io/share.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#eef0f3">
+<meta name="theme-color" content="#161c1a">
 <link rel="canonical" href="https://rakhaalif.github.io/">
-<meta name="site-kind" content="other">
-<meta name="page-type" content="service">
+<meta name="site-kind" content="software">
+<meta name="page-type" content="software">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..700&family=Hanken+Grotesk:wght@400..600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400..500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/system.css">
 <link rel="stylesheet" href="assets/ui/cards.css">
 <link rel="stylesheet" href="assets/motion/motion.css">
@@ -26,76 +26,124 @@
 <link rel="stylesheet" href="assets/icons/icon.css">
 <style>
 :root {
-  --p-bg: #eef0f3; --p-surface: #e2e5ea; --p-ink: #0b0c0e; --p-muted: #5d6470;
-  --p-accent: #1f2de6; --p-accent-ink: #ffffff; --p-action: #1f2de6; --p-action-ink: #ffffff;
-  --p-inv-bg: #0b0c0e; --p-inv-surface: #17181a; --p-inv-ink: #eef0f3; --p-inv-muted: #8e8f92;
-  --p-inv-accent: #eef0f3; --p-inv-accent-ink: #0b0c0e; --p-inv-action: #eef0f3; --p-inv-action-ink: #0b0c0e;
-  --font-display: "Newsreader", Georgia, serif;
-  --font-text: "Hanken Grotesk", system-ui, sans-serif;
-  --display-weight: 400;
-  --display-tracking: -0.018em;
-  --display-tracking-xl: -0.025em;
-  --ly-scale: 1.06;
+  --p-bg: #161c1a; --p-surface: #1f2725; --p-ink: #e3e2da; --p-muted: #8e948d;
+  --p-accent: #9fc7b8; --p-accent-ink: #161c1a; --p-action: #9fc7b8; --p-action-ink: #161c1a;
+  --p-inv-bg: #e3e2da; --p-inv-surface: #d3d2cb; --p-inv-ink: #161c1a; --p-inv-muted: #555a55;
+  --p-inv-accent: #161c1a; --p-inv-accent-ink: #e3e2da; --p-inv-action: #161c1a; --p-inv-action-ink: #e3e2da;
+  --font-display: "Host Grotesk", system-ui, sans-serif;
+  --font-text: "Host Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.035em;
+  --display-tracking-xl: -0.04em;
 }
 </style>
+<link rel="stylesheet" href="assets/ui/base.css">
+<link rel="stylesheet" href="assets/ui/terminal-run/fragment.css">
+<link rel="stylesheet" href="assets/diagrams/diagram.css">
 <script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
 <script src="assets/backgrounds/backgrounds.js"></script>
 <script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
 <link rel="modulepreload" href="assets/moments/moments.js">
 <link rel="modulepreload" href="assets/moments/lib.js">
-<link rel="modulepreload" href="assets/moments/word-highlight/moment.js">
-<!-- page CSS: inside visuals only (the bumper, the ID card in the hero's frame, one --p-h per card row) -->
+<link rel="modulepreload" href="assets/moments/counter-rolls/moment.js">
+<link rel="modulepreload" href="assets/moments/iris-opens/moment.js">
+<!-- page CSS: inside visuals only (the bumper, the ID card in the hero's frame, card panel heights, the tools grid) -->
 <style>
   /* bumper intro: kept at the owner's request; it never takes the pointer and is gone after 3.4 s */
   .bumper { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center;
-    background: var(--p-inv-bg); color: var(--p-inv-ink); text-align: center; pointer-events: none;
+    background: var(--p-bg); color: var(--p-ink); text-align: center; pointer-events: none;
     animation: bumper-out .6s ease 2.8s forwards; }
   .bumper__icons { display: flex; gap: var(--s-5); justify-content: center; margin-bottom: var(--s-5); animation: bumper-up .5s ease .3s both; }
   .bumper__icon { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 50%;
-    background: var(--p-inv-surface); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--p-inv-ink) 16%, transparent); font-size: 20px; }
+    background: var(--p-surface); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--p-ink) 16%, transparent); font-size: 20px; }
   .bumper__title { margin: 0 0 var(--s-4); font: var(--display-weight) clamp(32px, 5vw, 56px)/1.05 var(--font-display);
     letter-spacing: var(--display-tracking-xl); animation: bumper-up .5s ease .5s both; }
-  .bumper__url { display: inline-block; padding: 6px 16px; border-radius: 999px; font-size: 14px; color: var(--p-inv-muted);
-    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--p-inv-ink) 16%, transparent); animation: bumper-up .5s ease .7s both; }
+  .bumper__url { display: inline-block; padding: 6px 16px; border-radius: 999px; font: 14px var(--font-mono); color: var(--p-muted);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--p-ink) 16%, transparent); animation: bumper-up .5s ease .7s both; }
   @keyframes bumper-out { to { opacity: 0; visibility: hidden; } }
   @keyframes bumper-up { from { opacity: 0; transform: translateY(16px); } }
   @media (prefers-reduced-motion: reduce) { .bumper { display: none; } }
 
-  /* the ID card on its lanyard: drag it sideways and it swings back (js/main.js) */
-  .idcard-scene { position: absolute; inset: 0; overflow: hidden; touch-action: pan-y; }
-  .idcard-hang { position: absolute; left: 50%; top: 0; width: 248px; display: flex; flex-direction: column; align-items: center;
+  /* the ID card: a bone-white card with a foil sheen that slides as it swings (js/main.js sets --swing) */
+  .idcard-scene { position: absolute; inset: 0; z-index: 1; overflow: hidden; touch-action: pan-y; }
+  .idcard-hang { --cw: 260px; position: absolute; left: 50%; top: 0; width: var(--cw); display: flex; flex-direction: column; align-items: center;
     transform: translateX(-50%); transform-origin: top center; cursor: grab; will-change: transform; user-select: none; }
   .idcard-hang:active { cursor: grabbing; }
-  .idcard-strap { position: relative; width: 30px; height: clamp(80px, 22svh, 190px); background: var(--p-ink);
+  .idcard-strap { position: relative; width: 34px; height: clamp(80px, 21svh, 190px); overflow: hidden;
+    background: repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 1px, transparent 1px 3px), #23302c;
+    box-shadow: inset 2px 0 0 var(--p-accent), inset -2px 0 0 var(--p-accent);
     display: flex; flex-direction: column; align-items: center; justify-content: space-around; }
-  .idcard-strap span { color: var(--p-inv-ink); font: 500 11px/1 var(--font-text); writing-mode: vertical-lr; transform: rotate(180deg); }
-  .idcard-clip { position: relative; width: 30px; height: 30px; display: flex; justify-content: center; }
-  .idcard-clip::before { content: ""; position: absolute; top: -6px; width: 18px; height: 18px; border-radius: 50%; border: 3px solid #2a2c30; }
-  .idcard-clip::after { content: ""; position: absolute; top: 8px; width: 8px; height: 22px; border-radius: 3px; background: #2a2c30; }
-  .idcard-body { position: relative; width: 248px; aspect-ratio: 5 / 7; margin-top: 10px; padding: 12px; border-radius: 22px; background: #fff;
-    box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 24px 48px -12px rgba(11,12,14,.35); }
-  .idcard-body::before { content: ""; position: absolute; top: 8px; left: 50%; width: 18px; height: 5px; border-radius: 3px; transform: translateX(-50%); background: var(--p-ink); }
-  .idcard-inner { width: 100%; height: 100%; overflow: hidden; border-radius: 14px; background: var(--p-surface); }
-  .idcard-inner img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; pointer-events: none; }
-  @media (max-width: 1023px) { .idcard-hang, .idcard-body { width: 200px; } .idcard-strap { height: clamp(48px, 8svh, 96px); } }
-  @media (max-width: 639px) { .idcard-hang, .idcard-body { width: 150px; } .idcard-strap { height: 32px; } .idcard-strap span { display: none; } }
+  .idcard-strap span { color: var(--p-ink); font: 500 13px/1 var(--font-mono); writing-mode: vertical-lr; transform: rotate(180deg); white-space: nowrap; }
+  .idcard-clip { position: relative; width: 34px; height: 34px; display: flex; justify-content: center; }
+  .idcard-clip::before { content: ""; position: absolute; top: -6px; width: 20px; height: 20px; border-radius: 50%;
+    border: 3px solid #c9ccc6; box-shadow: 0 2px 4px rgba(0,0,0,.4); }
+  .idcard-clip::after { content: ""; position: absolute; top: 10px; width: 10px; height: 24px; border-radius: 3px;
+    background: linear-gradient(90deg, #8f948e, #e6e8e3 45%, #8f948e); }
+  .idcard-body { --swing: 0; position: relative; width: var(--cw); aspect-ratio: 5 / 8; margin-top: 8px; padding: calc(var(--cw) * .055);
+    border-radius: calc(var(--cw) * .08); overflow: hidden; color: #161c1a;
+    background: linear-gradient(160deg, #f4f3ee 0%, #e3e2da 60%, #d6d5cc 100%);
+    box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 30px 60px -18px rgba(0,0,0,.65), 0 8px 18px rgba(0,0,0,.35);
+    display: flex; flex-direction: column; gap: calc(var(--cw) * .04); }
+  .idcard-body::before { content: ""; position: absolute; top: 8px; left: 50%; width: 22px; height: 6px; border-radius: 3px; transform: translateX(-50%);
+    background: #161c1a; box-shadow: inset 0 1px 2px rgba(0,0,0,.6); }
+  .idc-top { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+  .idc-mark { width: 26px; height: 26px; display: grid; place-items: center; border-radius: 7px; background: #161c1a; color: var(--p-accent);
+    font: 600 14px/1 var(--font-display); }
+  .idc-site { font: 500 13px/1 var(--font-mono); }
+  .idc-chip { margin-left: auto; width: 32px; height: 24px; border-radius: 5px; position: relative;
+    background: linear-gradient(135deg, #e6d8ad, #b39555 45%, #f0e4bf 60%, #a88a4c);
+    box-shadow: inset 0 0 0 1px rgba(80,60,20,.35); }
+  .idc-chip::after { content: ""; position: absolute; inset: 5px 9px; border: 1px solid rgba(80,60,20,.35); border-radius: 2px; }
+  .idc-photo { aspect-ratio: 1; border-radius: calc(var(--cw) * .05); overflow: hidden; background: #c9d3cf; }
+  .idc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; pointer-events: none; }
+  .idc-name { margin: 0; font: 600 calc(var(--cw) * .077)/1.1 var(--font-display); letter-spacing: -0.02em; }
+  .idc-role { margin: -4px 0 0; font: 500 13px/1.3 var(--font-mono); color: #3c4541; }
+  .idc-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .idc-status { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: #161c1a; color: var(--p-accent);
+    font: 500 13px/1.2 var(--font-mono); white-space: nowrap; }
+  .idc-status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #5fd3a6; box-shadow: 0 0 0 3px rgba(95,211,166,.18); }
+  .idc-code { width: 58px; height: 22px; background: repeating-linear-gradient(90deg, #161c1a 0 2px, transparent 2px 3px, #161c1a 3px 4px, transparent 4px 7px, #161c1a 7px 10px, transparent 10px 11px); }
+  .idc-holo { position: absolute; inset: 0; pointer-events: none; border-radius: inherit; mix-blend-mode: soft-light; opacity: .9;
+    background: linear-gradient(115deg, transparent 25%, rgba(159,199,184,.75) 40%, rgba(255,255,255,.9) 48%, rgba(230,205,150,.75) 56%, rgba(150,190,230,.6) 64%, transparent 78%);
+    background-size: 280% 100%; background-position: calc(50% - var(--swing) * 260%) 50%; }
+  @media (max-width: 1023px) { .idcard-hang { --cw: 200px; } .idcard-strap { height: clamp(48px, 8svh, 96px); } .idc-code, .idc-site { display: none; } }
+  @media (max-width: 639px) { .idcard-hang { --cw: 150px; } .idcard-strap { height: 28px; } .idcard-strap span, .idc-role, .idc-foot { display: none; } .idc-name { font-size: 13px; } }
+
+  /* skeleton shimmer: a frame waits on its photograph with a soft light passing over it (js/main.js) */
+  .is-loading { position: relative; overflow: hidden; background-color: var(--surface); }
+  .is-loading::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(100deg, transparent 20%, color-mix(in oklab, var(--ink) 9%, transparent) 50%, transparent 80%);
+    transform: translateX(-100%); animation: skeleton 1.3s linear infinite; }
+  @keyframes skeleton { to { transform: translateX(100%); } }
+  @media (prefers-reduced-motion: reduce) { .is-loading::after { animation: none; transform: none; opacity: .5; } }
 
   /* project cards: one panel height per row */
   :is(#projects, #data-projects) .panel { flex: none; min-height: 0; height: var(--p-h); }
-  #projects .panel { --p-h: 340px; }
+  #projects .panel { --p-h: 352px; }
   #data-projects .panel { --p-h: 380px; }
-  @media (max-width: 1279px) { #projects .panel { --p-h: 220px; } #data-projects { --h: 2; } #data-projects .panel { --p-h: 340px; } }
+  :is(#projects, #data-projects) .panel > img { width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 1279px) { #projects { --h: 2; } #projects .grid > .card { grid-column: 1 / -1; } #projects .panel { --p-h: 300px; } #data-projects { --h: 2; } #data-projects .panel { --p-h: 340px; } }
   @media (min-width: 640px) and (max-width: 1023px) {
-    #projects .grid > .card { grid-column: span 6; }
+    #projects .grid > .card { grid-column: 1 / -1; }
     #data-projects .grid > .card { grid-column: span 4; }
-    #projects .panel { --p-h: 280px; }
+    #projects .panel { --p-h: 340px; }
     #data-projects { --h: 1; }
     #data-projects .panel { --p-h: 180px; }
   }
   @media (min-width: 640px) and (max-width: 1023px) and (min-height: 1100px) {
-    #projects .panel { --p-h: 420px; }
+    #projects { --h: 1; }
+    #projects .panel { --p-h: 260px; }
     #data-projects .panel { --p-h: 340px; }
   }
+  @media (max-width: 639px) { .hero__facts { display: none; } }
+  @media (max-width: 639px) { #projects, #data-projects { --hm: 2; } #projects .panel { --p-h: 400px; } #data-projects .panel { --p-h: 240px; } }
+  /* the agent diagram's frame: as tall as the text beside it */
+  #agent .frame { min-height: 600px; background: var(--p-surface); }
+  .close__word { line-height: 1; }
+  @media (max-width: 1279px) { #agent .frame { min-height: 520px; } }
+  @media (max-width: 1023px) { #agent .frame { min-height: 280px; margin-top: var(--s-7); } }
+  @media (max-width: 639px) { #agent { --hm: 2; } #agent .frame { min-height: 860px; } }
   /* experience: under 1280 the rows and the photograph stack, over two screens */
   @media (max-width: 1279px) {
     #experience { --h: 2; --hm: 2; }
@@ -109,11 +157,9 @@
     #experience .frame { min-height: 220px; }
     :is(#experience, #certificates) .rows > li { grid-template-columns: minmax(0, 1fr); }
     :is(#experience, #certificates) .rows__value { grid-column: 1; grid-row: auto; justify-self: start; width: auto; text-align: left; white-space: nowrap; font-size: var(--t-small); }
-    #certificates .frame { flex: none; height: 200px; min-height: 0; }
+    #certificates .frame { height: 540px; min-height: 0; flex: none; }
     #certificates .rows > li { padding-block: var(--s-1); }
   }
-  #projects .panel > img { width: 100%; height: 100%; object-fit: cover; }
-  @media (max-width: 639px) { #projects, #data-projects { --hm: 2; } #projects .panel { --p-h: 260px; } #data-projects .panel { --p-h: 180px; } }
 
   /* stack: the tools as real icons on 72px tiles, eight across, in one frame */
   .tools__grid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: var(--s-8) var(--s-5); margin: 0; padding: 0; list-style: none; }
@@ -125,10 +171,11 @@
 </style>
 </head>
 <body>
-<!-- type: service (a person is hired)
-     deal: hero split (film re-dealt: no film), nav nav-split, close close-photo, footer footer-dark, rhythm surface-pairs,
-     buttons arrow, mark dots, palette cool-grey-cobalt, type newsreader, grounds none (kind other)
-     moments: word-highlight in #about
+<!-- type: software (site-kind software: an AI and QA engineer's portfolio; the owner asked for the tech allowances)
+     deal: hero split (kept for the ID card), nav nav-cards, close close-word, footer footer-columns, rhythm surface-pairs,
+     buttons solid, mark initial, palette green-black-bone (dark, the owner's choice), type host, ground sage (lit ground)
+     effect: gradient-mesh, live, in the hero's frame; card ground: painterly-landscape (still) under the terminal
+     moments: counter-rolls in the hero's facts, iris-opens on #experience
      kept at the owner's request: the bumper intro and the draggable ID card -->
 
 <div class="bumper" aria-hidden="true">
@@ -139,29 +186,23 @@
   </div>
 </div>
 
-<header class="nav nav--split">
+<header class="nav">
   <div class="wrap nav__bar">
     <a class="skip-link" href="#top">Skip to content</a>
-    <a class="nav__logo" href="#top"><span class="mark" data-mark="dots" aria-hidden="true"></span>Rakha Alif Athallah</a>
+    <a class="nav__logo" href="#top"><span class="mark mark--initial" aria-hidden="true">R</span>Rakha Alif Athallah</a>
     <nav class="nav__links" aria-label="Main">
       <div class="nav__item">
         <a class="nav__link" href="#projects">Projects <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <div class="nav__menu">
           <div class="wrap grid">
-            <div class="menu-col span-4">
-              <p class="t-label">AI and machine learning</p>
-              <a href="#projects">Automated test case generator<span>Agentic AI at Telkom Indonesia</span></a>
-              <a href="#projects">Skin cancer early detection<span>Image classification with TensorFlow</span></a>
-              <a href="#data-projects">Anime recommendation system<span>Collaborative and content filtering</span></a>
-            </div>
-            <div class="menu-col span-4">
-              <p class="t-label">Data analysis</p>
-              <a href="#data-projects">Tokopedia sentiment analysis<span>NLP on product reviews</span></a>
-              <a href="#data-projects">Brazil e-commerce dashboard<span>Sales and customer trends</span></a>
-            </div>
+            <a class="menu-card span-3" href="#projects"><div class="panel"><img class="frame__img" src="assets/img/photo-f61739566-500.jpg" width="500" height="333" loading="lazy" decoding="async" alt="Source code open in an editor on a laptop screen" data-source="stand-in" data-subject="code on a laptop"></div><span class="t-card">Test generation agent</span><span class="t-small muted">LLM and RAG at Telkom Indonesia</span></a>
+            <a class="menu-card span-3" href="#projects"><div class="panel"><img class="frame__img" src="assets/img/photo-f84892807-500.jpg" width="500" height="376" loading="lazy" decoding="async" alt="A skin lesion seen close up through a dermatoscope" data-source="stand-in" data-subject="skin lesion"></div><span class="t-card">Skin cancer detection</span><span class="t-small muted">Image classification in TensorFlow</span></a>
+            <a class="menu-card span-3" href="#data-projects"><div class="panel"><img class="frame__img" src="assets/img/photo-f46928304-500.jpg" width="500" height="376" loading="lazy" decoding="async" alt="A shelf of manga volumes" data-source="stand-in" data-subject="manga shelf"></div><span class="t-card">Anime recommendations</span><span class="t-small muted">Content and collaborative filtering</span></a>
+            <a class="menu-card span-3" href="#data-projects"><div class="panel"><img class="frame__img" src="assets/img/photo-f191913514-500.jpg" width="500" height="333" loading="lazy" decoding="async" alt="A shopper reading a phone while leaning on a shopping trolley" data-source="stand-in" data-subject="shopper with phone"></div><span class="t-card">Tokopedia sentiment</span><span class="t-small muted">NLP on customer reviews</span></a>
           </div>
         </div>
       </div>
+      <div class="nav__item"><a class="nav__link" href="#agent">Thesis</a></div>
       <div class="nav__item"><a class="nav__link" href="#experience">Experience</a></div>
       <div class="nav__item"><a class="nav__link" href="#stack">Stack</a></div>
       <div class="nav__item"><a class="nav__link" href="#certificates">Certificates</a></div>
@@ -179,22 +220,31 @@
   <section class="hero hero--split" data-enter aria-labelledby="hero-h">
     <div class="wrap"><div class="hero-text grid hero__grid">
       <div class="hero__text span-5">
-        <h1 id="hero-h">Rakha Alif Athallah, data and AI engineer</h1>
-        <p class="hero__lead">Final-year Informatics Engineering student at Universitas Brawijaya, GPA 3.80. I build LLM agents that write and run software tests, and machine learning models for images and text.</p>
+        <h1 id="hero-h">Rakha Alif Athallah, QA and AI engineer</h1>
+        <p class="hero__lead">I build AI that tests software: LLM agents that write and run functional and visual test cases. Informatics Engineering, Universitas Brawijaya, GPA 3.80.</p>
         <div class="btn-row">
           <a class="btn btn--primary" href="assets/CV_ATS_Rakha%20Alif%20Athallah.pdf" download>Download CV<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
           <a class="btn btn--secondary" href="https://www.linkedin.com/in/rakhaalif/" target="_blank" rel="noopener">Message on LinkedIn</a>
         </div>
+        <dl class="hero__facts" data-moment="counter-rolls">
+          <div><dt>GPA</dt><dd data-count>3.80</dd></div>
+          <div><dt>Projects</dt><dd data-count>5</dd></div>
+          <div><dt>Members led</dt><dd data-count>90+</dd></div>
+          <div><dt>Certificates</dt><dd data-count>9</dd></div>
+        </dl>
       </div>
-      <div class="hero__media span-6 start-7" data-visual>
+      <div class="hero__media span-6 start-7" data-fx="gradient-mesh" data-fx-seed="7" data-fx-params='{"speed":0.05,"calm":0.15,"calmX":0.5,"calmY":0.6}'>
         <div class="idcard-scene" id="idcard-scene" role="img" aria-label="Rakha Alif Athallah's ID card on a lanyard; drag it sideways and it swings back">
           <div class="idcard-hang" id="idcard-hang">
-            <div class="idcard-strap" aria-hidden="true"><span>rkh.dev</span><span>rkh.dev</span></div>
+            <div class="idcard-strap" aria-hidden="true"></div>
             <div class="idcard-clip" aria-hidden="true"></div>
-            <div class="idcard-body">
-              <div class="idcard-inner">
-                <img src="assets/img/rakha-portrait-560.webp" srcset="assets/img/rakha-portrait-560.webp 560w, assets/img/rakha-portrait.webp 1000w" sizes="(max-width: 639px) 126px, (max-width: 1023px) 176px, 224px" alt="Portrait of Rakha Alif Athallah on an ID card" width="560" height="511" fetchpriority="high" data-source="client" data-subject="portrait">
-              </div>
+            <div class="idcard-body" id="idcard-body">
+              <div class="idc-top"><span class="idc-mark">R</span><span class="idc-site">rkh.dev</span><span class="idc-chip"></span></div>
+              <div class="idc-photo"><img src="assets/img/rakha-portrait-560.webp" srcset="assets/img/rakha-portrait-560.webp 560w, assets/img/rakha-portrait.webp 1000w" sizes="(max-width: 639px) 134px, (max-width: 1023px) 178px, 232px" alt="" width="560" height="511" fetchpriority="high" data-source="client" data-subject="portrait"></div>
+              <p class="idc-name">Rakha Alif Athallah</p>
+              <p class="idc-role">QA &amp; AI engineer</p>
+              <div class="idc-foot"><span class="idc-status">Checks passed</span><span class="idc-code"></span></div>
+              <span class="idc-holo"></span>
             </div>
           </div>
         </div>
@@ -202,30 +252,67 @@
     </div></div>
   </section>
 
-  <section class="section statement" id="about" data-moment="word-highlight" aria-label="About">
+  <section class="section" id="agent" aria-labelledby="agent-h">
     <div class="wrap">
-      <p class="t-label">About</p>
-      <p class="mo-wh__text">My thesis uses large language models with retrieval-augmented generation to write functional and visual test cases for web applications. At Telkom Indonesia I built an agent that writes those tests and <strong>runs them</strong> before each release.</p>
+      <div class="grid grid--top">
+        <div class="span-5 stack-4">
+          <h2 id="agent-h">An AI test agent for web apps</h2>
+          <p class="t-lead">My thesis generates functional and visual test cases for web applications with a large language model and retrieval-augmented generation.</p>
+          <p>At PT Telkom Indonesia I built the first agent on this idea during my SQA internship: it reads the app, writes the cases and runs them before release.</p>
+          <p class="muted">Python, Gemini API, RAG. Jul to Sep 2025.</p>
+          <p><a class="link" href="https://www.figma.com/design/tFlV4Sti2pGrOGFejt27MW/Usecase-Casecraft-Agent-Netmonk" target="_blank" rel="noopener">See the use-case board</a></p>
+        </div>
+        <div class="frame frame--split span-6 start-7">
+          <div class="dg" data-diagram data-ground="dark"><script type="application/json">{"layout": "lanes", "alt": "Pages of a web app go to an LLM with retrieval-augmented generation, which writes functional test cases, writes visual test cases and runs them.", "input": {"label": "Web app", "icon": "ui:globe", "sub": "Screens and flows"}, "core": {"label": "LLM + RAG", "icon": "gemini"}, "lanes": [{"label": "Functional", "icon": "ui:list-checks", "done": true, "sub": "Steps and checks"}, {"label": "Visual", "icon": "ui:image", "done": true, "sub": "Layout and look"}, {"label": "Test run", "icon": "ui:play", "done": true, "sub": "Pass or fail"}]}</script></div>
+        </div>
+      </div>
     </div>
   </section>
 
   <section class="section" id="projects" aria-labelledby="projects-h">
     <div class="wrap">
         <div class="section-head">
-          <h2 id="projects-h">AI projects at Telkom and DBS. <span class="muted">Each card opens the design or the live app.</span></h2>
+          <h2 id="projects-h">AI projects at Telkom and DBS. <span class="muted">One tests software, one reads skin images.</span></h2>
         </div>
         <div class="grid">
           <a class="card card--row card--open span-6" href="https://www.figma.com/design/tFlV4Sti2pGrOGFejt27MW/Usecase-Casecraft-Agent-Netmonk" target="_blank" rel="noopener">
             <h3>Test generation agent at Telkom Indonesia</h3>
-            <p>Automated Test Case Generator: an agent that writes functional and visual test cases and runs them, built in my internship.</p>
+            <p>Automated Test Case Generator: an agent that writes functional and visual test cases and runs them, built in my SQA internship.</p>
             <div class="ic-chip-row"><span class="ic-chip"><img class="ic" src="assets/icons/python.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Python</span><span class="ic-chip"><img class="ic" src="assets/icons/gemini.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Gemini API</span><span class="ic-chip">RAG</span></div>
-            <div class="panel"><img class="frame__img" src="assets/img/photo-f61739566.jpg" srcset="assets/img/photo-f61739566-500.jpg 500w, assets/img/photo-f61739566-960.jpg 960w, assets/img/photo-f61739566.jpg 1280w" sizes="(max-width: 1023px) 100vw, 50vw" width="1280" height="853" alt="Source code open in an editor on a laptop screen" loading="lazy" decoding="async" data-source="stand-in" data-subject="code on a laptop"></div>
+            <div class="panel" data-fx="painterly-landscape" data-fx-seed="8" data-fx-params='{"drift":0}' style="--calm-k:0%">
+              <div class="stage"><div class="at-rise fit" style="--fit-max:440px;--ax:max(32px, 50% - 220px);--ay:40px;--ay-sm:24px" data-ui-loop>
+                <div class="ui ui-panel ui-term" data-ui="terminal-run">
+                  <div class="ui-term__head">
+                    <span class="ui-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="ui-term__title">casecraft/agent</span>
+                    <span class="ui-meta">zsh</span>
+                    <span class="ui-spacer"></span>
+                    <span class="ui-chip ui-chip--plain ui-term__branch"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="3.5" r="1.5"/><circle cx="5" cy="12.5" r="1.5"/><circle cx="11" cy="5.5" r="1.5"/><path d="M5 5v6M11 7c0 2.6-6 1.8-6 4"/></svg>main</span>
+                  </div>
+                  <div class="ui-term__screen" data-term-screen>
+                    <div class="ui-term__track" data-term-track>
+                      <div class="ui-term__ln ui-term__cmd"><span class="ui-term__cwd">~/<span class="ui-term__up">casecraft/</span>agent</span><span class="ui-term__sig">$</span><span class="ui-term__typed" data-term-cmd>pytest generated/</span></div>
+                      <div class="ui-term__ln ui-term__meter" data-term-out data-term-meter><span class="ui-term__bar" style="--p:1"><i></i></span><span class="ui-term__count" data-term-count>4 of 4 files</span></div>
+                      <div class="ui-term__ln ui-term__log" data-term-out data-term-step><svg class="ui-term__tick" viewBox="0 0 16 16" aria-hidden="true"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg><span class="ui-term__path">test_login_flow.py</span><span class="ui-term__n">12 tests</span><span class="ui-term__t">1.42s</span></div>
+                      <div class="ui-term__ln ui-term__log" data-term-out data-term-step><svg class="ui-term__tick" viewBox="0 0 16 16" aria-hidden="true"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg><span class="ui-term__path">test_dashboard.py</span><span class="ui-term__n">9 tests</span><span class="ui-term__t">980ms</span></div>
+                      <div class="ui-term__ln ui-term__log" data-term-out data-term-step><svg class="ui-term__tick" viewBox="0 0 16 16" aria-hidden="true"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg><span class="ui-term__path">test_visual_home.py</span><span class="ui-term__n">6 tests</span><span class="ui-term__t">2.07s</span></div>
+                      <div class="ui-term__ln ui-term__log" data-term-out data-term-step><svg class="ui-term__tick" viewBox="0 0 16 16" aria-hidden="true"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg><span class="ui-term__path">test_report_export.py</span><span class="ui-term__n">7 tests</span><span class="ui-term__t">640ms</span></div>
+                      <div class="ui-term__ln ui-term__gap" data-term-out aria-hidden="true"></div>
+                      <div class="ui-term__ln ui-term__sum" data-term-out><span class="ui-term__key">Test files</span><span class="ui-term__val">4 passed</span><span class="ui-term__dim">(4)</span></div>
+                      <div class="ui-term__ln ui-term__sum" data-term-out><span class="ui-term__key">Tests</span><span class="ui-term__val">34 passed</span><span class="ui-term__dim">(34)</span></div>
+                      <div class="ui-term__ln ui-term__done" data-term-out data-term-done><span class="ui-term__ok"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4.5 8.3 2.4 2.4 4.6-5"/></svg></span><b>Done</b><span class="ui-term__dim">in 5.11s</span></div>
+                      <div class="ui-term__ln ui-term__cmd" data-term-next><span class="ui-term__cwd">~/<span class="ui-term__up">casecraft/</span>agent</span><span class="ui-term__sig">$</span><span class="ui-term__typed"></span><i class="ui-term__caret" aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+                </div>
+              </div></div>
+            </div>
           </a>
           <a class="card card--row card--open span-6" href="https://capstone-dbs-skinalyze.vercel.app" target="_blank" rel="noopener">
-            <h3>Skin cancer detection from image data</h3>
+            <h3>Skinalyze, a skin cancer detection app</h3>
             <p>Skin Cancer Early Detection: a deep learning classifier from the DBS Coding Camp capstone, live as a web app.</p>
             <div class="ic-chip-row"><span class="ic-chip"><img class="ic" src="assets/icons/tensorflow.svg" alt="" width="18" height="18" loading="lazy" decoding="async">TensorFlow</span><span class="ic-chip"><img class="ic" src="assets/icons/python.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Python</span></div>
-            <div class="panel"><img class="frame__img" src="assets/img/photo-f84892807.jpg" srcset="assets/img/photo-f84892807-500.jpg 500w, assets/img/photo-f84892807-960.jpg 960w, assets/img/photo-f84892807.jpg 1280w" sizes="(max-width: 1023px) 100vw, 50vw" width="1280" height="962" alt="A skin lesion seen close up through a dermatoscope" loading="lazy" decoding="async" data-source="stand-in" data-subject="skin lesion"></div>
+            <div class="panel"><img class="frame__img" src="assets/img/photo-f84892807.jpg" srcset="assets/img/photo-f84892807-500.jpg 500w, assets/img/photo-f84892807-960.jpg 960w, assets/img/photo-f84892807.jpg 1280w" sizes="(max-width: 639px) 160vw, (max-width: 1023px) 100vw, 50vw" width="1280" height="962" alt="A skin lesion seen close up through a dermatoscope" loading="lazy" decoding="async" data-source="stand-in" data-subject="skin lesion"></div>
           </a>
         </div>
     </div>
@@ -238,7 +325,7 @@
       </div>
       <div class="grid row-2">
         <a class="card card--row card--open span-4" href="https://github.com/rakhaalif/Sistem-Rekomendasi-Anime" target="_blank" rel="noopener">
-          <h3>Anime recommendations from rating data</h3>
+          <h3>Anime recommender on GitHub</h3>
           <p>Anime Recommendation System: content-based and collaborative filtering on what viewers rated.</p>
           <div class="ic-chip-row"><span class="ic-chip"><img class="ic ic-land" src="assets/icons/scikitlearn.svg" alt="" width="18" height="10" loading="lazy" decoding="async">scikit-learn</span><span class="ic-chip"><img class="ic" src="assets/icons/pandas-icon.svg" alt="" width="11" height="18" loading="lazy" decoding="async">pandas</span></div>
           <div class="panel"><img class="frame__img" src="assets/img/photo-f46928304-960.jpg" srcset="assets/img/photo-f46928304-500.jpg 500w, assets/img/photo-f46928304-960.jpg 960w" sizes="(max-width: 1023px) 100vw, 33vw" width="960" height="722" alt="A shelf of manga volumes" loading="lazy" decoding="async" data-source="stand-in" data-subject="manga shelf"></div>
@@ -259,7 +346,7 @@
     </div>
   </section>
 
-  <section class="section" id="experience" aria-labelledby="experience-h">
+  <section class="section ground-surface" id="experience" data-moment="iris-opens" data-moment-opts='{"from": "base"}' aria-labelledby="experience-h">
     <div class="wrap">
       <div class="section-head">
         <h2 id="experience-h">Experience since 2024</h2>
@@ -273,7 +360,7 @@
           <li><span class="rows__name">Laboratory Assistant</span><p>Universitas Brawijaya. Taught algorithms and data structures labs to 30+ students.</p><span class="rows__value">Feb to Jul 2024</span></li>
         </ul>
         <div class="frame frame--photo frame--fill span-6 start-7">
-          <img class="frame__img" src="assets/img/photo-f102898347.jpg" srcset="assets/img/photo-f102898347-500.jpg 500w, assets/img/photo-f102898347-960.jpg 960w, assets/img/photo-f102898347.jpg 1280w" sizes="(max-width: 639px) 188vw, (max-width: 1279px) 100vw, 50vw" width="1280" height="853" alt="A university lecture theatre seen from the back row" loading="lazy" decoding="async" data-source="stand-in" data-subject="lecture theatre">
+          <img class="frame__img" src="assets/img/photo-f102898347.jpg" srcset="assets/img/photo-f102898347-500.jpg 500w, assets/img/photo-f102898347-960.jpg 960w, assets/img/photo-f102898347.jpg 1280w" sizes="(max-width: 639px) 260vw, (max-width: 1279px) 100vw, 50vw" width="1280" height="853" alt="A university lecture theatre seen from the back row" loading="lazy" decoding="async" data-source="stand-in" data-subject="lecture theatre">
         </div>
       </div>
     </div>
@@ -282,7 +369,7 @@
   <section class="section ground-surface" id="stack" aria-labelledby="stack-h">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="stack-h">Tech stack for data work. <span class="muted">The tools behind the projects above.</span></h2>
+        <h2 id="stack-h">Tech stack for QA engineering and data work. <span class="muted">The tools behind the projects above.</span></h2>
       </div>
       <div class="tools" data-visual role="img" aria-label="Python, Java, R, SQL, scikit-learn, TensorFlow, Keras, Gemini API, pandas, NumPy, Matplotlib, Seaborn, AWS, Git, VS Code and RStudio">
         <ul class="tools__grid">
@@ -308,7 +395,7 @@
     </div>
   </section>
 
-  <section class="section ground-surface g2" id="certificates" aria-labelledby="certificates-h">
+  <section class="section g2" id="certificates" aria-labelledby="certificates-h">
     <div class="wrap">
       <div class="group">
         <div class="section-head">
@@ -335,20 +422,20 @@
   </section>
 </main>
 
-<footer class="footer closing footer--dark ground-inverse" id="contact" aria-labelledby="close-h">
+<footer class="footer closing" id="contact" aria-labelledby="close-h">
   <div class="wrap">
-    <div class="closing__cta close--photo">
+    <div class="closing__cta close--word">
       <div class="section-head--split">
-        <div><h2 id="close-h">Open to data and AI roles</h2><p class="t-lead">The CV lists every project, role and certificate on this page.</p></div>
+        <div><h2 id="close-h">Open to QA and AI engineering roles</h2><p class="t-lead">The CV lists every project, role and certificate on this page.</p></div>
         <a class="btn btn--primary" href="assets/CV_ATS_Rakha%20Alif%20Athallah.pdf" download>Download CV<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
       </div>
-      <div class="close__media"><img src="assets/img/photo-f61740057.jpg" srcset="assets/img/photo-f61740057-500.jpg 500w, assets/img/photo-f61740057-960.jpg 960w, assets/img/photo-f61740057.jpg 1280w" sizes="(max-width: 639px) 188vw, 100vw" width="1280" height="853" alt="Someone writing code on a laptop at a desk" loading="lazy" decoding="async" data-source="stand-in" data-subject="coding at a laptop"></div>
+      <p class="close__word" aria-hidden="true">Rakha Alif</p>
     </div>
     <div class="closing__links">
       <div class="grid">
         <div class="span-8 stack-4">
-          <a class="nav__logo" href="#top"><span class="mark" data-mark="dots" aria-hidden="true"></span>Rakha Alif Athallah</a>
-          <p class="footer__lede">Data and AI engineer, Informatics Engineering at Universitas Brawijaya.</p>
+          <a class="nav__logo" href="#top">Rakha Alif Athallah</a>
+          <p class="footer__lede">Quality assurance and AI engineer, Informatics Engineering at Universitas Brawijaya.</p>
         </div>
         <div class="span-2 footer__col"><h3>Work</h3><ul><li><a href="#projects">Projects</a></li><li><a href="#experience">Experience</a></li></ul></div>
         <div class="span-2 footer__col"><h3>Skills</h3><ul><li><a href="#stack">Stack</a></li><li><a href="#certificates">Certificates</a></li></ul></div>
@@ -360,7 +447,7 @@
           <a href="https://www.linkedin.com/in/rakhaalif/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
           <a href="https://www.instagram.com/rakhaa.athallah/" target="_blank" rel="noopener" aria-label="Instagram"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
         </div>
-        <a class="credits" href="credits.html">Photographs via Wikimedia Commons</a>
+        <span>Product names and logos are trademarks of their owners. <a class="credits" href="credits.html">Photographs via Wikimedia Commons</a></span>
       </div>
     </div>
   </div>
@@ -373,6 +460,7 @@
 <script type="module" src="assets/system.js"></script>
 <script type="module" src="assets/motion/motion.js"></script>
 <script type="module" src="assets/layout/layout.js"></script>
+<script type="module" src="assets/diagrams/mount.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
