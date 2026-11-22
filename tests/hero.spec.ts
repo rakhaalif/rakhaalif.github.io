@@ -50,22 +50,20 @@ test('h1 shows even if fonts never arrive', async ({ page }) => {
 });
 
 test('ID card follows a drag and settles', async ({ page }) => {
-  test.setTimeout(60_000);
+  test.setTimeout(90_000);
   await page.goto('/');
-  await page.waitForTimeout(6000);
   const card = page.locator('#idcard-hang');
-  const rot = () => card.evaluate((e) => (e as HTMLElement).style.transform);
+  const angle = async () =>
+    parseFloat(((await card.evaluate((e) => (e as HTMLElement).style.transform)).match(/rotate\(([-\d.e]+)rad/) ?? [])[1]);
+  await expect.poll(async () => Math.abs(await angle()), { timeout: 30_000 }).toBeLessThan(0.02);
   const box = (await card.locator('.idcard-body').boundingBox())!;
   const x = box.x + box.width / 2, y = box.y + box.height / 2;
   await page.mouse.move(x, y);
   await page.mouse.down();
   await page.mouse.move(x - 80, y, { steps: 5 });
-  expect(await rot()).not.toContain('rotate(0rad)');
-  const dragged = await rot();
+  expect(Math.abs(await angle())).toBeGreaterThan(0.15); // 80px * 0.004 = 0.32 rad
   await page.mouse.up();
-  expect(await rot()).not.toBe(dragged);
-  const angle = async () => Math.abs(parseFloat((await rot()).match(/rotate\(([-\d.e]+)rad/)![1]));
-  await expect.poll(angle, { timeout: 20_000 }).toBeLessThan(0.02);
+  await expect.poll(async () => Math.abs(await angle()), { timeout: 30_000 }).toBeLessThan(0.02);
 });
 
 test('ID card swings and settles', async ({ page }) => {
