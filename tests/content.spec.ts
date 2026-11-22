@@ -31,7 +31,7 @@ test('stack leads with QA', async ({ page }) => {
   const names = page.locator('#stack .tools__group').first().locator('.tools__name');
   await expect(names).toHaveText(['Playwright', 'Squash']);
   await expect(page.locator('#stack .tools__grid li')).toHaveCount(18);
-  await expect(page.locator('#stack a:has-text("Playwright")')).toHaveAttribute('href', /actions\/workflows/);
+  await expect(page.locator('#stack a:has-text("Playwright")')).toHaveAttribute('href', '/tests/');
 });
 
 test('certificates', async ({ page }) => {

@@ -1,6 +1,6 @@
 name: deploy
+# manual only while the account's Actions are locked; releases go out with `npm run release` (gh-pages branch)
 on:
-  push:
   workflow_dispatch:
 permissions:
   contents: read

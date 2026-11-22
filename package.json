@@ -9,7 +9,8 @@
     "preview": "vite preview --port 4173 --strictPort",
     "test": "playwright test",
     "typecheck": "tsc --noEmit",
-    "prebuild": "node -e \"if(process.env.CI)require('child_process').execSync('node scripts/count-tests.mjs',{stdio:'inherit'})\""
+    "prebuild": "node -e \"if(process.env.CI)require('child_process').execSync('node scripts/count-tests.mjs',{stdio:'inherit'})\"",
+    "release": "node scripts/release.mjs"
   },
   "dependencies": {
     "@gsap/react": "2.1.2",

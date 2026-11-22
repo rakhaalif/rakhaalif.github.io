@@ -4,7 +4,8 @@ export const LINKS = {
   linkedin: 'https://www.linkedin.com/in/rakhaalif/',
   instagram: 'https://www.instagram.com/rakhaa.athallah/',
 };
-export const TESTS_WORKFLOW = 'https://github.com/rakhaalif/rakhaalif.github.io/actions/workflows/deploy.yml';
+// the Playwright HTML report of the release, published with the site by scripts/release.mjs
+export const TESTS_REPORT = '/tests/';
 
 export const ROLES = [
   { title: 'SQA Automation Intern', org: 'PT Telkom Indonesia', when: 'Jul to Sep 2025', text: 'Built an agentic AI that generates and runs functional and visual tests.' },
@@ -54,7 +55,7 @@ export const DATA_PROJECTS = [
 
 // icon: a file in /assets/icons; '' is a text tile (Squash has no logo licence on file)
 export const STACK: { group: string; tools: { name: string; icon: string; href?: string }[] }[] = [
-  { group: 'QA and testing', tools: [{ name: 'Playwright', icon: 'playwright.svg', href: TESTS_WORKFLOW }, { name: 'Squash', icon: '' }] },
+  { group: 'QA and testing', tools: [{ name: 'Playwright', icon: 'playwright.svg', href: TESTS_REPORT }, { name: 'Squash', icon: '' }] },
   { group: 'AI and ML', tools: [
     { name: 'scikit-learn', icon: 'scikitlearn.svg' }, { name: 'TensorFlow', icon: 'tensorflow.svg' },
     { name: 'Keras', icon: 'keras.svg' }, { name: 'Gemini API', icon: 'gemini.svg' }] },

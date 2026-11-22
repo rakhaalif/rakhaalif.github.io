@@ -49,8 +49,7 @@ test('badge shows the test count', async ({ page }) => {
   const badge = page.locator('footer.closing a', { hasText: 'Playwright checks passing' });
   await expect(badge).toHaveText(/This site is tested: \d+ Playwright checks passing/);
   expect(Number((await badge.textContent())!.match(/(\d+) Playwright/)![1])).toBe(JSON.parse(readFileSync('src/test-count.json', 'utf8')).count); // read now: CI's prebuild rewrites it after this file loads
-  await expect(badge).toHaveAttribute('href', /actions\/workflows\/deploy\.yml$/);
-  await expect(page.locator('footer.closing img[alt="Deploy workflow status"]')).toHaveAttribute('src', /deploy\.yml\/badge\.svg$/);
+  await expect(badge).toHaveAttribute('href', '/tests/');
 });
 
 test.describe('gate findings', () => {

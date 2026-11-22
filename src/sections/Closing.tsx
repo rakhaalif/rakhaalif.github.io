@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom';
-import { CV_HREF, LINKS, TESTS_WORKFLOW } from '../content';
+import { CV_HREF, LINKS, TESTS_REPORT } from '../content';
 import tests from '../test-count.json';
 import Arrow from './Arrow';
 import { useIsClient } from '../lib/useIsClient';
@@ -31,8 +31,7 @@ export default function Closing() {
               <div className="span-2 footer__col"><h3>Skills</h3><ul><li><a href="#stack">Stack</a></li><li><a href="#certificates">Certificates</a></li></ul></div>
             </div>
             <p className="footer__tested">
-              <a href={TESTS_WORKFLOW} target="_blank" rel="noopener">This site is tested: {tests.count} Playwright checks passing</a>
-              <img src={`${TESTS_WORKFLOW}/badge.svg`} alt="Deploy workflow status" height={20} loading="lazy" />
+              <a href={TESTS_REPORT} target="_blank" rel="noopener">This site is tested: {tests.count} Playwright checks passing</a>
             </p>
             <div className="footer__legal">
               <span>&copy; 2026 Rakha Alif Athallah</span>
