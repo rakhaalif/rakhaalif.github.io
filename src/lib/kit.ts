@@ -4,7 +4,7 @@ let loaded = false;
 export function loadKit(): void {
   if (loaded) return;
   loaded = true;
-  for (const src of ['/assets/system.js', '/assets/motion/motion.js', '/assets/layout/layout.js']) {
+  for (const src of ['/assets/system.js', '/assets/motion/motion.js', '/assets/layout/layout.js', '/assets/diagrams/mount.js']) {
     const s = document.createElement('script');
     s.type = 'module';
     s.src = src;

@@ -66,26 +66,18 @@
   @keyframes skeleton { to { transform: translateX(100%); } }
   @media (prefers-reduced-motion: reduce) { .is-loading::after { animation: none; transform: none; opacity: .5; } }
 
-  /* project cards: one panel height per row */
-  :is(#projects, #data-projects) .panel { flex: none; min-height: 0; height: var(--p-h); }
-  #projects .panel { --p-h: 352px; }
-  #data-projects .panel { --p-h: 380px; }
-  :is(#projects, #data-projects) .panel > img { width: 100%; height: 100%; object-fit: cover; }
-  @media (max-width: 1279px) { #projects { --h: 2; } #projects .grid > .card { grid-column: 1 / -1; } #projects .panel { --p-h: 300px; } #data-projects { --h: 2; } #data-projects .panel { --p-h: 340px; } }
+  /* data project cards: one panel height per row */
+  #data-projects .panel { flex: none; min-height: 0; height: 380px; }
+  #data-projects .panel > img { width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 1279px) { #data-projects { --h: 2; } #data-projects .panel { height: 340px; } }
   @media (min-width: 640px) and (max-width: 1023px) {
-    #projects .grid > .card { grid-column: 1 / -1; }
     #data-projects .grid > .card { grid-column: span 4; }
-    #projects .panel { --p-h: 340px; }
     #data-projects { --h: 1; }
-    #data-projects .panel { --p-h: 180px; }
+    #data-projects .panel { height: 180px; }
   }
-  @media (min-width: 640px) and (max-width: 1023px) and (min-height: 1100px) {
-    #projects { --h: 1; }
-    #projects .panel { --p-h: 260px; }
-    #data-projects .panel { --p-h: 340px; }
-  }
+  @media (min-width: 640px) and (max-width: 1023px) and (min-height: 1100px) { #data-projects .panel { height: 340px; } }
   @media (max-width: 639px) { .hero__facts { display: none; } }
-  @media (max-width: 639px) { #projects, #data-projects { --hm: 2; } #projects .panel { --p-h: 400px; } #data-projects .panel { --p-h: 240px; } }
+  @media (max-width: 639px) { #data-projects { --hm: 2; } #data-projects .panel { height: 280px; } }
   .close__word { line-height: 1; font-size: clamp(30px, 9.2vw, 136px); white-space: nowrap; }
   /* experience: under 1280 the rows and the photograph stack, over two screens */
   @media (max-width: 1279px) {
@@ -104,15 +96,31 @@
     #certificates .rows > li { padding-block: var(--s-1); }
   }
 
-  /* stack: the tools as real icons on 72px tiles, eight across, in one frame */
-  .tools__grid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: var(--s-8) var(--s-5); margin: 0; padding: 0; list-style: none; }
-  .tools__grid li { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-3); }
+  /* stack: four groups of real icons on 96px tiles; groups sit on the page grid (3 + 4 + 5, then 12 columns) */
+  .tools__group > .t-label { margin: 0 0 var(--s-3); }
+  .tools__grid { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: var(--s-4) var(--s-2); margin: 0; padding: 0; list-style: none; }
+  .tools__grid li { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-2); min-width: 0; }
+  .tools__link { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-2); }
   .tools__grid .ic-tile { --tile: 96px; }
   .tools__grid .ic-tile > .ic { --ic-s: 52px; width: 52px; height: 52px; }
+  .tools__text { font: 500 20px/1 var(--font-mono); }
+  .tools__more { margin-top: var(--s-6); }
   @media (max-width: 1023px) { .tools__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-  @media (max-width: 639px) { .tools__grid .ic-tile { --tile: 64px; } .tools__grid .ic-tile > .ic { --ic-s: 34px; width: 34px; height: 34px; } }
+  @media (max-width: 639px) { .tools__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 639px) { #stack { --hm: 2; } .tools { row-gap: var(--s-6); } .tools__grid .ic-tile { --tile: 84px; } .tools__grid .ic-tile > .ic { --ic-s: 44px; width: 44px; height: 44px; } }
+  /* the grounds' own phone min-height is 0: give the two-screen ones their screens back */
+  @media (max-width: 767px) { #data-projects, #certificates { --g-screen: calc(var(--hm, var(--h, 1)) * 100lvh); } main > #projects:not(.is-live) { min-height: calc(var(--hm, 2) * 100lvh); } #projects .mo-pc__visual { aspect-ratio: 11 / 14; } #projects .mo-pc__visual > img { height: 100%; aspect-ratio: auto; max-height: none; } }
 
   /* the close: the name is 19 letters, so it is sized to fit the .wrap (the kit's clamp is for 8), and the grid column may shrink */
   footer.closing > .wrap { grid-template-columns: minmax(0, 1fr); }
   .close__word { font-size: clamp(30px, 9.2vw, 136px); line-height: 1; }
   @media (max-width: 639px) { footer.closing .close__word { font-size: 7.2vw; } }
+
+  /* experience timeline: a 1px line at the left edge of the rows, an 8px still dot per role; GSAP scrubs .tl__fill scaleY */
+  .tl { position: relative; }
+  .tl__track, .tl__fill { position: absolute; left: 3.5px; top: 0; bottom: 0; width: 1px; }
+  .tl__track { background: var(--line); }
+  .tl__fill { background: var(--accent); transform-origin: top; }
+  .tl .rows > li { position: relative; padding-left: var(--s-6); }
+  .tl .rows > li::before { content: ""; position: absolute; left: 0; top: var(--s-5); width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  @media (max-width: 1279px) { .tl { grid-column: 1 / -1; } }

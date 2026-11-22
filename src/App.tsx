@@ -3,6 +3,11 @@ import { loadKit, pauseHeroFxOffscreen } from './lib/kit';
 import Bumper from './sections/Bumper';
 import Hero from './sections/Hero';
 import AgentDemo from './demo/AgentDemo';
+import Projects from './sections/Projects';
+import DataProjects from './sections/DataProjects';
+import Experience from './sections/Experience';
+import Stack from './sections/Stack';
+import Certificates from './sections/Certificates';
 import Closing from './sections/Closing';
 import Nav from './sections/Nav';
 import { scrollToHash, startMotion } from './lib/motion';
@@ -22,9 +27,11 @@ export default function App() {
       <main id="top" tabIndex={-1}>
         <Hero />
         <AgentDemo />
-        <section id="experience" style={{ marginTop: '150vh', minHeight: '100vh' }}>
-          Experience
-        </section>
+        <Projects />
+        <DataProjects />
+        <Experience />
+        <Stack />
+        <Certificates />
       </main>
       <Closing />
     </>
