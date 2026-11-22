@@ -45,7 +45,7 @@ test('facts finish without scrolling at 1024x768', async ({ page }, info) => {
 
 test('h1 shows even if fonts never arrive', async ({ page }) => {
   await page.route(/fonts\.gstatic\.com/, () => {});
-  await page.goto('/', { waitUntil: 'commit' });
+  await page.goto('/'); // load event does not wait for fonts
   await expect(page.locator('h1')).toBeVisible({ timeout: 2500 });
 });
 
