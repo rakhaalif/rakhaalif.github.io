@@ -1,0 +1,118 @@
+  /* bumper intro: kept at the owner's request; it never takes the pointer and is gone after 3.4 s */
+  .bumper { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center;
+    background: var(--p-bg); color: var(--p-ink); text-align: center; pointer-events: none;
+    animation: bumper-out .6s ease 2.8s forwards; }
+  .bumper__icons { display: flex; gap: var(--s-5); justify-content: center; margin-bottom: var(--s-5); animation: bumper-up .5s ease .3s both; }
+  .bumper__icon { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 50%;
+    background: var(--p-surface); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--p-ink) 16%, transparent); font-size: 20px; }
+  .bumper__title { margin: 0 0 var(--s-4); font: var(--display-weight) clamp(32px, 5vw, 56px)/1.05 var(--font-display);
+    letter-spacing: var(--display-tracking-xl); animation: bumper-up .5s ease .5s both; }
+  .bumper__url { display: inline-block; padding: 6px 16px; border-radius: 999px; font: 14px var(--font-mono); color: var(--p-muted);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--p-ink) 16%, transparent); animation: bumper-up .5s ease .7s both; }
+  @keyframes bumper-out { to { opacity: 0; visibility: hidden; } }
+  @keyframes bumper-up { from { opacity: 0; transform: translateY(16px); } }
+  @media (prefers-reduced-motion: reduce) { .bumper { display: none; } }
+
+  /* the ID card: a bone-white card with a foil sheen that slides as it swings (js/main.js sets --swing) */
+  .idcard-scene { position: absolute; inset: 0; z-index: 1; overflow: hidden; touch-action: pan-y; }
+  .idcard-hang { --cw: 260px; position: absolute; left: 50%; top: 0; width: var(--cw); display: flex; flex-direction: column; align-items: center;
+    transform: translateX(-50%); transform-origin: top center; cursor: grab; will-change: transform; user-select: none; }
+  .idcard-hang:active { cursor: grabbing; }
+  .idcard-strap { position: relative; width: 34px; height: clamp(80px, 21svh, 190px); overflow: hidden;
+    background: repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 1px, transparent 1px 3px), #23302c;
+    box-shadow: inset 2px 0 0 var(--p-accent), inset -2px 0 0 var(--p-accent);
+    display: flex; flex-direction: column; align-items: center; justify-content: space-around; }
+  .idcard-strap span { color: var(--p-ink); font: 500 13px/1 var(--font-mono); writing-mode: vertical-lr; transform: rotate(180deg); white-space: nowrap; }
+  .idcard-clip { position: relative; width: 34px; height: 34px; display: flex; justify-content: center; }
+  .idcard-clip::before { content: ""; position: absolute; top: -6px; width: 20px; height: 20px; border-radius: 50%;
+    border: 3px solid #c9ccc6; box-shadow: 0 2px 4px rgba(0,0,0,.4); }
+  .idcard-clip::after { content: ""; position: absolute; top: 10px; width: 10px; height: 24px; border-radius: 3px;
+    background: linear-gradient(90deg, #8f948e, #e6e8e3 45%, #8f948e); }
+  .idcard-body { --swing: 0; position: relative; width: var(--cw); aspect-ratio: 5 / 8; margin-top: 8px; padding: calc(var(--cw) * .055);
+    border-radius: calc(var(--cw) * .08); overflow: hidden; color: #161c1a;
+    background: linear-gradient(160deg, #f4f3ee 0%, #e3e2da 60%, #d6d5cc 100%);
+    box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 30px 60px -18px rgba(0,0,0,.65), 0 8px 18px rgba(0,0,0,.35);
+    display: flex; flex-direction: column; gap: calc(var(--cw) * .04); }
+  .idcard-body::before { content: ""; position: absolute; top: 8px; left: 50%; width: 22px; height: 6px; border-radius: 3px; transform: translateX(-50%);
+    background: #161c1a; box-shadow: inset 0 1px 2px rgba(0,0,0,.6); }
+  .idc-top { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+  .idc-mark { width: 26px; height: 26px; display: grid; place-items: center; border-radius: 7px; background: #161c1a; color: var(--p-accent);
+    font: 600 14px/1 var(--font-display); }
+  .idc-site { font: 500 13px/1 var(--font-mono); }
+  .idc-chip { margin-left: auto; width: 32px; height: 24px; border-radius: 5px; position: relative;
+    background: linear-gradient(135deg, #e6d8ad, #b39555 45%, #f0e4bf 60%, #a88a4c);
+    box-shadow: inset 0 0 0 1px rgba(80,60,20,.35); }
+  .idc-chip::after { content: ""; position: absolute; inset: 5px 9px; border: 1px solid rgba(80,60,20,.35); border-radius: 2px; }
+  .idc-photo { aspect-ratio: 1; border-radius: calc(var(--cw) * .05); overflow: hidden; background: #c9d3cf; }
+  .idc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; pointer-events: none; }
+  .idc-name { margin: 0; font: 600 calc(var(--cw) * .077)/1.1 var(--font-display); letter-spacing: -0.02em; }
+  .idc-role { margin: -4px 0 0; font: 500 13px/1.3 var(--font-mono); color: #3c4541; }
+  .idc-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .idc-status { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: #161c1a; color: var(--p-accent);
+    font: 500 13px/1.2 var(--font-mono); white-space: nowrap; }
+  .idc-status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #5fd3a6; box-shadow: 0 0 0 3px rgba(95,211,166,.18); }
+  .idc-code { width: 58px; height: 22px; background: repeating-linear-gradient(90deg, #161c1a 0 2px, transparent 2px 3px, #161c1a 3px 4px, transparent 4px 7px, #161c1a 7px 10px, transparent 10px 11px); }
+  .idc-holo { position: absolute; inset: 0; pointer-events: none; border-radius: inherit; mix-blend-mode: soft-light; opacity: .9;
+    background: linear-gradient(115deg, transparent 25%, rgba(159,199,184,.75) 40%, rgba(255,255,255,.9) 48%, rgba(230,205,150,.75) 56%, rgba(150,190,230,.6) 64%, transparent 78%);
+    background-size: 280% 100%; background-position: calc(50% - var(--swing) * 260%) 50%; }
+  @media (max-width: 1023px) { .idcard-hang { --cw: 200px; } .idcard-strap { height: clamp(48px, 8svh, 96px); } .idc-code, .idc-site { display: none; } }
+  @media (max-width: 639px) { .idcard-hang { --cw: 150px; } .idcard-strap { height: 28px; } .idcard-strap span, .idc-role, .idc-foot { display: none; } .idc-name { font-size: 13px; } }
+
+  /* skeleton shimmer: a frame waits on its photograph with a soft light passing over it (js/main.js) */
+  .is-loading { position: relative; overflow: hidden; background-color: var(--surface); }
+  .is-loading::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(100deg, transparent 20%, color-mix(in oklab, var(--ink) 9%, transparent) 50%, transparent 80%);
+    transform: translateX(-100%); animation: skeleton 1.3s linear infinite; }
+  @keyframes skeleton { to { transform: translateX(100%); } }
+  @media (prefers-reduced-motion: reduce) { .is-loading::after { animation: none; transform: none; opacity: .5; } }
+
+  /* project cards: one panel height per row */
+  :is(#projects, #data-projects) .panel { flex: none; min-height: 0; height: var(--p-h); }
+  #projects .panel { --p-h: 352px; }
+  #data-projects .panel { --p-h: 380px; }
+  :is(#projects, #data-projects) .panel > img { width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 1279px) { #projects { --h: 2; } #projects .grid > .card { grid-column: 1 / -1; } #projects .panel { --p-h: 300px; } #data-projects { --h: 2; } #data-projects .panel { --p-h: 340px; } }
+  @media (min-width: 640px) and (max-width: 1023px) {
+    #projects .grid > .card { grid-column: 1 / -1; }
+    #data-projects .grid > .card { grid-column: span 4; }
+    #projects .panel { --p-h: 340px; }
+    #data-projects { --h: 1; }
+    #data-projects .panel { --p-h: 180px; }
+  }
+  @media (min-width: 640px) and (max-width: 1023px) and (min-height: 1100px) {
+    #projects { --h: 1; }
+    #projects .panel { --p-h: 260px; }
+    #data-projects .panel { --p-h: 340px; }
+  }
+  @media (max-width: 639px) { .hero__facts { display: none; } }
+  @media (max-width: 639px) { #projects, #data-projects { --hm: 2; } #projects .panel { --p-h: 400px; } #data-projects .panel { --p-h: 240px; } }
+  /* the agent diagram's frame: as tall as the text beside it */
+  #agent .frame { min-height: 600px; background: var(--p-surface); }
+  .close__word { line-height: 1; font-size: clamp(30px, 9.2vw, 136px); white-space: nowrap; }
+  @media (max-width: 1279px) { #agent .frame { min-height: 520px; } }
+  @media (max-width: 1023px) { #agent .frame { min-height: 280px; margin-top: var(--s-7); } }
+  @media (max-width: 639px) { #agent { --hm: 2; } #agent .frame { min-height: 860px; } }
+  /* experience: under 1280 the rows and the photograph stack, over two screens */
+  @media (max-width: 1279px) {
+    #experience { --h: 2; --hm: 2; }
+    #experience .grid > * { grid-column: 1 / -1; }
+    #experience .frame { min-height: 360px; margin-top: var(--s-7); }
+  }
+  /* certificates: screen one the heading and the photograph, screen two the list */
+  #certificates .frame { height: 100%; min-height: 240px; }
+  @media (min-width: 640px) and (min-height: 860px) { #certificates .rows > li { padding-block: var(--s-5); } #certificates .rows > li:first-child { padding-top: 0; } }
+  @media (max-width: 639px) {
+    #experience .frame { min-height: 220px; }
+    :is(#experience, #certificates) .rows > li { grid-template-columns: minmax(0, 1fr); }
+    :is(#experience, #certificates) .rows__value { grid-column: 1; grid-row: auto; justify-self: start; width: auto; text-align: left; white-space: nowrap; font-size: var(--t-small); }
+    #certificates .frame { height: 540px; min-height: 0; flex: none; }
+    #certificates .rows > li { padding-block: var(--s-1); }
+  }
+
+  /* stack: the tools as real icons on 72px tiles, eight across, in one frame */
+  .tools__grid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: var(--s-8) var(--s-5); margin: 0; padding: 0; list-style: none; }
+  .tools__grid li { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-3); }
+  .tools__grid .ic-tile { --tile: 96px; }
+  .tools__grid .ic-tile > .ic { --ic-s: 52px; width: 52px; height: 52px; }
+  @media (max-width: 1023px) { .tools__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (max-width: 639px) { .tools__grid .ic-tile { --tile: 64px; } .tools__grid .ic-tile > .ic { --ic-s: 34px; width: 34px; height: 34px; } }
