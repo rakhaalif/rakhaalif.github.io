@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
 import { loadKit } from './lib/kit';
+import Bumper from './sections/Bumper';
+import Closing from './sections/Closing';
+import Nav from './sections/Nav';
 import { scrollToHash, startMotion } from './lib/motion';
 
 export default function App() {
@@ -11,17 +14,15 @@ export default function App() {
   }, []);
   return (
     <>
-      <header className="nav">
-        <nav>
-          <a href="#experience">Experience</a>
-        </nav>
-      </header>
+      <Bumper />
+      <Nav />
       <main id="top">
         <h1>Rakha Alif Athallah, QA and AI engineer</h1>
         <section id="experience" style={{ marginTop: '150vh', minHeight: '100vh' }}>
           Experience
         </section>
       </main>
+      <Closing />
     </>
   );
 }

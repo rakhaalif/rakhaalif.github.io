@@ -9,7 +9,7 @@ const inView = (page: Page) =>
 test('nav link scrolls to its section', async ({ page }) => {
   await page.goto('/');
   expect(await inView(page)).toBe(false);
-  await page.getByRole('link', { name: 'Experience' }).click();
+  await page.locator('footer.closing').getByRole('link', { name: 'Experience' }).click();
   await expect.poll(() => inView(page), { timeout: 3000 }).toBe(true);
 });
 
@@ -31,7 +31,7 @@ for (const reduced of [false, true]) {
     if (reduced) await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/');
     await page.addStyleTag({ content: '.nav{position:fixed;top:0;left:0;right:0;height:64px}' });
-    await page.getByRole('link', { name: 'Experience' }).click();
+    await page.locator('footer.closing').getByRole('link', { name: 'Experience' }).click();
     const top = () => page.evaluate(() => Math.round(document.getElementById('experience')!.getBoundingClientRect().top));
     let prev = -1;
     await expect
