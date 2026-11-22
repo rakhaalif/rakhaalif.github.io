@@ -120,3 +120,4 @@
   /* the close: the name is 19 letters, so it is sized to fit the .wrap (the kit's clamp is for 8), and the grid column may shrink */
   footer.closing > .wrap { grid-template-columns: minmax(0, 1fr); }
   .close__word { font-size: clamp(30px, 9.2vw, 136px); line-height: 1; }
+  @media (max-width: 639px) { footer.closing .close__word { font-size: 7.2vw; } }

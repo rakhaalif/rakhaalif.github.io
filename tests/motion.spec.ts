@@ -6,10 +6,17 @@ const inView = (page: Page) =>
     return r.top < innerHeight && r.bottom > 0;
   });
 
+// the real nav link: on a phone it sits in the sheet, so open the menu first
+const clickNavExperience = async (page: Page) => {
+  const toggle = page.locator('.nav__toggle');
+  if (await toggle.isVisible()) await toggle.click();
+  await page.locator('.nav__links a[href="#experience"]').click();
+};
+
 test('nav link scrolls to its section', async ({ page }) => {
   await page.goto('/');
   expect(await inView(page)).toBe(false);
-  await page.locator('footer.closing').getByRole('link', { name: 'Experience' }).click();
+  await clickNavExperience(page);
   await expect.poll(() => inView(page), { timeout: 3000 }).toBe(true);
 });
 
@@ -31,16 +38,16 @@ for (const reduced of [false, true]) {
     if (reduced) await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/');
     await page.addStyleTag({ content: '.nav{position:fixed;top:0;left:0;right:0;height:64px}' });
-    await page.locator('footer.closing').getByRole('link', { name: 'Experience' }).click();
     const top = () => page.evaluate(() => Math.round(document.getElementById('experience')!.getBoundingClientRect().top));
-    let prev = -1;
+    const before = await top();
+    await clickNavExperience(page);
+    // the position must leave its pre-click value, then hold for 3 reads 100 ms apart
+    let reads: number[] = [];
     await expect
       .poll(async () => {
-        const t = await top();
-        const settled = t === prev;
-        prev = t;
-        return settled;
-      }, { timeout: 3000, intervals: [100] })
+        reads = [...reads, await top()].slice(-3);
+        return reads.length === 3 && reads.every((r) => r === reads[0]) && reads[0] !== before;
+      }, { timeout: 5000, intervals: [100] })
       .toBe(true);
     const settled = await top();
     expect(settled).toBeGreaterThanOrEqual(60);

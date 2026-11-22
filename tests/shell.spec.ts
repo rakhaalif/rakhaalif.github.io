@@ -46,3 +46,15 @@ test('phone menu opens', async ({ page }, info) => {
   await page.locator('.nav__toggle').tap();
   await expect(page.locator('.nav__toggle')).toHaveAttribute('aria-expanded', 'true');
 });
+
+for (const width of [320, 390, 1440]) {
+  test(`close name fits its box at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/');
+    await page.evaluate(() => document.fonts.ready);
+    // poll: the name reflows when the web font swaps in
+    await expect
+      .poll(() => page.locator('.close__word').evaluate((e) => e.scrollWidth <= e.clientWidth))
+      .toBe(true);
+  });
+}

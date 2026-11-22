@@ -16,7 +16,7 @@ export default function App() {
     <>
       <Bumper />
       <Nav />
-      <main id="top">
+      <main id="top" tabIndex={-1}>
         <h1>Rakha Alif Athallah, QA and AI engineer</h1>
         <section id="experience" style={{ marginTop: '150vh', minHeight: '100vh' }}>
           Experience
