@@ -15,9 +15,11 @@ const clickNavExperience = async (page: Page) => {
 
 test('nav link scrolls to its section', async ({ page }) => {
   await page.goto('/');
+  // the prerendered nav is clickable before hydration; wait for the smooth scroll to be wired, as the other tests do
+  await page.waitForFunction(() => !!(window as any).__lenis, null, { timeout: 15000 });
   expect(await inView(page)).toBe(false);
   await clickNavExperience(page);
-  await expect.poll(() => inView(page), { timeout: 3000 }).toBe(true);
+  await expect.poll(() => inView(page), { timeout: 5000 }).toBe(true);
 });
 
 test('deep link lands on its section', async ({ page }) => {
