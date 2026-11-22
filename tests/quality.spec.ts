@@ -61,7 +61,7 @@ test.describe('gate findings', () => {
     const cut = await page.evaluate(() => {
       const h1 = document.querySelector('h1')!;
       const words = [...h1.querySelectorAll('.split-word')].map((w) => w.getBoundingClientRect());
-      let n = 0;
+      let n = words.length ? 0 : 1; // no .split-word at all counts as a failure
       for (let a: Element | null = h1; a && a !== document.documentElement; a = a.parentElement) {
         if (getComputedStyle(a).overflow === 'visible') continue;
         const r = a.getBoundingClientRect();
@@ -109,6 +109,16 @@ test.describe('gate findings', () => {
     expect(boxes.length).toBe(5);
     for (const b of boxes) expect(b.h).toBeGreaterThanOrEqual(24);
     for (let i = 1; i < boxes.length; i++) if (boxes[i].top > boxes[i - 1].top) expect(boxes[i].top - boxes[i - 1].bottom).toBeGreaterThanOrEqual(8);
+  });
+
+  test('footer links hold at 320x640', async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 640 });
+    await page.goto('/');
+    const boxes = await page.locator('.footer__col a').evaluateAll((els) => els.map((e) => { const r = e.getBoundingClientRect(); return { top: r.top, bottom: r.bottom, h: r.height }; }));
+    expect(boxes.length).toBe(5);
+    for (const b of boxes) expect(b.h).toBeGreaterThanOrEqual(24);
+    for (let i = 1; i < boxes.length; i++) if (boxes[i].top > boxes[i - 1].top) expect(boxes[i].top - boxes[i - 1].bottom).toBeGreaterThanOrEqual(4);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(0);
   });
 
   test('stack tiles and names sit on shared left edges', async ({ page }, info) => {
