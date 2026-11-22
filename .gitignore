@@ -1,4 +1,5 @@
-.taste-skill/
+.taste-skill/*
+!.taste-skill/*history.json
 shots/
 node_modules
 dist

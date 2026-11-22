@@ -1,0 +1,56 @@
+{
+ "palettes": [
+  "cool-grey-cobalt",
+  "cool-grey-cobalt",
+  "cool-grey-cobalt",
+  "cool-grey-cobalt",
+  "green-black-bone",
+  "candy-on-black"
+ ],
+ "types": [
+  "newsreader",
+  "source-serif",
+  "source-serif",
+  "schibsted",
+  "host",
+  "chivo"
+ ],
+ "dealt": [
+  "newsreader",
+  "source-serif",
+  "schibsted",
+  "host",
+  "gabarito",
+  "plex",
+  "chivo",
+  "urbanist",
+  "gabarito"
+ ],
+ "moments": [
+  {
+   "id": "word-highlight",
+   "at": "2026-11-11T06:06:41.754Z",
+   "seed": "01ecfc09"
+  },
+  {
+   "id": "iris-opens",
+   "at": "2026-11-11T07:37:28.544Z",
+   "seed": "7feeb053"
+  },
+  {
+   "id": "counter-rolls",
+   "at": "2026-11-11T07:37:28.544Z",
+   "seed": "7feeb053"
+  },
+  {
+   "id": "liquid-type",
+   "at": "2026-11-22T07:59:09.660Z",
+   "seed": "08de0705"
+  },
+  {
+   "id": "pinned-chapters",
+   "at": "2026-11-22T07:59:09.660Z",
+   "seed": "08de0705"
+  }
+ ]
+}
