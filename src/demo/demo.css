@@ -1,0 +1,112 @@
+/* the agent demo: the kit's app-frame recipe, the mock web app (left) beside the terminal (right) */
+#agent { --fail: #ff5c5c; }
+@media (max-width: 639px) { #agent { --hm: 2; } }
+
+.agent__head { align-items: stretch; }
+.agent__caption { margin: var(--s-4) 0 0; color: var(--muted); max-width: 48ch; }
+.agent__side { display: flex; flex-direction: column; justify-content: space-between; gap: var(--s-5); }
+.agent__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-6); }
+/* the summary keeps its room while the run plays, so the window never jumps when it appears */
+.agent__summary { visibility: hidden; display: grid; gap: var(--s-2); max-width: 60ch; font-size: var(--t-small); line-height: 1.5; color: var(--muted); }
+.agent__summary p { margin: 0; }
+.agent__summary p:first-child { color: var(--ink); font-weight: 500; }
+#agent[data-state="done"] .agent__summary { visibility: visible; }
+
+/* app-frame (sections-library.md), panes 5fr and 7fr */
+.app.ui { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); margin-top: var(--s-7); overflow: hidden;
+  background: var(--u-bg); border: 1px solid var(--u-border); border-radius: var(--u-r); box-shadow: var(--u-shadow); }
+.app > .app__pane { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
+.app > .app__pane + .app__pane { border-left: 1px solid var(--u-line); }
+.app > .app__pane > .ui-panel { width: 100%; border: 0; border-radius: 0; box-shadow: none; }
+/* from 640 to 1279 the section grows past its screen rather than squeeze the window (system.css) */
+@media (min-width: 1024px) and (max-width: 1279px) { .app.ui { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); } #agent .app.ui { min-height: 400px; } }
+@media (max-width: 1023px) {
+  .app.ui { grid-template-columns: minmax(0, 1fr); grid-template-rows: 252px minmax(320px, 1fr); }
+  #agent .app.ui { min-height: 572px; } /* beats .fill's min-height: 0 */
+  .app > .app__pane + .app__pane { border-left: 0; border-top: 1px solid var(--u-line); }
+}
+
+/* the terminal fills its pane; its screen is the log and scrolls to the newest line */
+.term.ui-term { height: 100%; display: flex; flex-direction: column; }
+.term .ui-term__head { flex: none; }
+.term__screen { flex: 1 1 0; min-height: 0; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--u-line-2) transparent; }
+.term__screen:focus-visible { outline-offset: -2px; }
+@media (prefers-reduced-motion: no-preference) { .term__screen { scroll-behavior: smooth; } }
+.term__row { display: none; }
+#agent:not([data-state="idle"]) .term__wait { display: none; }
+.term .ui-term__typed { flex: 0 1 auto; }
+.term__note { margin-left: 2ch; }
+.term .ui-term__count { flex: 0 1 auto; }
+.term__n { width: 2ch; color: var(--u-muted); white-space: pre; }
+.term__st { width: 4ch; color: var(--p-accent); }
+.term__res .ui-term__path { flex: 0 1 auto; }
+.term__res.is-fail { background: color-mix(in oklab, var(--fail) 14%, transparent); }
+.term__res.is-fail .term__st { color: var(--fail); font-weight: 500; }
+.term__res.is-fail .ui-term__path { color: var(--u-ink); }
+/* the fail's reason is the one line that wraps rather than lose its words on a narrow pane */
+.term__detail { height: auto; min-height: 20px; padding-left: calc(16px + 6ch + 20px); white-space: normal; color: var(--fail); background: color-mix(in oklab, var(--fail) 14%, transparent); }
+.term__detail > span { flex: 0 1 auto; white-space: normal; }
+.term__sum { margin-top: 20px; color: var(--u-ink); font-weight: 500; }
+@container ui-term (max-width: 379px) {
+  .term .ui-term__track { font-size: 11px; }
+  .term .ui-term__ln { padding: 0 12px; }
+  .term .ui-term__ln:not(.ui-term__cmd) { gap: 8px; }
+  .term .term__meter { padding-left: calc(20px + 1ch); } /* under the command, as the bar is gone */
+  .term .term__detail { padding-left: calc(12px + 6ch + 16px); }
+  .term .ui-term__bar, .term .term__note { display: none; }
+}
+
+/* the mock web app: a light page in its own browser bar */
+.mock { height: 100%; display: flex; flex-direction: column; }
+.mock__bar { flex: none; display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 12px 0 14px; border-bottom: 1px solid var(--u-line); background: var(--u-fill); }
+.mock__url { flex: 1 1 auto; min-width: 0; max-width: 280px; height: 24px; display: flex; align-items: center; padding: 0 10px; border-radius: 6px;
+  background: var(--u-bg); box-shadow: inset 0 0 0 1px var(--u-line); color: var(--u-muted); font: 12px/1 var(--ui-mono); white-space: nowrap; overflow: hidden; }
+.mock__view { --m-bg: #efefea; --m-card: #ffffff; --m-ink: #141414; --m-muted: #6c6c66; --m-line: #e1e1da; --m-hl: #0a8f9b;
+  position: relative; flex: 1 1 0; min-height: 0; overflow: hidden; background: var(--m-bg); color: var(--m-ink); font-size: 12px; line-height: 16px; }
+.mock__screen { position: absolute; inset: 0; display: grid; place-items: center; padding: 16px; }
+.mock__screen[data-screen="checkout"] { visibility: hidden; opacity: 0; }
+.mock__form { width: min(100% - 32px, 264px); display: grid; gap: 10px; padding: 18px; border-radius: 12px; background: var(--m-card);
+  box-shadow: 0 1px 2px rgb(0 0 0 / .06), 0 12px 28px -14px rgb(0 0 0 / .22); }
+.mock__brand { display: flex; align-items: center; gap: 6px; font-weight: 600; }
+.mock__brand i { width: 14px; height: 14px; border-radius: 4px; background: var(--m-ink); }
+.mock__h { font-size: 16px; line-height: 20px; font-weight: 600; letter-spacing: -0.01em; }
+.mock__field { display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 32px; padding: 0 10px;
+  border: 1px solid var(--m-line); border-radius: 8px; white-space: nowrap; overflow: hidden; }
+.mock__field span { color: var(--m-muted); }
+.mock__btn { display: grid; place-items: center; height: 34px; border-radius: 8px; background: var(--m-ink); color: #fff; font-weight: 500; }
+.mock__cart { border: 1px solid var(--m-line); border-radius: 8px; }
+.mock__item { display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 10px; white-space: nowrap; }
+.mock__item + .mock__item { border-top: 1px solid var(--m-line); }
+.mock__item b { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }
+.mock__qty { display: inline-flex; align-items: center; height: 22px; padding: 0 6px; border: 1px solid var(--m-line); border-radius: 6px; color: var(--m-muted); }
+.mock__x { color: var(--m-muted); }
+.mock__sum { display: flex; justify-content: space-between; padding: 2px 2px 0; }
+.mock__pay { position: relative; }
+/* the planted fault: the Pay button sits 12 px right of the form column, so the visual test has a real catch */
+.mock__btn--pay { margin: 0 -12px 0 12px; }
+
+/* what the agent marks: the moving highlight, the fail circle and the diff overlay (GSAP shows them) */
+.mock__hl { position: absolute; left: 0; top: 0; width: 0; height: 0; z-index: 2; pointer-events: none; visibility: hidden; opacity: 0;
+  border: 2px solid var(--m-hl); border-radius: 10px; background: color-mix(in oklab, var(--m-hl) 9%, transparent); }
+.mock__hl[data-tone="fail"] { --m-hl: var(--fail); }
+.mock__ghost { position: absolute; inset: 0; border: 1.5px dashed var(--fail); border-radius: 8px; visibility: hidden; opacity: 0; }
+/* an ellipse round the button (30px out at the sides, 14px above and below, so the corners sit inside);
+   the timeline sweeps --a to draw it on */
+.mock__circle { position: absolute; left: -18px; right: -42px; top: -14px; bottom: -14px; z-index: 3; pointer-events: none; visibility: hidden; opacity: 0;
+  border: 2.5px solid var(--fail); border-radius: 50%; rotate: -2deg;
+  -webkit-mask: conic-gradient(from 200deg, #000 var(--a, 360deg), transparent 0); mask: conic-gradient(from 200deg, #000 var(--a, 360deg), transparent 0); }
+.mock__diff { position: absolute; left: calc(100% + 52px); top: 50%; translate: 0 -50%; z-index: 3; padding: 3px 6px; border-radius: 4px;
+  background: var(--fail); color: #fff; font: 500 11px/1 var(--ui-mono); white-space: nowrap; visibility: hidden; opacity: 0; }
+
+/* stacked, the app is 252px tall: everything a size smaller so the checkout still fits */
+@media (max-width: 1023px) {
+  .mock__screen { padding: 8px; }
+  .mock__form { width: min(100% - 56px, 240px); gap: 6px; padding: 12px; }
+  .mock__h { font-size: 14px; line-height: 18px; }
+  .mock__field, .mock__btn { height: 26px; }
+  .mock__item { height: 26px; }
+  .mock__circle { top: -9px; bottom: -9px; }
+}
+@media (max-width: 639px) {
+  .mock__diff { display: none; } /* no room beside the button; the circle, the dashed box and the log carry it */
+}

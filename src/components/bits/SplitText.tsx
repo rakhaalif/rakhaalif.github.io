@@ -122,15 +122,17 @@ const SplitText = ({
   });
 
   const gaveUp = useRef(false);
+  const mountedAt = useRef(performance.now());
 
   useEffect(() => {
     if (fontsLoaded) return undefined;
     let active = true;
-    // fonts that never arrive must not keep the heading hidden
+    // fonts that never arrive must not keep the heading hidden; the 1500 ms cap runs from mount, so a
+    // later font load (one that re-arms this wait) cannot restart it
     const timer = window.setTimeout(() => {
       gaveUp.current = true;
       if (active) setFontsLoaded(true);
-    }, 1500);
+    }, Math.max(0, 1500 - (performance.now() - mountedAt.current)));
     document.fonts.ready.then(() => {
       if (active) setFontsLoaded(true);
     });

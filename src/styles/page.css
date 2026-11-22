@@ -86,12 +86,7 @@
   }
   @media (max-width: 639px) { .hero__facts { display: none; } }
   @media (max-width: 639px) { #projects, #data-projects { --hm: 2; } #projects .panel { --p-h: 400px; } #data-projects .panel { --p-h: 240px; } }
-  /* the agent diagram's frame: as tall as the text beside it */
-  #agent .frame { min-height: 600px; background: var(--p-surface); }
   .close__word { line-height: 1; font-size: clamp(30px, 9.2vw, 136px); white-space: nowrap; }
-  @media (max-width: 1279px) { #agent .frame { min-height: 520px; } }
-  @media (max-width: 1023px) { #agent .frame { min-height: 280px; margin-top: var(--s-7); } }
-  @media (max-width: 639px) { #agent { --hm: 2; } #agent .frame { min-height: 860px; } }
   /* experience: under 1280 the rows and the photograph stack, over two screens */
   @media (max-width: 1279px) {
     #experience { --h: 2; --hm: 2; }
