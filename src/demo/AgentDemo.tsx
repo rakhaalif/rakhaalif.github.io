@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useIsClient } from '../lib/useIsClient';
 import { reducedMotion } from '../lib/motion';
 import MockApp from './MockApp';
 import Terminal from './Terminal';
@@ -11,7 +12,9 @@ export default function AgentDemo() {
   const { state, play } = useDemoTimeline(root);
   // the plan names no running label, so while a run plays the button reads Run the agent, aria-disabled
   const running = state === 'running';
-  const label = reducedMotion() ? BUTTONS.reduced : state === 'done' ? BUTTONS.replay : BUTTONS.run;
+  // read after hydration: the prerendered page cannot know the visitor's motion setting
+  const reduced = useIsClient() && reducedMotion();
+  const label = reduced ? BUTTONS.reduced : state === 'done' ? BUTTONS.replay : BUTTONS.run;
   return (
     <section ref={root} className="section" id="agent" data-state={state} aria-labelledby="agent-h">
       <div className="wrap">

@@ -47,8 +47,9 @@ test('facts finish without scrolling at 1024x768', async ({ page }, info) => {
 });
 
 test('h1 shows even if fonts never arrive', async ({ page }) => {
-  await page.route(/fonts\.gstatic\.com/, () => {});
-  await page.goto('/'); // load event does not wait for fonts
+  await page.route(/\/fonts\/.*\.woff2$/, () => {});
+  // the prerendered page asks for its fonts before load, so a font that never arrives holds the load event
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('h1')).toBeVisible({ timeout: 4000 });
 });
 
@@ -89,4 +90,19 @@ test('CV button in hero', async ({ page }) => {
   const a = page.locator('section.hero a.btn--primary');
   await expect(a).toHaveAttribute('href', CV);
   await expect(a).toHaveAttribute('download', '');
+});
+
+test('prerendered h1 ships visible', async ({ request }) => {
+  const html = await (await request.get('/')).text();
+  const h1 = html.match(/<h1[^>]*>/)?.[0];
+  expect(h1).toBeTruthy();
+  expect(h1).not.toMatch(/visibility:\s*hidden/);
+});
+
+test('h1 shows without JavaScript', async ({ browser }) => {
+  const ctx = await browser.newContext({ javaScriptEnabled: false });
+  const page = await ctx.newPage();
+  await page.goto('/');
+  await expect(page.locator('h1')).toBeVisible();
+  await ctx.close();
 });

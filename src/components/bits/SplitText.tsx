@@ -5,6 +5,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText as GSAPSplitText } from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
+import { useIsClient } from '../../lib/useIsClient';
 
 gsap.registerPlugin(ScrollTrigger, GSAPSplitText, useGSAP);
 
@@ -115,6 +116,8 @@ const SplitText = ({
   const liveRef = useRef({ trigger, hoverEffect, accentColor });
   const [fontsLoaded, setFontsLoaded] = useState(fontsAreLoaded);
   const [ready, setReady] = useState(false);
+  // hidden only in the browser until split: the prerendered heading ships visible, so it shows without JS
+  const client = useIsClient();
 
   useIsoLayoutEffect(() => {
     onCompleteRef.current = onLetterAnimationComplete;
@@ -463,7 +466,7 @@ const SplitText = ({
         wordWrap: 'break-word',
         color,
         cursor: trigger === 'click' ? 'pointer' : undefined,
-        visibility: ready ? undefined : 'hidden'
+        visibility: client && !ready ? 'hidden' : undefined
       }}
     >
       {text}

@@ -8,7 +8,8 @@ test('CV link is a PDF', async ({ request }) => {
 });
 
 test('CV is clickable during the bumper', async ({ page }) => {
-  await page.goto('/', { waitUntil: 'commit' });
+  // DOMContentLoaded, still during the bumper: the prerendered nav button exists before the CSS that hides it on a phone
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('.bumper')).toHaveAttribute('aria-hidden', 'true');
   // the nav button hides behind the action bar on a phone, so take whichever copy is visible (the action bar hides while the hero's own button is in view)
   await page.locator('.nav__actions .btn, .actionbar .btn, .hero .btn--primary').locator('visible=true').first().click({ trial: true });

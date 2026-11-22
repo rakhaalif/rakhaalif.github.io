@@ -2,11 +2,14 @@ import { createPortal } from 'react-dom';
 import { CV_HREF, LINKS, TESTS_WORKFLOW } from '../content';
 import tests from '../test-count.json';
 import Arrow from './Arrow';
+import { useIsClient } from '../lib/useIsClient';
 import { ICONS } from './icons';
 
 const SOCIALS = [['GitHub', LINKS.github, ICONS.github], ['LinkedIn', LINKS.linkedin, ICONS.linkedin], ['Instagram', LINKS.instagram, ICONS.instagram]];
 
 export default function Closing() {
+  // false while hydrating the prerendered page (it has no portal), true after
+  const client = useIsClient();
   return (
     <>
       <footer className="closing footer--statement" id="contact" aria-labelledby="close-h">
@@ -29,7 +32,7 @@ export default function Closing() {
             </div>
             <p className="footer__tested">
               <a href={TESTS_WORKFLOW} target="_blank" rel="noopener">This site is tested: {tests.count} Playwright checks passing</a>
-              <img src={`${TESTS_WORKFLOW}/badge.svg`} alt="Deploy workflow status" height={20} />
+              <img src={`${TESTS_WORKFLOW}/badge.svg`} alt="Deploy workflow status" height={20} loading="lazy" />
             </p>
             <div className="footer__legal">
               <span>&copy; 2026 Rakha Alif Athallah</span>
@@ -46,7 +49,7 @@ export default function Closing() {
         </div>
       </footer>
       {/* a direct child of body, which the kit's :root:has(> body > nav.actionbar) rules expect */}
-      {createPortal(
+      {client && createPortal(
         <nav className="actionbar" aria-label="Quick actions"><a className="btn btn--primary" href={CV_HREF} download>Download CV<Arrow /></a></nav>,
         document.body,
       )}

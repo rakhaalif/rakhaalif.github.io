@@ -56,6 +56,9 @@
     background: linear-gradient(115deg, transparent 25%, rgba(159,199,184,.75) 40%, rgba(255,255,255,.9) 48%, rgba(230,205,150,.75) 56%, rgba(150,190,230,.6) 64%, transparent 78%);
     background-size: 280% 100%; background-position: calc(50% - var(--swing) * 260%) 50%; }
   @media (max-width: 1023px) { .idcard-hang { --cw: 200px; } .idcard-strap { height: clamp(48px, 8svh, 96px); } .idc-code, .idc-site { display: none; } }
+  /* a phone shows the kit's own still of the hero ground (fluted-glass, seed 11, sky; captured from its phone bake)
+     as a picture, so no WebGL runs there (kit.ts takes data-fx off); it is there from the first paint */
+  @media (max-width: 639px) { .hero__art { background: url(/img/hero-ground-phone.webp) center / cover; } }
   @media (max-width: 639px) { .idcard-hang { --cw: 150px; } .idcard-strap { height: 28px; } .idcard-strap span, .idc-role, .idc-foot { display: none; } .idc-name { font-size: 13px; } }
 
   /* skeleton shimmer: a frame waits on its photograph with a soft light passing over it (Photo.tsx toggles it) */

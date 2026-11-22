@@ -10,6 +10,10 @@ export function loadKit(): void {
     s.src = src;
     document.body.appendChild(s);
   };
+  // on a phone the kit only bakes the hero ground once (system.js visuals); page.css shows that still as a picture,
+  // so the phone loads no fx.js or ui.js and creates no WebGL context. Read once: a phone turned sideways keeps the picture
+  const art = document.querySelector('.hero__art[data-fx]');
+  if (art && matchMedia('(max-width: 639px)').matches) art.removeAttribute('data-fx');
   for (const src of ['/assets/system.js', '/assets/motion/motion.js', '/assets/layout/layout.js']) add(src);
   // the diagram drawer (30 KB gzipped) waits for the browser to be idle, so it stays off the first paint
   setTimeout(() => add('/assets/diagrams/mount.js'), 2500);
