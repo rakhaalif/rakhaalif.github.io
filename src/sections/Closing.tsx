@@ -1,10 +1,9 @@
 import { createPortal } from 'react-dom';
-import { CV_HREF, LINKS } from '../content';
+import { CV_HREF, LINKS, TESTS_WORKFLOW } from '../content';
+import tests from '../test-count.json';
+import Arrow from './Arrow';
 import { ICONS } from './icons';
 
-const Arrow = () => (
-  <svg className="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path className="m-arrow__stem" d="M1 6h8" /><path className="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5" /></svg>
-);
 const SOCIALS = [['GitHub', LINKS.github, ICONS.github], ['LinkedIn', LINKS.linkedin, ICONS.linkedin], ['Instagram', LINKS.instagram, ICONS.instagram]];
 
 export default function Closing() {
@@ -28,6 +27,10 @@ export default function Closing() {
               <div className="span-2 footer__col"><h3>Work</h3><ul><li><a href="#agent">Demo</a></li><li><a href="#projects">Projects</a></li><li><a href="#experience">Experience</a></li></ul></div>
               <div className="span-2 footer__col"><h3>Skills</h3><ul><li><a href="#stack">Stack</a></li><li><a href="#certificates">Certificates</a></li></ul></div>
             </div>
+            <p className="footer__tested">
+              <a href={TESTS_WORKFLOW} target="_blank" rel="noopener">This site is tested: {tests.count} Playwright checks passing</a>
+              <img src={`${TESTS_WORKFLOW}/badge.svg`} alt="Deploy workflow status" height={20} />
+            </p>
             <div className="footer__legal">
               <span>&copy; 2026 Rakha Alif Athallah</span>
               <div className="socials">
@@ -44,7 +47,7 @@ export default function Closing() {
       </footer>
       {/* a direct child of body, which the kit's :root:has(> body > nav.actionbar) rules expect */}
       {createPortal(
-        <nav className="actionbar" aria-label="Quick actions"><a className="btn btn--primary" href={CV_HREF} download>Download CV</a></nav>,
+        <nav className="actionbar" aria-label="Quick actions"><a className="btn btn--primary" href={CV_HREF} download>Download CV<Arrow /></a></nav>,
         document.body,
       )}
     </>

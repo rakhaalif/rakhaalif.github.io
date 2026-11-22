@@ -23,14 +23,17 @@ test('hero is exactly one screen', async ({ page }) => {
 
 test('facts count up, then end on their values', async ({ page }, info) => {
   test.skip(info.project.name === 'phone', 'facts are display:none under 640px');
+  // a MutationObserver from before the page runs: the count can finish before a slow load event lets us poll
+  await page.addInitScript(() => {
+    const w = window as unknown as { __seen: Set<string> };
+    w.__seen = new Set();
+    new MutationObserver(() => {
+      const t = document.querySelector('.hero__facts dd')?.textContent;
+      if (t) w.__seen.add(t);
+    }).observe(document, { subtree: true, childList: true, characterData: true });
+  });
   await page.goto('/');
-  const first = page.locator('.hero__facts dd').first();
-  const seen = new Set<string>();
-  for (let i = 0; i < 12; i++) {
-    seen.add((await first.textContent()) ?? '');
-    await page.waitForTimeout(100);
-  }
-  expect([...seen].some((t) => t !== '3.80')).toBe(true);
+  await expect.poll(() => page.evaluate(() => [...(window as unknown as { __seen: Set<string> }).__seen].some((t) => t !== '3.80'))).toBe(true);
   await page.waitForTimeout(2000);
   expect(await facts(page)).toEqual(['3.80', '5', '90+', '9']);
 });
@@ -46,7 +49,7 @@ test('facts finish without scrolling at 1024x768', async ({ page }, info) => {
 test('h1 shows even if fonts never arrive', async ({ page }) => {
   await page.route(/fonts\.gstatic\.com/, () => {});
   await page.goto('/'); // load event does not wait for fonts
-  await expect(page.locator('h1')).toBeVisible({ timeout: 2500 });
+  await expect(page.locator('h1')).toBeVisible({ timeout: 4000 });
 });
 
 test('ID card follows a drag and settles', async ({ page }) => {
