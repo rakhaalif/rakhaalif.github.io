@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { loadKit } from './lib/kit';
 import Bumper from './sections/Bumper';
+import Hero from './sections/Hero';
 import Closing from './sections/Closing';
 import Nav from './sections/Nav';
 import { scrollToHash, startMotion } from './lib/motion';
@@ -17,7 +18,7 @@ export default function App() {
       <Bumper />
       <Nav />
       <main id="top" tabIndex={-1}>
-        <h1>Rakha Alif Athallah, QA and AI engineer</h1>
+        <Hero />
         <section id="experience" style={{ marginTop: '150vh', minHeight: '100vh' }}>
           Experience
         </section>
