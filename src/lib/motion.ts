@@ -19,14 +19,25 @@ function goTo(el: Element, immediate = false) {
   else window.scrollTo(0, el.getBoundingClientRect().top + scrollY - navHeight());
 }
 
+/** Element for a "#hash"; null for empty, malformed or missing ids so native behavior applies. */
+function target(hash: string): HTMLElement | null {
+  try {
+    return hash.length > 1 ? document.getElementById(decodeURIComponent(hash.slice(1))) : null;
+  } catch {
+    return null;
+  }
+}
+
 export function startMotion(): () => void {
   const onClick = (e: MouseEvent) => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     const a = (e.target as Element).closest?.('a[href^="#"]');
-    const id = a?.getAttribute('href') ?? '';
-    const el = id.length > 1 ? document.querySelector(id) : null;
-    if (!el || e.defaultPrevented) return;
+    if (!a || a.hasAttribute('target')) return;
+    const id = a.getAttribute('href')!;
+    const el = target(id);
+    if (!el) return;
     e.preventDefault();
-    history.pushState(null, '', id);
+    if (location.hash !== id) history.pushState(null, '', id);
     goTo(el);
   };
   document.addEventListener('click', onClick);
@@ -48,7 +59,6 @@ export function startMotion(): () => void {
 
 /** Land on the URL hash after mount, whether or not Lenis runs. */
 export function scrollToHash() {
-  const hash = location.hash;
-  const el = hash.length > 1 ? document.querySelector(hash) : null;
+  const el = target(location.hash);
   if (el) goTo(el, true);
 }

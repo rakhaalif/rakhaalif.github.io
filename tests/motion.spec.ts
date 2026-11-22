@@ -32,11 +32,28 @@ for (const reduced of [false, true]) {
     await page.goto('/');
     await page.addStyleTag({ content: '.nav{position:fixed;top:0;left:0;right:0;height:64px}' });
     await page.getByRole('link', { name: 'Experience' }).click();
+    const top = () => page.evaluate(() => Math.round(document.getElementById('experience')!.getBoundingClientRect().top));
+    let prev = -1;
     await expect
-      .poll(() => page.evaluate(() => Math.round(document.getElementById('experience')!.getBoundingClientRect().top)), { timeout: 3000 })
-      .toBeGreaterThanOrEqual(60);
-    await expect
-      .poll(() => page.evaluate(() => Math.round(document.getElementById('experience')!.getBoundingClientRect().top)))
-      .toBeLessThanOrEqual(68);
+      .poll(async () => {
+        const t = await top();
+        const settled = t === prev;
+        prev = t;
+        return settled;
+      }, { timeout: 3000, intervals: [100] })
+      .toBe(true);
+    const settled = await top();
+    expect(settled).toBeGreaterThanOrEqual(60);
+    expect(settled).toBeLessThanOrEqual(68);
+  });
+}
+
+for (const hash of ['#1%E0%A4%A', '#a.b']) {
+  test(`odd hash ${hash} loads cleanly`, async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.goto('/' + hash);
+    await expect(page.locator('h1')).toBeVisible();
+    expect(errors).toEqual([]);
   });
 }
