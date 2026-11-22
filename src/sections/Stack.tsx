@@ -17,7 +17,7 @@ export default function Stack() {
           {STACK.map((g, i) => (
             <div className={`tools__group ${SPAN[i]}`} key={g.group}>
               <p className="t-label muted">{g.group}</p>
-              <ul className="tools__grid" style={{ '--cols': Math.min(g.tools.length, 8), '--span': COLS[i] } as CSSProperties}>
+              <ul className="tools__grid" style={{ '--cols': Math.min(g.tools.length, 8), '--span': Math.min(COLS[i], g.tools.length) } as CSSProperties}>
                 {g.tools.map(t => {
                   const tile = (
                     <>

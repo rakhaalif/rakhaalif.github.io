@@ -73,17 +73,14 @@ test.describe('gate findings', () => {
     expect(await page.locator('h1').evaluate((e) => getComputedStyle(e).overflow)).toBe('visible');
   });
 
-  test('pause button shows the kit focus ring', async ({ page }) => {
+  test('pause button shows a two-tone focus ring (black ring, white halo)', async ({ page }) => {
     await page.goto('/');
     const btn = page.locator('.hero button.loop-pause, .hero button.ui-pause').first();
     test.skip(!(await btn.waitFor({ timeout: 10_000 }).then(() => true, () => false)), 'no pause button on this screen');
     await btn.focus();
-    const s = await btn.evaluate((e) => {
-      const probe = document.createElement('i'); probe.style.color = 'var(--action)'; document.body.append(probe);
-      const action = getComputedStyle(probe).color; probe.remove();
-      const c = getComputedStyle(e); return { action, color: c.outlineColor, w: c.outlineWidth, style: c.outlineStyle };
-    });
-    expect(s).toMatchObject({ color: s.action, w: '2px', style: 'solid' });
+    const s = await btn.evaluate((e) => { const c = getComputedStyle(e); return { color: c.outlineColor, w: c.outlineWidth, style: c.outlineStyle, halo: c.boxShadow }; });
+    expect(s).toMatchObject({ color: 'rgb(0, 0, 0)', w: '2px', style: 'solid' });
+    expect(s.halo).toContain('rgb(255, 255, 255)');
   });
 
   test('Download CV is drawn the same way everywhere', async ({ page }) => {

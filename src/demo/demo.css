@@ -111,3 +111,6 @@
 @media (max-width: 639px) {
   .mock__diff { display: none; } /* no room beside the button; the circle, the dashed box and the log carry it */
 }
+
+/* phone: the demo fills the agent section second screen (after the 572px rule above) */
+@media (max-width: 639px) { #agent .app.ui { min-height: 780px; } }

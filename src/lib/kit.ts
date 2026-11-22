@@ -4,12 +4,15 @@ let loaded = false;
 export function loadKit(): void {
   if (loaded) return;
   loaded = true;
-  for (const src of ['/assets/system.js', '/assets/motion/motion.js', '/assets/layout/layout.js', '/assets/diagrams/mount.js']) {
+  const add = (src: string) => {
     const s = document.createElement('script');
     s.type = 'module';
     s.src = src;
     document.body.appendChild(s);
-  }
+  };
+  for (const src of ['/assets/system.js', '/assets/motion/motion.js', '/assets/layout/layout.js']) add(src);
+  // the diagram drawer (30 KB gzipped) waits for the browser to be idle, so it stays off the first paint
+  setTimeout(() => add('/assets/diagrams/mount.js'), 2500);
 }
 
 type FxController = { pause(): void; resume(): void };

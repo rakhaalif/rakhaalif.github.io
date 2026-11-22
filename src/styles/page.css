@@ -130,7 +130,7 @@
   /* hero heading: SplitText clips its rise with overflow:hidden, which cuts the tall words; the words fade in, so no clip is needed */
   .hero-h1.split-parent { overflow: visible !important; }
   /* the pause button's ring is the kit's focus ring (system.css :focus-visible), not the faint ink one */
-  .hero button.loop-pause:focus-visible { outline: 2px solid var(--action); outline-offset: 2px; }
+  .hero button.loop-pause:focus-visible { outline: 2px solid #000; outline-offset: 2px; box-shadow: 0 0 0 5px #fff; } /* a black ring with a white halo reads on the pale glass and on dark */
   /* the kit inverts the action colour on the closing ground; Download CV is drawn the same on every screen */
   nav.actionbar .btn { height: var(--btn-h); }
   footer.closing.footer--statement { --action: var(--p-action); --action-ink: var(--p-action-ink); }
@@ -153,3 +153,6 @@
   .tl__fill { background: var(--accent); transform-origin: top; }
   .tl .rows > li { position: relative; padding-left: var(--s-6); }
   .tl .rows > li::before { content: ""; position: absolute; left: 0; top: var(--s-5); width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+
+  /* the last credential row clears the phone action bar, so its date never sits on the black bar */
+  @media (max-width: 767px) { #certificates { padding-bottom: calc(var(--s-8) + 96px); } }
