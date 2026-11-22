@@ -121,14 +121,22 @@ const SplitText = ({
     liveRef.current = { trigger, hoverEffect, accentColor };
   });
 
+  const gaveUp = useRef(false);
+
   useEffect(() => {
     if (fontsLoaded) return undefined;
     let active = true;
+    // fonts that never arrive must not keep the heading hidden
+    const timer = window.setTimeout(() => {
+      gaveUp.current = true;
+      if (active) setFontsLoaded(true);
+    }, 1500);
     document.fonts.ready.then(() => {
       if (active) setFontsLoaded(true);
     });
     return () => {
       active = false;
+      window.clearTimeout(timer);
     };
   }, [fontsLoaded]);
 
@@ -137,7 +145,7 @@ const SplitText = ({
       const el = ref.current;
       if (!el || !text || !fontsLoaded) return;
       el.getBoundingClientRect();
-      if (!fontsAreLoaded()) {
+      if (!gaveUp.current && !fontsAreLoaded()) {
         setFontsLoaded(false);
         return;
       }

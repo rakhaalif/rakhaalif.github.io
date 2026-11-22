@@ -20,7 +20,7 @@ export default function CountUp({ to, duration = 1.6 }: { to: string; duration?:
       v: Number(num), duration, ease: 'power2.out', onUpdate: draw, paused: true,
       onComplete: () => (el.textContent = to),
     });
-    const st = ScrollTrigger.create({ trigger: el, start: 'top 60%', once: true, onEnter: () => tween.play() });
+    const st = ScrollTrigger.create({ trigger: el, start: 'top bottom', once: true, onEnter: () => tween.play() });
     return () => {
       st.kill();
       tween.kill();
