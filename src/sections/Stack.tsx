@@ -4,6 +4,7 @@ import { STACK } from '../content';
 const LANDSCAPE = ['playwright.svg', 'scikitlearn.svg'];
 // 3 + 4 + 5 columns on the first row, the long group on the second: every row runs the container's full width
 const SPAN = ['span-3', 'span-4', 'span-5', 'span-12'];
+const COLS = [3, 4, 5, 12];
 
 export default function Stack() {
   return (
@@ -16,7 +17,7 @@ export default function Stack() {
           {STACK.map((g, i) => (
             <div className={`tools__group ${SPAN[i]}`} key={g.group}>
               <p className="t-label muted">{g.group}</p>
-              <ul className="tools__grid" style={{ '--cols': Math.min(g.tools.length, 8) } as CSSProperties}>
+              <ul className="tools__grid" style={{ '--cols': Math.min(g.tools.length, 8), '--span': COLS[i] } as CSSProperties}>
                 {g.tools.map(t => {
                   const tile = (
                     <>

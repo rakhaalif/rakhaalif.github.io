@@ -27,7 +27,7 @@ function Projects() {
               <Chips tags={['TensorFlow', 'Python']} />
               <a className="link" href="https://capstone-dbs-skinalyze.vercel.app" target="_blank" rel="noopener">See Skinalyze live</a>
               <figure className="mo-pc__visual">
-                <Photo src="/assets/img/photo-f84892807.jpg" srcSet="/assets/img/photo-f84892807-500.jpg 500w, /assets/img/photo-f84892807-960.jpg 960w, /assets/img/photo-f84892807.jpg 1280w" sizes="(max-width: 1023px) 100vw, 50vw" width={1280} height={962} alt="A skin lesion seen close up through a dermatoscope" />
+                <Photo src="/assets/img/photo-f84892807.jpg" srcSet="/assets/img/photo-f84892807-500.jpg 500w, /assets/img/photo-f84892807-960.jpg 960w, /assets/img/photo-f84892807.jpg 1280w" sizes="(max-width: 639px) 150vw, (max-width: 1023px) 100vw, 50vw" width={1280} height={962} alt="A skin lesion seen close up through a dermatoscope" />
               </figure>
             </li>
           </ol>

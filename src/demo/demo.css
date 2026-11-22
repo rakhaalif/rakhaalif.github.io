@@ -97,7 +97,7 @@
   border: 2.5px solid var(--fail); border-radius: 50%; rotate: -2deg;
   -webkit-mask: conic-gradient(from 200deg, #000 var(--a, 360deg), transparent 0); mask: conic-gradient(from 200deg, #000 var(--a, 360deg), transparent 0); }
 .mock__diff { position: absolute; left: calc(100% + 52px); top: 50%; translate: 0 -50%; z-index: 3; padding: 3px 6px; border-radius: 4px;
-  background: var(--fail); color: #fff; font: 500 11px/1 var(--ui-mono); white-space: nowrap; visibility: hidden; opacity: 0; }
+  background: var(--fail); color: #1a0505; font: 500 11px/1 var(--ui-mono); white-space: nowrap; visibility: hidden; opacity: 0; }
 
 /* stacked, the app is 252px tall: everything a size smaller so the checkout still fits */
 @media (max-width: 1023px) {

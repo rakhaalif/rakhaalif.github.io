@@ -1,6 +1,7 @@
 import CountUp from '../components/bits/CountUp';
 import Magnet from '../components/bits/Magnet';
 import SplitText from '../components/bits/SplitText';
+import Arrow from './Arrow';
 import IdCard from '../components/IdCard';
 import { CV_HREF, LINKS } from '../content';
 
@@ -17,8 +18,7 @@ export default function Hero() {
             <p className="hero__lead">I build AI that tests software: LLM agents that write and run functional and visual test cases. Informatics Engineering, Universitas Brawijaya, GPA 3.80.</p>
             <div className="btn-row">
               <Magnet padding={40} magnetStrength={4}>
-                <a className="btn btn--primary" href={CV_HREF} download>Download CV
-                  <svg className="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path className="m-arrow__stem" d="M1 6h8" /><path className="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5" /></svg>
+                <a className="btn btn--primary" href={CV_HREF} download>Download CV<Arrow />
                 </a>
               </Magnet>
               <Magnet padding={40} magnetStrength={4}>

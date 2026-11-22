@@ -103,7 +103,9 @@
   .tools__link { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-2); }
   .tools__grid .ic-tile { --tile: 96px; }
   .tools__grid .ic-tile > .ic { --ic-s: 52px; width: 52px; height: 52px; }
-  .tools__text { font: 500 20px/1 var(--font-mono); }
+  .tools__text { font: 500 20px/1 var(--font-mono); color: #111; }
+  /* from 1024 up the tiles sit on the page's 12 columns, so every tile and name shares an edge with the groups above */
+  @media (min-width: 1024px) { .tools__grid { grid-template-columns: repeat(var(--span), minmax(0, 1fr)); column-gap: var(--gutter); } }
   .tools__more { margin-top: var(--s-6); }
   @media (max-width: 1023px) { .tools__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   @media (max-width: 639px) { .tools__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
@@ -124,6 +126,20 @@
   }
   /* certificates: full ink for the credential dates on the pale band (the kit already pads sections above the phone action bar) */
   #certificates .rows__value { color: var(--ink); }
+
+  /* hero heading: SplitText clips its rise with overflow:hidden, which cuts the tall words; the words fade in, so no clip is needed */
+  .hero-h1.split-parent { overflow: visible !important; }
+  /* the pause button's ring is the kit's focus ring (system.css :focus-visible), not the faint ink one */
+  .hero button.loop-pause:focus-visible { outline: 2px solid var(--action); outline-offset: 2px; }
+  /* the kit inverts the action colour on the closing ground; Download CV is drawn the same on every screen */
+  nav.actionbar .btn { height: var(--btn-h); }
+  footer.closing.footer--statement { --action: var(--p-action); --action-ink: var(--p-action-ink); }
+  /* footer links: a 24px-tall target with room around it */
+  .footer__col ul { display: grid; gap: var(--s-2); }
+  .footer__col a { display: inline-block; padding-block: 5px; }
+  .footer__tested { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3); margin: 0 0 var(--s-5); font-size: var(--t-small); }
+  .footer__tested a { text-decoration: underline; text-underline-offset: 3px; padding-block: 4px; }
+  .footer__tested img { display: block; height: 20px; width: auto; }
 
   /* the close: the name is 19 letters, so it is sized to fit the .wrap (the kit's clamp is for 8), and the grid column may shrink */
   footer.closing > .wrap { grid-template-columns: minmax(0, 1fr); }

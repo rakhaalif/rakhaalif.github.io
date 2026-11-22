@@ -1,3 +1,4 @@
+import Arrow from './Arrow';
 import { CV_HREF } from '../content';
 
 const ITEMS = [['Demo', '#agent'], ['Projects', '#projects'], ['Experience', '#experience'], ['Stack', '#stack'], ['Certificates', '#certificates']];
@@ -14,7 +15,7 @@ export default function Nav() {
           ))}
         </nav>
         <div className="nav__actions">
-          <a className="btn btn--primary" href={CV_HREF} download>Download CV</a>
+          <a className="btn btn--primary" href={CV_HREF} download>Download CV<Arrow /></a>
         </div>
         <button className="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
           <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
