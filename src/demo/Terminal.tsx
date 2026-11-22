@@ -38,7 +38,7 @@ function Row({ line, n }: { line: Line; n: number }) {
   );
 }
 
-export default function Terminal() {
+export default function Terminal({ busy }: { busy: boolean }) {
   const screen = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
   // keep the newest line in view as lines appear
@@ -56,7 +56,7 @@ export default function Terminal() {
         <span className="ui-spacer" />
         <span className="ui-chip ui-chip--plain">{TITLE[1]}</span>
       </div>
-      <div ref={screen} className="ui-term__screen term__screen" role="log" aria-live="polite" aria-label="Agent run"
+      <div ref={screen} className="ui-term__screen term__screen" role="log" aria-live="polite" aria-label="Agent run" aria-busy={busy || undefined}
         tabIndex={0} data-lenis-prevent>
         <div ref={track} className="ui-term__track">
           <div className="ui-term__ln term__wait">

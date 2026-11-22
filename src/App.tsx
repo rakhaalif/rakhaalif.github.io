@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { loadKit } from './lib/kit';
+import { loadKit, pauseHeroFxOffscreen } from './lib/kit';
 import Bumper from './sections/Bumper';
 import Hero from './sections/Hero';
 import AgentDemo from './demo/AgentDemo';
@@ -11,8 +11,9 @@ export default function App() {
   useEffect(() => {
     loadKit();
     const stop = startMotion();
+    const unwatch = pauseHeroFxOffscreen();
     scrollToHash();
-    return stop;
+    return () => { stop(); unwatch(); };
   }, []);
   return (
     <>

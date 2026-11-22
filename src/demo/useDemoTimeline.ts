@@ -86,6 +86,7 @@ function build(root: HTMLElement, onComplete: () => void) {
 export function useDemoTimeline(root: RefObject<HTMLElement | null>): { state: DemoState; play(): void } {
   const [state, setState] = useState<DemoState>('idle');
   const tl = useRef<gsap.core.Timeline | null>(null);
+  const autoplay = useRef<IntersectionObserver | null>(null);
 
   const { contextSafe } = useGSAP(() => {
     if (reducedMotion()) {
@@ -94,17 +95,16 @@ export function useDemoTimeline(root: RefObject<HTMLElement | null>): { state: D
       return;
     }
     // autoplay once, when the demo fills 60% of the screen (the section is taller than one on a phone)
-    const io = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return;
-      io.disconnect();
-      play();
-    }, { rootMargin: '0px 0px -60% 0px' });
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) play(); }, { rootMargin: '0px 0px -60% 0px' });
     io.observe(root.current!);
+    autoplay.current = io;
     return () => io.disconnect();
   }, { scope: root });
 
-  // one timeline at a time: a new run reverts the old one (its lines, highlight and circle) first
+  // one timeline at a time: a new run reverts the old one (its lines, highlight and circle) first.
+  // Any run, the autoplay's or a press, ends the autoplay, so it can never restart a run later.
   const play = contextSafe(() => {
+    autoplay.current?.disconnect();
     tl.current?.revert();
     tl.current = build(root.current!, () => setState('done'));
     setState('running');
