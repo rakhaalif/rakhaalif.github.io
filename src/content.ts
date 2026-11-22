@@ -47,7 +47,7 @@ export const DATA_PROJECTS = [
     title: 'Brazil e-commerce sales dashboard',
     text: 'An interactive view of Brazilian online sales, customer behaviour and delivery trends.',
     tags: ['Python', 'pandas'], href: 'https://github.com/rakhaalif/Dashboard-E-Commerce-Brazil',
-    img: `${P}photo-f138536950-900.jpg`, srcSet: `${P}photo-f138536950-500.jpg 500w, ${P}photo-f138536950-900.jpg 900w`, width: 900, height: 1200,
+    img: `${P}photo-f138536950-900.jpg`, srcSet: `${P}photo-f138536950-500.jpg 500w, ${P}photo-f138536950-900.jpg 900w`, width: 900, height: 1200, pos: '50% 60%',
     alt: 'A cardboard shipping box on a carpet',
   },
 ];

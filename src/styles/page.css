@@ -13,7 +13,7 @@
   @keyframes bumper-up { from { opacity: 0; transform: translateY(16px); } }
   @media (prefers-reduced-motion: reduce) { .bumper { display: none; } }
 
-  /* the ID card: a bone-white card with a foil sheen that slides as it swings (js/main.js sets --swing) */
+  /* the ID card: a bone-white card with a foil sheen that slides as it swings (useSwing sets --swing) */
   .idcard-scene { position: absolute; inset: 0; z-index: 1; overflow: hidden; touch-action: pan-y; }
   .idcard-hang { --cw: 260px; position: absolute; left: 50%; top: 0; width: var(--cw); display: flex; flex-direction: column; align-items: center;
     transform: translateX(-50%); transform-origin: top center; cursor: grab; will-change: transform; user-select: none; }
@@ -58,7 +58,7 @@
   @media (max-width: 1023px) { .idcard-hang { --cw: 200px; } .idcard-strap { height: clamp(48px, 8svh, 96px); } .idc-code, .idc-site { display: none; } }
   @media (max-width: 639px) { .idcard-hang { --cw: 150px; } .idcard-strap { height: 28px; } .idcard-strap span, .idc-role, .idc-foot { display: none; } .idc-name { font-size: 13px; } }
 
-  /* skeleton shimmer: a frame waits on its photograph with a soft light passing over it (js/main.js) */
+  /* skeleton shimmer: a frame waits on its photograph with a soft light passing over it (Photo.tsx toggles it) */
   .is-loading { position: relative; overflow: hidden; background-color: var(--surface); }
   .is-loading::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background: linear-gradient(100deg, transparent 20%, color-mix(in oklab, var(--ink) 9%, transparent) 50%, transparent 80%);
@@ -108,8 +108,22 @@
   @media (max-width: 1023px) { .tools__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   @media (max-width: 639px) { .tools__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (max-width: 639px) { #stack { --hm: 2; } .tools { row-gap: var(--s-6); } .tools__grid .ic-tile { --tile: 84px; } .tools__grid .ic-tile > .ic { --ic-s: 44px; width: 44px; height: 44px; } }
-  /* the grounds' own phone min-height is 0: give the two-screen ones their screens back */
-  @media (max-width: 767px) { #data-projects, #certificates { --g-screen: calc(var(--hm, var(--h, 1)) * 100lvh); } main > #projects:not(.is-live) { min-height: calc(var(--hm, 2) * 100lvh); } #projects .mo-pc__visual { aspect-ratio: 11 / 14; } #projects .mo-pc__visual > img { height: 100%; aspect-ratio: auto; max-height: none; } }
+  /* the kit's grounds set their own min-height (76svh/88svh, 0 under 768px): below 1280px give the sections their whole screens back */
+  @media (max-width: 1279px) {
+    #data-projects, #certificates { --g-screen: calc(var(--h, 1) * 100svh); }
+  }
+  @media (max-width: 767px) {
+    #data-projects, #certificates { --g-screen: calc(var(--hm, var(--h, 1)) * 100lvh); }
+  }
+  @media (max-width: 1023px) { #stack { --h: 2; } .tools { row-gap: var(--s-6); } }
+  /* projects at rest on a phone: two screens, each chapter's visual tall enough to fill them */
+  @media (max-width: 767px) {
+    main > #projects:not(.is-live) { min-height: calc(var(--hm, 2) * 100lvh); }
+    #projects .mo-pc__visual { aspect-ratio: 11 / 14; }
+    #projects .mo-pc__visual > img { height: 100%; aspect-ratio: auto; max-height: none; }
+  }
+  /* certificates: full ink for the credential dates on the pale band (the kit already pads sections above the phone action bar) */
+  #certificates .rows__value { color: var(--ink); }
 
   /* the close: the name is 19 letters, so it is sized to fit the .wrap (the kit's clamp is for 8), and the grid column may shrink */
   footer.closing > .wrap { grid-template-columns: minmax(0, 1fr); }
@@ -123,4 +137,3 @@
   .tl__fill { background: var(--accent); transform-origin: top; }
   .tl .rows > li { position: relative; padding-left: var(--s-6); }
   .tl .rows > li::before { content: ""; position: absolute; left: 0; top: var(--s-5); width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
-  @media (max-width: 1279px) { .tl { grid-column: 1 / -1; } }

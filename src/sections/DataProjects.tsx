@@ -15,7 +15,7 @@ export default function DataProjects() {
               <h3>{p.title}</h3>
               <p>{p.text}</p>
               <Chips tags={p.tags} />
-              <div className="panel"><Photo src={p.img} srcSet={p.srcSet} sizes="(max-width: 1023px) 100vw, 33vw" width={p.width} height={p.height} alt={p.alt} /></div>
+              <div className="panel"><Photo src={p.img} srcSet={p.srcSet} sizes="(max-width: 1023px) 100vw, 33vw" width={p.width} height={p.height} alt={p.alt} style={'pos' in p ? { objectPosition: p.pos } : undefined} /></div>
             </a>
           ))}
         </div>

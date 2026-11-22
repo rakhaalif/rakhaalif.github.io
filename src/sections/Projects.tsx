@@ -1,11 +1,11 @@
-import type { CSSProperties } from 'react';
+import { memo, type CSSProperties } from 'react';
 import Chips from './Chips';
 import Photo from '../components/Photo';
 
 const DIAGRAM = '{"layout": "lanes", "alt": "Pages of a web app go to an LLM with retrieval-augmented generation, which writes functional test cases, writes visual test cases and runs them.", "input": {"label": "Web app", "icon": "ui:globe", "sub": "Screens and flows"}, "core": {"label": "LLM + RAG", "icon": "gemini"}, "lanes": [{"label": "Functional", "icon": "ui:list-checks", "done": true, "sub": "Steps and checks"}, {"label": "Visual", "icon": "ui:image", "done": true, "sub": "Layout and look"}, {"label": "Test run", "icon": "ui:play", "done": true, "sub": "Pass or fail"}]}';
 
 // pinned-chapters: the kit's moment.js moves each figure into the shared frame while it holds the section
-export default function Projects() {
+function Projects() {
   return (
     <section className="section" id="projects" style={{ '--h': 2 } as CSSProperties} data-moment="pinned-chapters" aria-labelledby="projects-h">
       <div className="wrap mo-pc__grid">
@@ -32,8 +32,11 @@ export default function Projects() {
             </li>
           </ol>
         </div>
+        {/* shortcut: the kit moves the figures above into this frame, so React must never re-render this subtree (no props or state, memo); upgrade = mount the moment inside a ref'd container React leaves empty */}
         <div className="mo-pc__visuals frame" />
       </div>
     </section>
   );
 }
+
+export default memo(Projects);
