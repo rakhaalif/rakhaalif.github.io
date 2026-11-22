@@ -79,33 +79,25 @@ test('certificate rows read at 4.5:1 and clear the action bar', async ({ page })
   await sec.evaluate(el => { const y = el.getBoundingClientRect().bottom + scrollY - innerHeight; (window as any).__lenis ? (window as any).__lenis.scrollTo(y, { immediate: true }) : scrollTo(0, y); });
   await page.waitForTimeout(1200);
   const rows = page.locator('#certificates .rows > li');
+  // computed colours (oklab) → sRGB through a 1px canvas; the band behind the rows is the section's flat ground,
+  // and no picture may sit under the text. Read from styles, not a screenshot: a late smooth scroll moved the shot
+  const rgb = (css: string) => page.evaluate(c => {
+    const x = document.createElement('canvas').getContext('2d')!; x.fillStyle = c; x.fillRect(0, 0, 1, 1);
+    return Array.from(x.getImageData(0, 0, 1, 1).data.slice(0, 3));
+  }, css);
+  const ground = await rgb(await sec.evaluate(e => getComputedStyle(e).backgroundColor));
   for (const i of [0, 4, 8]) {
-    const row = rows.nth(i);
-    await row.evaluate(e => { const r = e.getBoundingClientRect(); const y = r.top + scrollY - innerHeight / 2; (window as any).__lenis ? (window as any).__lenis.scrollTo(y, { immediate: true }) : scrollTo(0, y); });
-    await page.waitForTimeout(500);
     for (const sel of ['.rows__name', '.rows__value']) {
-      const el = row.locator(sel);
-      // computed colours may be oklab(): let a canvas turn it into sRGB
-      const color = await el.evaluate(e => {
-        const c = document.createElement('canvas'); c.width = c.height = 1;
-        const x = c.getContext('2d')!; x.fillStyle = getComputedStyle(e).color; x.fillRect(0, 0, 1, 1);
-        return Array.from(x.getImageData(0, 0, 1, 1).data.slice(0, 3));
+      const el = rows.nth(i).locator(sel);
+      const color = await rgb(await el.evaluate(e => getComputedStyle(e).color));
+      expect(ratio(color, ground), `${sel} of row ${i}`).toBeGreaterThanOrEqual(4.5);
+      await el.evaluate(e => e.scrollIntoView({ block: 'center' }));
+      const under = await el.evaluate(e => {
+        const r = e.getBoundingClientRect();
+        return document.elementsFromPoint(r.left + r.width / 2, r.top + r.height / 2)
+          .filter(n => n.closest('#certificates') && /^(IMG|PICTURE|VIDEO|CANVAS)$/.test(n.tagName)).length;
       });
-      const box = (await el.boundingBox())!;
-      // background: hide the text, shoot the pixels where it sat, take the darkest/lightest worst case
-      await el.evaluate(e => ((e as HTMLElement).style.visibility = 'hidden'));
-      const png = await page.screenshot({ clip: { x: box.x, y: box.y, width: Math.max(1, box.width), height: Math.max(1, box.height) } });
-      await el.evaluate(e => ((e as HTMLElement).style.visibility = ''));
-      const bg = await page.evaluate(async b64 => {
-        const img = new Image(); img.src = 'data:image/png;base64,' + b64; await img.decode();
-        const c = document.createElement('canvas'); c.width = img.width; c.height = img.height;
-        const x = c.getContext('2d')!; x.drawImage(img, 0, 0);
-        const d = x.getImageData(0, 0, c.width, c.height).data; const out: number[][] = [];
-        for (let p = 0; p < d.length; p += 4 * 7) out.push([d[p], d[p + 1], d[p + 2]]);
-        return out;
-      }, png.toString('base64'));
-      const worst = Math.min(...bg.map(b => ratio(color, b)));
-      expect(worst, `${sel} of row ${i}`).toBeGreaterThanOrEqual(4.5);
+      expect(under, `no picture under ${sel} of row ${i}`).toBe(0);
     }
   }
   // the last row ends above the fixed bar (phone only)
