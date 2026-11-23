@@ -80,6 +80,13 @@
   }
   @media (min-width: 640px) and (max-width: 1023px) and (min-height: 1100px) { #data-projects .panel { height: 340px; } }
   @media (max-width: 639px) { .hero__facts { display: none; } }
+  /* the hero's release panel: the last release's real checks, in the space under the facts (wide screens only, like the facts) */
+  .hero__run { margin-top: var(--s-6); padding: var(--s-4); border: 1px solid var(--line); border-radius: 12px; font-family: var(--font-mono); font-size: 13px; line-height: 1.7; color: var(--muted); }
+  .hero__run-cmd { color: var(--ink); margin: 0; }
+  .hero__run ul { list-style: none; margin: var(--s-2) 0 var(--s-3); padding: 0; }
+  .hero__run li::before { content: "\2713  "; color: var(--accent); }
+  .hero__run a { color: var(--ink); display: inline-flex; align-items: center; gap: 6px; min-height: 24px; }
+  @media (max-width: 639px), (max-height: 760px) { .hero__run { display: none; } }
   @media (max-width: 639px) { #data-projects { --hm: 2; } #data-projects .panel { height: 280px; } }
   .close__word { line-height: 1; font-size: clamp(30px, 9.2vw, 136px); white-space: nowrap; }
   /* experience: under 1280 the rows and the photograph stack, over two screens */

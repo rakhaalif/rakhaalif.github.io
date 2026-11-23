@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { readFileSync } from 'node:fs';
 
 const CV = '/assets/CV_ATS_Rakha%20Alif%20Athallah.pdf';
 const facts = (page: import('@playwright/test').Page) => page.locator('.hero__facts dd').allTextContents();
@@ -105,4 +106,15 @@ test('h1 shows without JavaScript', async ({ browser }) => {
   await page.goto('/');
   await expect(page.locator('h1')).toBeVisible();
   await ctx.close();
+});
+
+test('release panel fills the space under the facts', async ({ page }, info) => {
+  await page.goto('/');
+  const run = page.locator('.hero__run');
+  if (info.project.name === 'phone') { await expect(run).toBeHidden(); return; }
+  const count = JSON.parse(readFileSync('src/test-count.json', 'utf8')).count;
+  await expect(run).toContainText(`${count} Playwright checks passed`);
+  await expect(run.locator('a')).toHaveAttribute('href', '/tests/');
+  const box = (await run.boundingBox())!;
+  expect(box.y + box.height).toBeLessThanOrEqual(page.viewportSize()!.height); // stays inside the one-screen hero
 });
