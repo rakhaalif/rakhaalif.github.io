@@ -3,10 +3,7 @@ import Magnet from '../components/bits/Magnet';
 import SplitText from '../components/bits/SplitText';
 import Arrow from './Arrow';
 import IdCard from '../components/IdCard';
-import { CV_HREF, LINKS, TESTS_REPORT } from '../content';
-import tests from '../test-count.json';
-
-declare const __BUILD_DATE__: string;
+import { CV_HREF, LINKS, ROLES } from '../content';
 
 const FACTS = [['GPA', '3.80'], ['Projects', '5'], ['Members led', '90+'], ['Certificates', '9']];
 
@@ -33,14 +30,13 @@ export default function Hero() {
                 <div key={k}><dt>{k}</dt><dd><CountUp to={v} /></dd></div>
               ))}
             </dl>
-            <div className="hero__run">
-              <p className="hero__run-cmd"><span aria-hidden="true">$ </span>npm run release</p>
+            <div className="hero__orgs">
+              <p className="hero__orgs-label">Worked with</p>
               <ul>
-                <li>{tests.count} Playwright checks passed, run on desktop and phone</li>
-                <li>0 serious accessibility issues (axe)</li>
-                <li>Published {__BUILD_DATE__}</li>
+                {ROLES.slice(0, 3).map(r => (
+                  <li key={r.org}><a href="#experience"><span className="hero__org">{r.org}</span><span className="hero__role">{r.title}</span></a></li>
+                ))}
               </ul>
-              <a href={TESTS_REPORT} target="_blank" rel="noopener">See the test report<Arrow /></a>
             </div>
           </div>
           <div className="hero__art span-6 start-7" data-fx="fluted-glass" data-fx-seed="11">
